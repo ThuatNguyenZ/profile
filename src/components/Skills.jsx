@@ -1,4 +1,4 @@
-import { useState } from 'framer-motion'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Code, Database, Cloud, Settings, Brain, X } from 'lucide-react'
 import Section from './common/Section'

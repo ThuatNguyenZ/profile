@@ -1,0 +1,65 @@
+export const skillCategories = [
+  {
+    id: 'languages',
+    name: 'Languages',
+    icon: 'Code',
+    skills: [
+      { name: 'Python', level: 90 },
+      { name: 'SQL', level: 85 },
+      { name: 'JavaScript', level: 75 },
+      { name: 'C++', level: 70 },
+      { name: 'HTML/CSS', level: 70 },
+    ],
+  },
+  {
+    id: 'databases',
+    name: 'Databases & Big Data',
+    icon: 'Database',
+    skills: [
+      { name: 'PostgreSQL', level: 85 },
+      { name: 'MongoDB', level: 80 },
+      { name: 'Cassandra', level: 75 },
+      { name: 'Redis', level: 80 },
+      { name: 'Apache Spark', level: 85 },
+      { name: 'Apache Kafka', level: 80 },
+      { name: 'Hadoop', level: 70 },
+    ],
+  },
+  {
+    id: 'cloud',
+    name: 'Cloud & DevOps',
+    icon: 'Cloud',
+    skills: [
+      { name: 'AWS (EC2, S3, RDS, Glue, Lambda)', level: 85 },
+      { name: 'Docker', level: 80 },
+      { name: 'CI/CD Pipelines', level: 80 },
+    ],
+  },
+  {
+    id: 'workflow',
+    name: 'Workflow & Tools',
+    icon: 'Settings',
+    skills: [
+      { name: 'Celery', level: 80 },
+      { name: 'GitHub Actions', level: 85 },
+      { name: 'FastAPI', level: 85 },
+      { name: 'Playwright', level: 75 },
+      { name: 'Selenium', level: 75 },
+      { name: 'React', level: 70 },
+      { name: 'Git', level: 85 },
+    ],
+  },
+  {
+    id: 'aiml',
+    name: 'AI/ML & Domain',
+    icon: 'Brain',
+    skills: [
+      { name: 'Data Warehousing', level: 80 },
+      { name: 'ETL Pipelines', level: 90 },
+      { name: 'Web Scraping', level: 85 },
+      { name: 'NLP (PhoBERT, FastText)', level: 80 },
+      { name: 'LLMs (LangChain, DeepSeek)', level: 75 },
+      { name: 'Deep Learning (Keras)', level: 80 },
+    ],
+  },
+]
