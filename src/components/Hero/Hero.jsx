@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowDown, Mail, Github, Linkedin } from 'lucide-react'
-import DataPipelineBackground from './DataPipelineBackground'
+import DataPipelineBackground from './DataPipelineBackground_01'
 
 const profile = {
   name: 'Nguyen Thien Thuat',
