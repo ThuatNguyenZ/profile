@@ -1,0 +1,7 @@
+export { default as ETLIcon } from './ETLIcon'
+export { default as DataWarehouseIcon } from './DataWarehouseIcon'
+export { default as WebScrapingIcon } from './WebScrapingIcon'
+export { default as NLPIcon } from './NLPIcon'
+export { default as LLMIcon } from './LLMIcon'
+export { default as DeepLearningIcon } from './DeepLearningIcon'
+export { default as CICDIcon } from './CICDIcon'
