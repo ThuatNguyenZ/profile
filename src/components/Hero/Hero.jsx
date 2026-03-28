@@ -98,7 +98,7 @@ export default function Hero() {
               className="flex items-center justify-center gap-4"
             >
               <button
-                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-8 py-3 bg-secondary rounded-full font-medium hover:bg-blue-600 transition-colors"
               >
                 View My Work
