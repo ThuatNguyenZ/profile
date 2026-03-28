@@ -20,10 +20,10 @@ const serviceColors = {
 export default function ArchitectureDiagram({ architecture }) {
   return (
     <div className="bg-surface rounded-xl p-6">
-      <h4 className="font-bold text-primary mb-4">{architecture.title}</h4>
+      <h4 className="font-bold text-primary mb-4 text-center">{architecture.title}</h4>
 
-      {/* Single row flow */}
-      <div className="flex flex-wrap items-center gap-2">
+      {/* Single row flow - nowrap with scroll on mobile */}
+      <div className="flex items-center justify-center gap-2 overflow-x-auto py-2">
         {architecture.services.map((service, index) => (
           <motion.div
             key={service.name}
@@ -31,18 +31,18 @@ export default function ArchitectureDiagram({ architecture }) {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.08 }}
-            className="flex items-center"
+            className="flex items-center flex-shrink-0"
           >
             <div
-              className="bg-white rounded-lg p-3 text-center min-w-[90px] shadow border-l-4"
+              className="bg-white rounded-lg p-2 text-center min-w-[75px] shadow border-l-4"
               style={{ borderLeftColor: serviceColors[service.name] || '#3B82F6' }}
             >
-              <div className="text-2xl mb-1">{serviceIcons[service.icon]}</div>
-              <div className="font-bold text-primary text-xs">{service.name}</div>
-              <div className="text-xs text-gray-500">{service.description}</div>
+              <div className="text-xl mb-0.5">{serviceIcons[service.icon]}</div>
+              <div className="font-bold text-primary text-[10px] leading-tight">{service.name}</div>
+              <div className="text-[9px] text-gray-500 leading-tight">{service.description}</div>
             </div>
             {index < architecture.services.length - 1 && (
-              <ArrowRight className="text-secondary mx-1 flex-shrink-0" size={18} />
+              <ArrowRight className="text-secondary mx-1 flex-shrink-0" size={16} />
             )}
           </motion.div>
         ))}
