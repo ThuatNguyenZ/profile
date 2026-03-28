@@ -15,9 +15,9 @@ export const lifeInterests = {
     icon: 'Trophy',
     color: '#F97316',
     activities: [
-      { name: 'Football', icon: 'Circle', level: 'Regular' },
-      { name: 'Billiards', icon: 'CircleDot', level: 'Enthusiast' },
-      { name: 'Badminton', icon: 'Circle', level: 'Casual' },
+      { name: 'Football', icon: 'football', level: 'Regular' },
+      { name: 'Billiards', icon: 'target', level: 'Enthusiast' },
+      { name: 'Badminton', icon: 'wind', level: 'Casual' },
     ],
     visualization: {
       type: 'activity',
@@ -29,7 +29,7 @@ export const lifeInterests = {
     description: 'Love discovering new places, cultures, and perspectives.',
     icon: 'Map',
     color: '#10B981',
-    places: ['Vietnam', 'Thailand', 'Singapore', 'Japan'],
+    places: ['Vũng Tàu', 'Nha Trang', 'Hà Nội', 'Phan Thiết'],
     visualization: {
       type: 'map',
       markers: 4,

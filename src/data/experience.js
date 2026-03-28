@@ -43,8 +43,8 @@ export const experiences = [
       services: [
         { name: 'EC2', description: 'Data Ingestion', icon: 'compute' },
         { name: 'S3', description: 'Raw Storage', icon: 'storage' },
-        { name: 'Glue', description: 'ETL Processing', icon: 'etl' },
-        { name: 'Lambda', description: 'Real-time Processing', icon: 'function' },
+        { name: 'Glue', description: 'ETL', icon: 'etl' },
+        { name: 'Lambda', description: 'Real-time', icon: 'function' },
         { name: 'PostgreSQL', description: 'Structured Storage', icon: 'database' },
       ],
     },

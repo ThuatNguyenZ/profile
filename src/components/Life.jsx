@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Music, Trophy, Map, Users, Facebook } from 'lucide-react'
+import { Music, Trophy, Map, Users, Facebook, Circle, Target, Wind } from 'lucide-react'
 import Section from './common/Section'
 import { lifeInterests } from '../data/life'
 
@@ -8,6 +8,12 @@ const iconMap = {
   Trophy,
   Map,
   Users,
+}
+
+const sportIconMap = {
+  football: Circle,
+  target: Target,
+  wind: Wind,
 }
 
 export default function Life() {
@@ -46,10 +52,10 @@ export default function Life() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -5, scale: 1.02 }}
-              className="rounded-2xl p-6 shadow-md border-l-4"
+              className="rounded-2xl p-6 shadow-md border-l-4 relative overflow-hidden"
               style={{
                 borderColor: color,
-                backgroundColor: `${color}08`,
+                background: `linear-gradient(to right, ${color}08 0%, ${color}10 50%, ${color}25 100%)`,
               }}
             >
               <div className="flex items-start gap-4">
@@ -70,16 +76,21 @@ export default function Life() {
 
                   {key === 'sports' && interest.activities && (
                     <div className="flex gap-3">
-                      {interest.activities.map((activity) => (
-                        <div
-                          key={activity.name}
-                          className="px-3 py-2 bg-white rounded-lg text-center"
-                        >
-                          <div className="text-lg">{activity.icon === 'Circle' ? '⚽' : '🎱'}</div>
-                          <div className="text-xs text-gray-500">{activity.name}</div>
-                          <div className="text-xs text-secondary font-medium">{activity.level}</div>
-                        </div>
-                      ))}
+                      {interest.activities.map((activity) => {
+                        const SportIcon = sportIconMap[activity.icon]
+                        return (
+                          <div
+                            key={activity.name}
+                            className="px-3 py-2 bg-white rounded-lg text-center"
+                          >
+                            <div className="flex justify-center mb-1">
+                              {SportIcon ? <SportIcon size={20} style={{ color }} strokeWidth={2} /> : <Circle size={20} style={{ color }} />}
+                            </div>
+                            <div className="text-xs text-gray-500">{activity.name}</div>
+                            <div className="text-xs text-secondary font-medium">{activity.level}</div>
+                          </div>
+                        )
+                      })}
                     </div>
                   )}
 
