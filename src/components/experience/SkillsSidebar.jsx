@@ -24,6 +24,13 @@ const deviconClassMap = {
 export default function SkillsSidebar() {
   return (
     <aside className="hidden md:block w-1/3 sticky top-20 self-start">
+      {/* Technical Skills Header - Visual separation */}
+      <div className="mb-6 pb-3 border-b-2 border-primary">
+        <h2 className="text-lg font-bold text-primary uppercase tracking-wide">
+          Technical Skills
+        </h2>
+      </div>
+
       <div className="space-y-6">
         {skillDomains.map((domain, domainIndex) => (
           <motion.div
@@ -33,15 +40,10 @@ export default function SkillsSidebar() {
             viewport={{ once: true }}
             transition={{ delay: domainIndex * 0.1 }}
           >
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="font-bold text-primary">{domain.name}</h3>
-              <span
-                className="px-2 py-1 text-xs font-medium rounded-full text-white"
-                style={{ backgroundColor: domain.levelColor }}
-              >
-                {domain.level}
-              </span>
-            </div>
+            <h3 className="font-bold text-primary mb-3 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-secondary" />
+              {domain.name}
+            </h3>
             <div className="flex flex-wrap gap-2">
               {domain.skills.map((skill) => {
                 const deviconClass = deviconClassMap[skill]
@@ -49,12 +51,13 @@ export default function SkillsSidebar() {
                   <motion.span
                     key={skill}
                     whileHover={{ scale: 1.05 }}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-surface rounded-full text-xs font-medium text-gray-700 hover:shadow-md transition-shadow cursor-default"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 bg-white rounded-full text-xs font-medium text-gray-700 hover:shadow-md transition-shadow cursor-default"
+                    title={skill}
                   >
                     {deviconClass ? (
-                      <i className={`${deviconClass}`} style={{ fontSize: 14 }} />
+                      <i className={`${deviconClass}`} style={{ fontSize: 16, color: 'inherit' }} />
                     ) : null}
-                    <span>{skill.split(' ')[0]}</span>
+                    <span className="whitespace-nowrap">{skill}</span>
                   </motion.span>
                 )
               })}

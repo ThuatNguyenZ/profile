@@ -54,20 +54,14 @@ export const experiences = [
 export const skillDomains = [
   {
     name: 'Languages & Frameworks',
-    level: 'Expert',
-    levelColor: '#10B981',
     skills: ['Python', 'SQL', 'JavaScript', 'FastAPI', 'React'],
   },
   {
     name: 'Data Processing & Storage',
-    level: 'Senior',
-    levelColor: '#3B82F6',
     skills: ['PostgreSQL', 'MongoDB', 'Redis', 'Apache Spark', 'Apache Kafka', 'Hadoop'],
   },
   {
     name: 'Cloud & DevOps',
-    level: 'Senior',
-    levelColor: '#3B82F6',
     skills: ['AWS (EC2, S3, RDS, Glue, Lambda)', 'Docker', 'Git', 'GitHub Actions', 'CI/CD Pipelines'],
   },
 ]
