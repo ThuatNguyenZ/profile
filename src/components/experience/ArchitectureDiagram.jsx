@@ -9,29 +9,25 @@ const serviceColors = {
   PostgreSQL: '#336791',
 }
 
-// AWS Glue Icon - Custom SVG
+// AWS Glue Icon - ETL (Extract, Transform, Load)
 function GlueIcon({ size = 24, color }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="6" cy="6" r="3" />
-      <circle cx="18" cy="6" r="3" />
-      <circle cx="6" cy="18" r="3" />
-      <circle cx="18" cy="18" r="3" />
-      <path d="M9 6h6" />
-      <path d="M9 18h6" />
-      <path d="M6 9v6" />
-      <path d="M18 9v6" />
+      {/* Funnel shape for ETL */}
+      <path d="M4 4h16l-6 8v6l-4 2v-8L4 4z" />
+      {/* Data flow lines */}
+      <path d="M8 12h8" />
+      <path d="M10 15h4" />
     </svg>
   )
 }
 
-// AWS Lambda Icon - Custom SVG (λ symbol)
+// AWS Lambda Icon - Real-time Processing/Event-driven
 function LambdaIcon({ size = 24, color }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M8 4h2l6 12" />
-      <path d="M12 8l6 12" />
-      <path d="M8 20h10" />
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      {/* Lightning bolt for fast/event-driven processing */}
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
     </svg>
   )
 }
