@@ -1,9 +1,74 @@
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Code, Database, Cloud, Settings, Brain, X } from 'lucide-react'
 import Section from './common/Section'
 import SkillNode from './common/SkillNode'
-import { skillCategories } from '../data/skills'
+
+const skillCategories = [
+  {
+    id: 'languages',
+    name: 'Languages',
+    icon: 'Code',
+    skills: [
+      { name: 'Python', level: 90 },
+      { name: 'SQL', level: 85 },
+      { name: 'JavaScript', level: 75 },
+      { name: 'C++', level: 70 },
+      { name: 'HTML/CSS', level: 70 },
+    ],
+  },
+  {
+    id: 'databases',
+    name: 'Databases & Big Data',
+    icon: 'Database',
+    skills: [
+      { name: 'PostgreSQL', level: 85 },
+      { name: 'MongoDB', level: 80 },
+      { name: 'Cassandra', level: 75 },
+      { name: 'Redis', level: 80 },
+      { name: 'Apache Spark', level: 85 },
+      { name: 'Apache Kafka', level: 80 },
+      { name: 'Hadoop', level: 70 },
+    ],
+  },
+  {
+    id: 'cloud',
+    name: 'Cloud & DevOps',
+    icon: 'Cloud',
+    skills: [
+      { name: 'AWS (EC2, S3, RDS, Glue, Lambda)', level: 85 },
+      { name: 'Docker', level: 80 },
+      { name: 'CI/CD Pipelines', level: 80 },
+    ],
+  },
+  {
+    id: 'workflow',
+    name: 'Workflow & Tools',
+    icon: 'Settings',
+    skills: [
+      { name: 'Celery', level: 80 },
+      { name: 'GitHub Actions', level: 85 },
+      { name: 'FastAPI', level: 85 },
+      { name: 'Playwright', level: 75 },
+      { name: 'Selenium', level: 75 },
+      { name: 'React', level: 70 },
+      { name: 'Git', level: 85 },
+    ],
+  },
+  {
+    id: 'aiml',
+    name: 'AI/ML & Domain',
+    icon: 'Brain',
+    skills: [
+      { name: 'Data Warehousing', level: 80 },
+      { name: 'ETL Pipelines', level: 90 },
+      { name: 'Web Scraping', level: 85 },
+      { name: 'NLP (PhoBERT, FastText)', level: 80 },
+      { name: 'LLMs (LangChain, DeepSeek)', level: 75 },
+      { name: 'Deep Learning (Keras)', level: 80 },
+    ],
+  },
+]
 
 const iconMap = {
   Code,
@@ -46,7 +111,6 @@ export default function Skills() {
         </motion.p>
       </div>
 
-      {/* Category Tabs */}
       <div className="flex flex-wrap justify-center gap-4 mb-8">
         {skillCategories.map((category) => {
           const Icon = iconMap[category.icon]
@@ -64,7 +128,6 @@ export default function Skills() {
         })}
       </div>
 
-      {/* Skills Grid by Category */}
       <div className="space-y-12">
         {skillCategories.map((category, categoryIndex) => {
           const Icon = iconMap[category.icon]
@@ -103,46 +166,43 @@ export default function Skills() {
         })}
       </div>
 
-      {/* Skill Detail Modal */}
-      <AnimatePresence>
-        {selectedSkill && (
+      {selectedSkill && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+          onClick={() => setSelectedSkill(null)}
+        >
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
-            onClick={() => setSelectedSkill(null)}
+            initial={{ scale: 0.9, y: 20 }}
+            animate={{ scale: 1, y: 0 }}
+            className="bg-white rounded-2xl p-8 max-w-md w-full"
+            onClick={(e) => e.stopPropagation()}
           >
-            <motion.div
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              className="bg-white rounded-2xl p-8 max-w-md w-full"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex justify-between items-start mb-4">
-                <h3 className="text-2xl font-bold text-primary">
-                  {selectedSkill.name}
-                </h3>
-                <button
-                  onClick={() => setSelectedSkill(null)}
-                  className="text-gray-400 hover:text-gray-600"
-                >
-                  <X size={24} />
-                </button>
-              </div>
-              <p className="text-gray-600 mb-4">
-                Proficiency Level: {selectedSkill.level}%
-              </p>
-              <div className="w-full bg-gray-200 rounded-full h-4">
-                <div
-                  className="h-4 rounded-full bg-secondary transition-all duration-500"
-                  style={{ width: `${selectedSkill.level}%` }}
-                />
-              </div>
-            </motion.div>
+            <div className="flex justify-between items-start mb-4">
+              <h3 className="text-2xl font-bold text-primary">
+                {selectedSkill.name}
+              </h3>
+              <button
+                onClick={() => setSelectedSkill(null)}
+                className="text-gray-400 hover:text-gray-600"
+              >
+                <X size={24} />
+              </button>
+            </div>
+            <p className="text-gray-600 mb-4">
+              Proficiency Level: {selectedSkill.level}%
+            </p>
+            <div className="w-full bg-gray-200 rounded-full h-4">
+              <div
+                className="h-4 rounded-full bg-secondary transition-all duration-500"
+                style={{ width: `${selectedSkill.level}%` }}
+              />
+            </div>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </motion.div>
+      )}
     </Section>
   )
 }

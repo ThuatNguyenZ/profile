@@ -17,14 +17,10 @@ export default function AnimatedCounter({ value, duration = 2 }) {
 
   useEffect(() => {
     const unsubscribe = displayValue.on('change', (latest) => {
-      if (typeof value === 'number') {
-        setDisplayValue(Math.round(latest))
-      } else {
-        setDisplayValue(latest)
-      }
+      setDisplayValue(Math.round(latest))
     })
     return () => unsubscribe()
-  }, [displayValue, setDisplayValue, value])
+  }, [displayValue, setDisplayValue])
 
   return (
     <motion.span ref={ref}>

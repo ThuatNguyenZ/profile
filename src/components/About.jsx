@@ -1,7 +1,31 @@
 import { motion } from 'framer-motion'
 import { MapPin, GraduationCap, Award } from 'lucide-react'
 import Section from './common/Section'
-import { profile, education } from '../data/profile'
+
+const profile = {
+  name: 'Nguyen Thien Thuat',
+  title: 'Data Engineer',
+  tagline: 'Building scalable data pipelines that power intelligent products',
+  location: 'Ho Chi Minh City, Vietnam',
+  bio: `Results-driven Data Engineer with a strong product-thinking mindset, experienced in architecting scalable ETL pipelines, automated ingestion systems, and real-time streaming architectures (Kafka, Spark). Proficient in the AWS ecosystem with a readiness to adapt to hybrid cloud environments. Proven ability to deliver high-quality data products to downstream consumers and bridge the gap between robust data infrastructure and advanced AI/ML research.`,
+}
+
+const education = [
+  {
+    degree: 'Master of Science in Artificial Intelligence',
+    school: 'University of Science – VNU-HCM',
+    period: 'Sep. 2025 – Present',
+    location: 'Ho Chi Minh City, Vietnam',
+  },
+  {
+    degree: 'Bachelor of Science in Data Science',
+    school: 'University of Information Technology – VNU-HCM',
+    period: 'Sep. 2020 – May 2024',
+    location: 'Ho Chi Minh City, Vietnam',
+    gpa: '8.22/10.0',
+    highlight: 'Graduated early (completed 4-year program in 3.5 years)',
+  },
+]
 
 export default function About() {
   return (
@@ -19,7 +43,6 @@ export default function About() {
       </div>
 
       <div className="grid md:grid-cols-2 gap-12">
-        {/* Bio */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -36,7 +59,6 @@ export default function About() {
           </div>
         </motion.div>
 
-        {/* Education Timeline */}
         <motion.div
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -48,7 +70,6 @@ export default function About() {
           </h3>
 
           <div className="relative">
-            {/* Timeline line */}
             <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-secondary" />
 
             {education.map((edu, index) => (
@@ -60,7 +81,6 @@ export default function About() {
                 transition={{ delay: index * 0.1 }}
                 className="relative pl-12 pb-8 last:pb-0"
               >
-                {/* Timeline dot */}
                 <div className="absolute left-2 top-1 w-4 h-4 bg-secondary rounded-full border-4 border-white shadow" />
 
                 <div className="bg-surface rounded-xl p-4">

@@ -18,7 +18,6 @@ export default function DataPipelineBackground() {
     resize()
     window.addEventListener('resize', resize)
 
-    // Create particles
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width
@@ -47,12 +46,10 @@ export default function DataPipelineBackground() {
       }
     }
 
-    // Initialize particles
     for (let i = 0; i < 50; i++) {
       particles.push(new Particle())
     }
 
-    // Draw connections
     const drawConnections = () => {
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
