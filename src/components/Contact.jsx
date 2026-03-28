@@ -88,20 +88,23 @@ export default function Contact() {
               <item.icon className="mx-auto mb-4 text-primary" size={32} strokeWidth={2} />
               <h3 className="font-bold text-gray-500 text-sm mb-2">{item.label}</h3>
               {item.isCopyButton ? (
-                <button
-                  onClick={item.onClick}
-                  className="w-full mt-2 px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-secondary transition-colors flex items-center justify-center gap-2"
-                >
-                  {copied ? (
-                    <>
-                      <Check size={16} /> Copied!
-                    </>
-                  ) : (
-                    <>
-                      <Mail size={16} /> Copy Email
-                    </>
-                  )}
-                </button>
+                <>
+                  <p className="text-primary font-medium text-sm mb-2 break-all">{item.value}</p>
+                  <button
+                    onClick={item.onClick}
+                    className="w-full mt-2 px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-secondary transition-colors flex items-center justify-center gap-2"
+                  >
+                    {copied ? (
+                      <>
+                        <Check size={16} /> Copied!
+                      </>
+                    ) : (
+                      <>
+                        <Mail size={16} /> Copy Email
+                      </>
+                    )}
+                  </button>
+                </>
               ) : item.href ? (
                 <a
                   href={item.href}
