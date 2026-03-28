@@ -1,20 +1,8 @@
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Github, Linkedin, Facebook, Download, Check } from 'lucide-react'
 import Section from './common/Section'
+import { profile } from '../data/profile'
 import { useState } from 'react'
-
-const profile = {
-  name: 'Nguyen Thien Thuat',
-  title: 'Data Engineer',
-  location: 'Ho Chi Minh City, Vietnam',
-  contact: {
-    email: 'thuatnguyen2k2info@gmail.com',
-    phone: '+84 942 389 852',
-    github: 'https://github.com/ThuatNguyenZ',
-    linkedin: 'https://linkedin.com/in/thuat-nguyen1306/',
-    facebook: 'https://www.facebook.com/ThuatNguyen992',
-  },
-}
 
 export default function Contact() {
   const [copied, setCopied] = useState(false)

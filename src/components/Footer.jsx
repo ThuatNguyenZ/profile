@@ -1,10 +1,5 @@
 import { Heart } from 'lucide-react'
-
-const profile = {
-  name: 'Nguyen Thien Thuat',
-  title: 'Data Engineer',
-  location: 'Ho Chi Minh City, Vietnam',
-}
+import { profile } from '../data/profile'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
