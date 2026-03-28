@@ -20,17 +20,17 @@ export default function Contact() {
 
   const contactItems = [
     {
+      icon: Phone,
+      label: 'Phone',
+      value: profile.contact.phone,
+      href: `tel:${profile.contact.phone.replace(/\s/g, '')}`,
+    },
+    {
       icon: Mail,
       label: 'Email',
       value: profile.contact.email,
       onClick: copyEmail,
       isCopyButton: true,
-    },
-    {
-      icon: Phone,
-      label: 'Phone',
-      value: profile.contact.phone,
-      href: `tel:${profile.contact.phone.replace(/\s/g, '')}`,
     },
     {
       icon: MapPin,
