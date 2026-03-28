@@ -2,59 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, ExternalLink } from 'lucide-react'
 import Section from './common/Section'
 import AnimatedCounter from './common/AnimatedCounter'
-
-const experiences = [
-  {
-    company: 'BA3 Studio',
-    website: 'https://demo.ba3.studio',
-    role: 'Data Engineer',
-    period: 'Nov. 2024 – Present',
-    location: 'Ho Chi Minh City, Vietnam',
-    description: 'Data-driven service & software for digital commerce. Helps brands optimize every move through data-driven innovation on dashboards, AI-powered recommendations on factors that directly affect revenue such as promotion and keyword on Shopee, TikTokshop, Lazada and other platforms.',
-    technologies: [
-      'AWS (EC2, S3, RDS, Glue, Lambda)',
-      'GitHub Actions',
-      'PostgreSQL',
-      'FastAPI',
-      'Redis',
-      'Celery',
-      'Docker',
-      'React',
-    ],
-    achievements: [
-      {
-        metric: 'Millions',
-        label: 'Records processed daily via ETL pipelines',
-        icon: 'Database',
-      },
-      {
-        metric: '3',
-        label: 'E-commerce platforms automated (Shopee, TikTok, Lazada)',
-        icon: 'ShoppingCart',
-      },
-      {
-        metric: '-90%',
-        label: 'Reduction in manual extraction time',
-        icon: 'Clock',
-      },
-      {
-        metric: 'Minutes',
-        label: 'Deployment time with CI/CD (from hours)',
-        icon: 'Rocket',
-      },
-    ],
-    pipeline: {
-      title: 'Data Architecture',
-      stages: [
-        { name: 'EC2', description: 'Data Ingestion' },
-        { name: 'S3', description: 'Raw Storage' },
-        { name: 'Glue', description: 'ETL Processing' },
-        { name: 'Lambda', description: 'Real-time Processing' },
-        { name: 'PostgreSQL', description: 'Structured Storage' },
-      ],
-    },
-  },
-]
+import { experiences } from '../data/experience'
 
 const iconMap = {
   Database: '📊',
@@ -86,6 +34,7 @@ export default function Experience() {
           viewport={{ once: true }}
           className="mb-16"
         >
+          {/* Company Header */}
           <div className="bg-primary rounded-2xl p-6 mb-6 text-white">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div>
@@ -109,8 +58,10 @@ export default function Experience() {
             </div>
           </div>
 
+          {/* Description */}
           <p className="text-gray-600 mb-6">{exp.description}</p>
 
+          {/* Technologies */}
           <div className="flex flex-wrap gap-2 mb-8">
             {exp.technologies.map((tech) => (
               <span
@@ -122,6 +73,7 @@ export default function Experience() {
             ))}
           </div>
 
+          {/* Achievement Metrics */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             {exp.achievements.map((achievement, i) => (
               <motion.div
@@ -141,6 +93,7 @@ export default function Experience() {
             ))}
           </div>
 
+          {/* Pipeline Diagram */}
           {exp.pipeline && (
             <div className="bg-surface rounded-xl p-6">
               <h4 className="font-bold text-primary mb-4">{exp.pipeline.title}</h4>
