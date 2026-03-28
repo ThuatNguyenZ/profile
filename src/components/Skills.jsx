@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import 'devicon/devicon.min.css'
 import { Code, Database, Cloud, Settings, Brain, X } from 'lucide-react'
 import Section from './common/Section'
 import SkillNode from './common/SkillNode'
