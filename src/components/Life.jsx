@@ -18,7 +18,7 @@ const sportIconMap = {
 
 export default function Life() {
   return (
-    <Section id="life" backgroundColor="white" patternColor="#F97316" patternOpacity={0.04}>
+    <Section id="life" backgroundColor="white" patternColor="#3B82F6" patternOpacity={0.03}>
       <div className="text-center mb-12">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
