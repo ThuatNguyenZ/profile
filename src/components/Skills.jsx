@@ -93,7 +93,8 @@ export default function Skills() {
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.3 }}
           className="text-3xl md:text-4xl font-bold text-primary mb-4"
         >
           Technical Skills
@@ -102,7 +103,8 @@ export default function Skills() {
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.3 }}
           className="text-gray-600 max-w-2xl mx-auto"
         >
           A comprehensive toolkit for building scalable data systems
@@ -113,15 +115,13 @@ export default function Skills() {
         {skillCategories.map((category) => {
           const Icon = iconMap[category.icon]
           return (
-            <motion.button
+            <button
               key={category.id}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-4 py-2 bg-white rounded-full shadow-sm font-medium text-gray-700 flex items-center gap-2 hover:shadow-md transition-shadow"
+              className="px-4 py-2 bg-white rounded-full shadow-sm font-medium text-gray-700 flex items-center gap-2 hover:shadow-md transition-shadow hover:-translate-y-0.5 will-change-transform"
             >
               <Icon size={18} style={{ color: categoryColors[category.id] }} />
               {category.name}
-            </motion.button>
+            </button>
           )
         })}
       </div>
@@ -136,8 +136,8 @@ export default function Skills() {
               key={category.id}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: categoryIndex * 0.1 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: categoryIndex * 0.05, duration: 0.2 }}
             >
               <h3
                 className="text-xl font-bold text-primary mb-4 flex items-center gap-2"
@@ -154,7 +154,7 @@ export default function Skills() {
                     name={skill.name}
                     isCore={skill.isCore}
                     color={color}
-                    delay={skillIndex * 0.05}
+                    delay={skillIndex * 0.03}
                   />
                 ))}
               </div>

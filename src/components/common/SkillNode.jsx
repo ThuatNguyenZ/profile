@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { memo } from 'react'
 
 // Devicon class mapping
 const deviconClassMap = {
@@ -36,58 +37,11 @@ const customIconMap = {
   'Deep Learning (Keras)': 'deeplearning',
 }
 
-export default function SkillNode({
-  name,
-  isCore,
-  color,
-  delay = 0
-}) {
-  const iconSize = isCore ? 48 : 40
-  const borderWidth = isCore ? 3 : 1.5
-
-  // Check if skill has devicon class
-  const deviconClass = deviconClassMap[name]
-  const customIconName = customIconMap[name]
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ delay, duration: 0.3 }}
-      whileHover={{ scale: 1.1, boxShadow: '0 10px 40px rgba(0,0,0,0.15)' }}
-      className="cursor-pointer bg-white rounded-xl p-4 shadow-md transition-all flex flex-col items-center text-center"
-      style={{ borderLeftWidth: `${borderWidth}px`, borderLeftColor: color, borderLeftStyle: 'solid' }}
-    >
-      {/* Icon */}
-      <div className="mb-3" style={{ width: iconSize, height: iconSize }}>
-        {deviconClass ? (
-          <i className={`${deviconClass}`} style={{ fontSize: iconSize, color }} />
-        ) : customIconName ? (
-          <CustomIcon name={customIconName} size={iconSize} color={color} />
-        ) : null}
-      </div>
-
-      {/* Skill Name */}
-      <span className="font-semibold text-gray-800 text-xs mb-2 line-clamp-2">
-        {name}
-      </span>
-
-      {/* Core Badge */}
-      {isCore && (
-        <span className="px-2 py-0.5 text-xs font-medium rounded-full" style={{ backgroundColor: `${color}20`, color }}>
-          Core
-        </span>
-      )}
-    </motion.div>
-  )
-}
-
-// Custom Icon Component
-function CustomIcon({ name, size, color }) {
+// Memoized Custom Icon Component
+const CustomIcon = memo(function CustomIcon({ name, size, color }) {
   const icons = {
     'cicd': (
-      <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
+      <svg width={size} height={size} viewBox="0 0 48 48" fill="none" aria-hidden="true">
         <rect x="6" y="14" width="10" height="8" rx="2" fill={color} opacity="0.6"/>
         <rect x="20" y="14" width="10" height="8" rx="2" fill={color}/>
         <rect x="34" y="14" width="10" height="8" rx="2" fill={color} opacity="0.6"/>
@@ -98,7 +52,7 @@ function CustomIcon({ name, size, color }) {
       </svg>
     ),
     'etl': (
-      <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
+      <svg width={size} height={size} viewBox="0 0 48 48" fill="none" aria-hidden="true">
         <rect x="4" y="8" width="12" height="8" rx="2" fill={color} opacity="0.8"/>
         <rect x="18" y="20" width="12" height="8" rx="2" fill={color}/>
         <rect x="32" y="32" width="12" height="8" rx="2" fill={color} opacity="0.8"/>
@@ -109,7 +63,7 @@ function CustomIcon({ name, size, color }) {
       </svg>
     ),
     'datawarehouse': (
-      <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
+      <svg width={size} height={size} viewBox="0 0 48 48" fill="none" aria-hidden="true">
         <ellipse cx="24" cy="12" rx="16" ry="4" fill={color} opacity="0.8"/>
         <ellipse cx="24" cy="24" rx="16" ry="4" fill={color} opacity="0.6"/>
         <ellipse cx="24" cy="36" rx="16" ry="4" fill={color} opacity="0.4"/>
@@ -118,7 +72,7 @@ function CustomIcon({ name, size, color }) {
       </svg>
     ),
     'webscraping': (
-      <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
+      <svg width={size} height={size} viewBox="0 0 48 48" fill="none" aria-hidden="true">
         <rect x="8" y="8" width="32" height="24" rx="2" stroke={color} strokeWidth="2"/>
         <circle cx="24" cy="20" r="6" fill={color} opacity="0.3"/>
         <path d="M20 38L24 42L28 38" stroke={color} strokeWidth="2"/>
@@ -126,7 +80,7 @@ function CustomIcon({ name, size, color }) {
       </svg>
     ),
     'nlp': (
-      <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
+      <svg width={size} height={size} viewBox="0 0 48 48" fill="none" aria-hidden="true">
         <rect x="8" y="12" width="32" height="24" rx="4" fill={color} opacity="0.2"/>
         <path d="M14 20L20 20" stroke={color} strokeWidth="2" strokeLinecap="round"/>
         <path d="M14 28L24 28" stroke={color} strokeWidth="2" strokeLinecap="round"/>
@@ -136,7 +90,7 @@ function CustomIcon({ name, size, color }) {
       </svg>
     ),
     'llm': (
-      <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
+      <svg width={size} height={size} viewBox="0 0 48 48" fill="none" aria-hidden="true">
         <circle cx="24" cy="24" r="14" fill={color} opacity="0.2"/>
         <circle cx="24" cy="24" r="8" fill={color} opacity="0.4"/>
         <circle cx="24" cy="24" r="4" fill={color}/>
@@ -147,7 +101,7 @@ function CustomIcon({ name, size, color }) {
       </svg>
     ),
     'deeplearning': (
-      <svg width={size} height={size} viewBox="0 0 48 48" fill="none">
+      <svg width={size} height={size} viewBox="0 0 48 48" fill="none" aria-hidden="true">
         <circle cx="24" cy="8" r="3" fill={color}/>
         <circle cx="12" cy="24" r="3" fill={color} opacity="0.8"/>
         <circle cx="36" cy="24" r="3" fill={color} opacity="0.8"/>
@@ -161,4 +115,52 @@ function CustomIcon({ name, size, color }) {
     ),
   }
   return icons[name] || null
-}
+})
+
+const SkillNode = memo(function SkillNode({
+  name,
+  isCore,
+  color,
+  delay = 0
+}) {
+  const iconSize = isCore ? 48 : 40
+  const borderWidth = isCore ? 3 : 1.5
+
+  const deviconClass = deviconClassMap[name]
+  const customIconName = customIconMap[name]
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ delay, duration: 0.2 }}
+      whileHover={{ scale: 1.05 }}
+      className="cursor-pointer bg-white rounded-xl p-4 shadow-md hover:shadow-xl transition-shadow flex flex-col items-center text-center will-change-transform"
+      style={{ borderLeftWidth: `${borderWidth}px`, borderLeftColor: color, borderLeftStyle: 'solid' }}
+    >
+      {/* Icon */}
+      <div className="mb-3 flex items-center justify-center" style={{ width: iconSize, height: iconSize, flexShrink: 0 }}>
+        {deviconClass ? (
+          <i className={`${deviconClass}`} style={{ fontSize: iconSize, color, willChange: 'auto' }} />
+        ) : customIconName ? (
+          <CustomIcon name={customIconName} size={iconSize} color={color} />
+        ) : null}
+      </div>
+
+      {/* Skill Name */}
+      <span className="font-semibold text-gray-800 text-xs mb-2 line-clamp-2 min-h-[2.5rem]">
+        {name}
+      </span>
+
+      {/* Core Badge */}
+      {isCore && (
+        <span className="px-2 py-0.5 text-xs font-medium rounded-full flex-shrink-0" style={{ backgroundColor: `${color}20`, color }}>
+          Core
+        </span>
+      )}
+    </motion.div>
+  )
+})
+
+export default SkillNode
