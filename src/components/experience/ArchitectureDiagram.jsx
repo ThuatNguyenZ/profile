@@ -37,26 +37,26 @@ export default function ArchitectureDiagram({ architecture }) {
   const getIconForService = (iconType, color) => {
     switch (iconType) {
       case 'compute':
-        return <Server size={32} strokeWidth={2} color={color} />
+        return <Server size={28} strokeWidth={2} color={color} />
       case 'storage':
-        return <HardDrive size={32} strokeWidth={2} color={color} />
+        return <HardDrive size={28} strokeWidth={2} color={color} />
       case 'etl':
-        return <GlueIcon size={32} color={color} />
+        return <GlueIcon size={28} color={color} />
       case 'function':
-        return <LambdaIcon size={32} color={color} />
+        return <LambdaIcon size={28} color={color} />
       case 'database':
-        return <Database size={32} strokeWidth={2} color={color} />
+        return <Database size={28} strokeWidth={2} color={color} />
       default:
-        return <Server size={32} strokeWidth={2} color={color} />
+        return <Server size={28} strokeWidth={2} color={color} />
     }
   }
 
   return (
-    <div className="bg-surface rounded-xl p-8">
-      <h4 className="font-bold text-primary mb-6 text-center text-xl">{architecture.title}</h4>
+    <div className="bg-surface rounded-xl p-6">
+      <h4 className="font-bold text-primary mb-5 text-center text-lg">{architecture.title}</h4>
 
       {/* Single row flow - nowrap with scroll on mobile */}
-      <div className="flex items-center justify-center gap-3 overflow-x-auto py-4">
+      <div className="flex items-center justify-center gap-2 overflow-x-auto py-3">
         {architecture.services.map((service, index) => {
           const color = serviceColors[service.name] || '#3B82F6'
           const icon = getIconForService(service.icon, color)
@@ -71,17 +71,17 @@ export default function ArchitectureDiagram({ architecture }) {
               className="flex items-center flex-shrink-0"
             >
               <div
-                className="bg-white rounded-xl p-4 text-center min-w-[100px] shadow-lg border-l-4"
+                className="bg-white rounded-lg p-3 text-center min-w-[90px] shadow border-l-4"
                 style={{ borderLeftColor: color }}
               >
-                <div className="flex justify-center mb-2" style={{ color }}>
+                <div className="flex justify-center mb-1.5" style={{ color }}>
                   {icon}
                 </div>
-                <div className="font-bold text-primary text-sm leading-tight mb-1">{service.name}</div>
+                <div className="font-bold text-primary text-xs leading-tight mb-0.5">{service.name}</div>
                 <div className="text-xs text-gray-500 leading-tight">{service.description}</div>
               </div>
               {index < architecture.services.length - 1 && (
-                <ArrowRight className="text-secondary mx-2 flex-shrink-0" size={20} strokeWidth={2} />
+                <ArrowRight className="text-secondary mx-1.5 flex-shrink-0" size={18} strokeWidth={2} />
               )}
             </motion.div>
           )
