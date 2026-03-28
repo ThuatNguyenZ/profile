@@ -6,7 +6,7 @@ export const experiences = [
     period: 'Nov. 2024 – Present',
     location: 'Ho Chi Minh City, Vietnam',
     description: 'Data-driven service & software for digital commerce. Helps brands optimize every move through data-driven innovation on dashboards, AI-powered recommendations on factors that directly affect revenue such as promotion and keyword on Shopee, TikTokshop, Lazada and other platforms.',
-    technologies: [
+    techStack: [
       'AWS (EC2, S3, RDS, Glue, Lambda)',
       'GitHub Actions',
       'PostgreSQL',
@@ -16,36 +16,36 @@ export const experiences = [
       'Docker',
       'React',
     ],
-    achievements: [
+    metrics: [
       {
-        metric: 'Millions',
-        label: 'Records processed daily via ETL pipelines',
+        value: '50M+',
+        label: 'Records processed daily',
         icon: 'Database',
       },
       {
-        metric: '3',
-        label: 'E-commerce platforms automated (Shopee, TikTok, Lazada)',
+        value: '3',
+        label: 'E-commerce platforms automated',
         icon: 'ShoppingCart',
       },
       {
-        metric: '-90%',
+        value: '-90%',
         label: 'Reduction in manual extraction time',
         icon: 'Clock',
       },
       {
-        metric: 'Minutes',
-        label: 'Deployment time with CI/CD (from hours)',
+        value: 'Minutes',
+        label: 'CI/CD deployment (from hours)',
         icon: 'Rocket',
       },
     ],
-    pipeline: {
+    architecture: {
       title: 'Data Architecture',
-      stages: [
-        { name: 'EC2', description: 'Data Ingestion' },
-        { name: 'S3', description: 'Raw Storage' },
-        { name: 'Glue', description: 'ETL Processing' },
-        { name: 'Lambda', description: 'Real-time Processing' },
-        { name: 'PostgreSQL', description: 'Structured Storage' },
+      services: [
+        { name: 'EC2', description: 'Data Ingestion', icon: 'compute' },
+        { name: 'S3', description: 'Raw Storage', icon: 'storage' },
+        { name: 'Glue', description: 'ETL Processing', icon: 'etl' },
+        { name: 'Lambda', description: 'Real-time Processing', icon: 'function' },
+        { name: 'PostgreSQL', description: 'Structured Storage', icon: 'database' },
       ],
     },
   },
