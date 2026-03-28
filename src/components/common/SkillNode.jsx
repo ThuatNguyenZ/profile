@@ -123,7 +123,7 @@ const SkillNode = memo(function SkillNode({
   color,
   delay = 0
 }) {
-  const iconSize = isCore ? 48 : 40
+  const iconSize = isCore ? 36 : 32
   const borderWidth = isCore ? 3 : 1.5
 
   const deviconClass = deviconClassMap[name]
@@ -136,11 +136,11 @@ const SkillNode = memo(function SkillNode({
       viewport={{ once: true, amount: 0.2 }}
       transition={{ delay, duration: 0.2 }}
       whileHover={{ scale: 1.05 }}
-      className="cursor-pointer bg-white rounded-xl p-4 shadow-md hover:shadow-xl transition-shadow flex flex-col items-center text-center will-change-transform"
+      className="cursor-pointer bg-white rounded-xl p-3 shadow-md hover:shadow-xl transition-shadow flex flex-col items-center text-center will-change-transform"
       style={{ borderLeftWidth: `${borderWidth}px`, borderLeftColor: color, borderLeftStyle: 'solid' }}
     >
       {/* Icon */}
-      <div className="mb-3 flex items-center justify-center" style={{ width: iconSize, height: iconSize, flexShrink: 0 }}>
+      <div className="mb-2 flex items-center justify-center" style={{ width: iconSize, height: iconSize, flexShrink: 0 }}>
         {deviconClass ? (
           <i className={`${deviconClass}`} style={{ fontSize: iconSize, color, willChange: 'auto' }} />
         ) : customIconName ? (
@@ -149,7 +149,7 @@ const SkillNode = memo(function SkillNode({
       </div>
 
       {/* Skill Name */}
-      <span className="font-semibold text-gray-800 text-xs mb-2 line-clamp-2 min-h-[2.5rem]">
+      <span className="font-semibold text-gray-800 text-xs mb-1.5 line-clamp-2 min-h-[2rem]">
         {name}
       </span>
 
