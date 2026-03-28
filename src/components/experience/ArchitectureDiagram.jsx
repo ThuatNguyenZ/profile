@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, Server, HardDrive, Zap, Database } from 'lucide-react'
+import { ArrowRight, Server, HardDrive, Database } from 'lucide-react'
 
 const serviceColors = {
   EC2: '#FF9900',
@@ -36,26 +36,25 @@ function LambdaIcon({ size = 24, color }) {
   )
 }
 
-// Custom SVG icons for each service
-const serviceIcons = {
-  compute: ({ size = 24, color }) => (
-    <Server size={size} strokeWidth={2} color={color} />
-  ),
-  storage: ({ size = 24, color }) => (
-    <HardDrive size={size} strokeWidth={2} color={color} />
-  ),
-  etl: ({ size = 24, color }) => (
-    <GlueIcon size={size} color={color} />
-  ),
-  function: ({ size = 24, color }) => (
-    <LambdaIcon size={size} color={color} />
-  ),
-  database: ({ size = 24, color }) => (
-    <Database size={size} strokeWidth={2} color={color} />
-  ),
-}
-
 export default function ArchitectureDiagram({ architecture }) {
+  // Icon component mapping
+  const getIconForService = (iconType, color) => {
+    switch (iconType) {
+      case 'compute':
+        return <Server size={24} strokeWidth={2} color={color} />
+      case 'storage':
+        return <HardDrive size={24} strokeWidth={2} color={color} />
+      case 'etl':
+        return <GlueIcon size={24} color={color} />
+      case 'function':
+        return <LambdaIcon size={24} color={color} />
+      case 'database':
+        return <Database size={24} strokeWidth={2} color={color} />
+      default:
+        return <Server size={24} strokeWidth={2} color={color} />
+    }
+  }
+
   return (
     <div className="bg-surface rounded-xl p-6">
       <h4 className="font-bold text-primary mb-4 text-center">{architecture.title}</h4>
@@ -63,8 +62,8 @@ export default function ArchitectureDiagram({ architecture }) {
       {/* Single row flow - nowrap with scroll on mobile */}
       <div className="flex items-center justify-center gap-2 overflow-x-auto py-2">
         {architecture.services.map((service, index) => {
-          const IconComponent = serviceIcons[service.icon] || serviceIcons.compute
           const color = serviceColors[service.name] || '#3B82F6'
+          const icon = getIconForService(service.icon, color)
 
           return (
             <motion.div
@@ -80,7 +79,7 @@ export default function ArchitectureDiagram({ architecture }) {
                 style={{ borderLeftColor: color }}
               >
                 <div className="flex justify-center mb-1" style={{ color }}>
-                  <IconComponent size={24} strokeWidth={2} />
+                  {icon}
                 </div>
                 <div className="font-bold text-primary text-[10px] leading-tight">{service.name}</div>
                 <div className="text-[9px] text-gray-500 leading-tight">{service.description}</div>
