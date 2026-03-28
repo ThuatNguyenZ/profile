@@ -47,15 +47,27 @@ export default function About() {
           initial={{ opacity: 0, x: -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          className="prose prose-lg"
+          className="flex flex-col md:flex-row gap-6"
         >
-          <p className="text-gray-600 leading-relaxed">
-            {profile.bio}
-          </p>
+          {/* Profile Image */}
+          <div className="flex-shrink-0 flex md:block justify-center md:justify-start">
+            <img
+              src="/images/profile.jpg"
+              alt="Nguyen Thien Thuat"
+              className="w-full max-w-[200px] h-full object-cover rounded-2xl shadow-lg"
+            />
+          </div>
 
-          <div className="flex items-center gap-2 mt-6 text-gray-500">
-            <MapPin size={20} />
-            <span>{profile.location}</span>
+          {/* Bio Content */}
+          <div className="flex-1">
+            <p className="text-gray-600 leading-relaxed">
+              {profile.bio}
+            </p>
+
+            <div className="flex items-center gap-2 mt-6 text-gray-500">
+              <MapPin size={20} />
+              <span>{profile.location}</span>
+            </div>
           </div>
         </motion.div>
 
