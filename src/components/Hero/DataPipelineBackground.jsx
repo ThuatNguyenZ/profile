@@ -1,9 +1,8 @@
 import { useEffect, useRef } from 'react'
 
-export default function GrandDataPipelineBackground() {
+export default function CinematicBilliardData() {
   const canvasRef = useRef(null)
-  const mouseRef = useRef({ x: null, y: null, clickTime: 0 })
-  const binaryRef = useRef([])
+  const mouseRef = useRef({ x: null, y: null })
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -13,19 +12,22 @@ export default function GrandDataPipelineBackground() {
     let animationId
     let particles = []
     
-    // Cấu hình hoành tráng
-    const PARTICLE_COUNT = 150
-    const CONNECTION_DISTANCE = 220
-    const MOUSE_REPULSE_RADIUS = 200
-    const FOCAL_LENGTH = 400 // Cho phép chiếu 3D
-    const COLOR_PRIMARY = '59, 130, 246' // blue-500
-    const COLOR_SECONDARY = '147, 197, 253' // blue-300
-    const COLOR_TERTIARY = '96, 165, 250' // blue-400
+    // --- CẤU HÌNH CHUYỂN ĐỘNG ĐỀU & NÉT ---
+    const PARTICLE_COUNT = 60 
+    const CONSTANT_SPEED = 0.4    // Tốc độ di chuyển chậm cố định
+    const MOUSE_SENSITIVITY = 0.0002 
+    
+    const PARTICLE_SIZE_BASE = 6
+    const PARTICLE_SIZE_VAR = 8
+    const FOCAL_LENGTH = 500 
+    const CONNECTION_DISTANCE = 200
+
+    const COLOR_PRIMARY = '59, 130, 246'   
+    const COLOR_SECONDARY = '191, 219, 254' 
 
     const resize = () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
-      initBinaryStreams()
     }
     
     const handleMouseMove = (e) => {
@@ -33,221 +35,160 @@ export default function GrandDataPipelineBackground() {
       mouseRef.current.y = e.clientY
     }
 
-    const handleMouseDown = () => {
-      mouseRef.current.clickTime = Date.now()
-    }
-
-    // Khởi tạo dòng nhị phân chạy nền
-    const initBinaryStreams = () => {
-        binaryRef.current = []
-        const columns = Math.floor(canvas.width / 20)
-        for (let i = 0; i < columns; i++) {
-            binaryRef.current.push({
-                x: i * 20,
-                y: Math.random() * canvas.height,
-                speed: 1 + Math.random() * 3,
-                chars: Array(15 + Math.floor(Math.random() * 10)).fill(0).map(() => (Math.random() > 0.5 ? '1' : '0'))
-            })
-        }
-    }
-
     resize()
     window.addEventListener('resize', resize)
     window.addEventListener('mousemove', handleMouseMove)
-    window.addEventListener('mousedown', handleMouseDown)
 
     class Particle {
       constructor() {
-        this.reset(true)
+        this.init()
       }
 
-      reset(init = false) {
-        // Tọa độ 3D
-        this.x3d = (Math.random() - 0.5) * canvas.width * 2
-        this.y3d = (Math.random() - 0.5) * canvas.height * 2
-        this.z3d = init ? Math.random() * FOCAL_LENGTH : FOCAL_LENGTH
+      init() {
+        this.x3d = (Math.random() - 0.5) * window.innerWidth * 1.8
+        this.y3d = (Math.random() - 0.5) * window.innerHeight * 1.8
+        this.z3d = Math.random() * FOCAL_LENGTH
 
-        this.vx = (Math.random() - 0.5) * 1.5
-        this.vy = (Math.random() - 0.5) * 1.5
-        this.vz = -(1 + Math.random() * 2) // Bay về phía người xem
+        // Khởi tạo vận tốc ngẫu nhiên nhưng có hướng
+        this.vx = (Math.random() - 0.5) * CONSTANT_SPEED
+        this.vy = (Math.random() - 0.5) * CONSTANT_SPEED
+        this.vz = (Math.random() - 0.5) * CONSTANT_SPEED
 
-        this.size = 2 + Math.random() * 4
-        this.type = Math.random() > 0.8 ? 'cube' : 'node' // 2 loại hạt
-        this.pulse = Math.random() * Math.PI
+        this.size = PARTICLE_SIZE_BASE + Math.random() * PARTICLE_SIZE_VAR
       }
 
       update() {
+        // Tương tác chuột (đẩy nhẹ)
+        if (mouseRef.current.x) {
+            const scale = FOCAL_LENGTH / (FOCAL_LENGTH + this.z3d)
+            const x2d = this.x3d * scale + canvas.width / 2
+            const y2d = this.y3d * scale + canvas.height / 2
+
+            const dx = mouseRef.current.x - x2d
+            const dy = mouseRef.current.y - y2d
+            const dist = Math.sqrt(dx * dx + dy * dy)
+
+            if (dist < 300) {
+              const force = (300 - dist) / 300
+              this.vx -= dx * force * MOUSE_SENSITIVITY
+              this.vy -= dy * force * MOUSE_SENSITIVITY
+            }
+        }
+
+        // ĐẢM BẢO LUÔN DI CHUYỂN: Duy trì tốc độ ổn định
+        const currentSpeed = Math.sqrt(this.vx**2 + this.vy**2 + this.vz**2)
+        if (currentSpeed < CONSTANT_SPEED) {
+            this.vx *= 1.01; // Tăng tốc nhẹ nếu quá chậm
+            this.vy *= 1.01;
+            this.vz *= 1.01;
+        } else if (currentSpeed > CONSTANT_SPEED * 1.5) {
+            this.vx *= 0.98; // Giảm tốc nếu quá nhanh
+            this.vy *= 0.98;
+            this.vz *= 0.98;
+        }
+
         this.x3d += this.vx
         this.y3d += this.vy
         this.z3d += this.vz
 
-        // Tương tác chuột và Click
-        const timeSinceClick = Date.now() - mouseRef.current.clickTime
-        if (mouseRef.current.x) {
-            // Phép chiếu 2D ngược để tính tương tác
-            const scale = FOCAL_LENGTH / (FOCAL_LENGTH + this.z3d)
-            this.x = this.x3d * scale + canvas.width / 2
-            this.y = this.y3d * scale + canvas.height / 2
-
-            const dx = mouseRef.current.x - this.x
-            const dy = mouseRef.current.y - this.y
-            const dist = Math.sqrt(dx * dx + dy * dy)
-
-            // Click Burst: Nổ mạnh
-            if (timeSinceClick < 500) {
-              const burstForce = (500 - timeSinceClick) / 500 * 20
-              if (dist < MOUSE_REPULSE_RADIUS * 1.5) {
-                this.vx -= dx * burstForce * 0.005
-                this.vy -= dy * burstForce * 0.005
-                this.vz -= burstForce * 0.01 // Nổ tung về phía sau
-              }
-            } 
-            // Hover Repulse: Đẩy nhẹ
-            else if (dist < MOUSE_REPULSE_RADIUS) {
-              const force = (MOUSE_REPULSE_RADIUS - dist) / MOUSE_REPULSE_RADIUS
-              this.vx -= dx * force * 0.01
-              this.vy -= dy * force * 0.01
-            }
-        }
-
-        this.pulse += 0.04
-
-        // Reset khi bay quá gần hoặc quá xa
-        if (this.z3d < -FOCAL_LENGTH || this.z3d > FOCAL_LENGTH * 2) {
-            this.reset()
-        }
+        // Giới hạn biên 3D
+        const bound = 1000
+        if (Math.abs(this.x3d) > bound) this.vx *= -1
+        if (Math.abs(this.y3d) > bound) this.vy *= -1
+        if (this.z3d > FOCAL_LENGTH || this.z3d < -150) this.vz *= -1
       }
 
       draw() {
-        // Phép chiếu 3D sang 2D
         const scale = FOCAL_LENGTH / (FOCAL_LENGTH + this.z3d)
-        this.x = this.x3d * scale + canvas.width / 2
-        this.y = this.y3d * scale + canvas.height / 2
+        if (scale < 0.1) return 
+
+        const x = this.x3d * scale + canvas.width / 2
+        const y = this.y3d * scale + canvas.height / 2
         const finalSize = this.size * scale
 
-        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) return
+        // Độ mờ cố định theo độ sâu (Không chớp tắt)
+        const opacity = 0.6 * scale
 
-        const opacity = (0.5 + Math.sin(this.pulse) * 0.3) * (scale) // Mờ khi ở xa
-        ctx.fillStyle = `rgba(${this.type === 'cube' ? COLOR_TERTIARY : COLOR_PRIMARY}, ${opacity})`
-        ctx.shadowBlur = 15 * scale
-        ctx.shadowColor = `rgba(${COLOR_SECONDARY}, 0.8)`
+        ctx.save()
+        ctx.shadowBlur = 35 * scale
+        ctx.shadowColor = `rgba(${COLOR_PRIMARY}, 0.6)`
 
-        if (this.type === 'cube') {
-          // Vẽ khối 3D đơn giản
-          ctx.fillRect(this.x, this.y, finalSize * 1.5, finalSize * 1.5)
-          // Vẽ thêm cạnh để tạo khối
-          ctx.fillStyle = `rgba(${COLOR_TERTIARY}, ${opacity * 0.5})`
-          ctx.fillRect(this.x + finalSize * 0.5, this.y - finalSize * 0.5, finalSize * 1.5, finalSize * 1.5)
-        } else {
-          // Vẽ nút tròn sáng
-          ctx.beginPath()
-          ctx.arc(this.x, this.y, finalSize, 0, Math.PI * 2)
-          ctx.fill()
-        }
-        ctx.shadowBlur = 0 // Reset shadow
+        const grad = ctx.createRadialGradient(x, y, 0, x, y, finalSize)
+        grad.addColorStop(0, `rgba(255, 255, 255, ${opacity})`)
+        grad.addColorStop(0.5, `rgba(${COLOR_PRIMARY}, ${opacity * 0.7})`)
+        grad.addColorStop(1, `rgba(${COLOR_PRIMARY}, 0)`)
+
+        ctx.beginPath()
+        ctx.fillStyle = grad
+        ctx.arc(x, y, finalSize, 0, Math.PI * 2)
+        ctx.fill()
+        ctx.restore()
       }
     }
 
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      particles.push(new Particle())
-    }
-
-    const drawBinaryMatrix = () => {
-        ctx.font = '10px monospace'
-        binaryRef.current.forEach(stream => {
-            stream.y += stream.speed
-            if (stream.y > canvas.height + stream.chars.length * 12) stream.y = -stream.chars.length * 12
-            
-            stream.chars.forEach((char, index) => {
-                const opacity = (index + 1) / stream.chars.length
-                ctx.fillStyle = `rgba(59, 130, 246, ${opacity * 0.15})`
-                ctx.fillText(char, stream.x, stream.y - index * 12)
-                
-                // Cập nhật thỉnh thoảng thay đổi số
-                if (Math.random() > 0.999) stream.chars[index] = (char === '1' ? '0' : '1')
-            })
-        })
-    }
+    for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle())
 
     const drawConnections = () => {
-      // Sắp xếp hạt theo chiều sâu Z để vẽ đúng thứ tự connections
-      const sortedParticles = [...particles].sort((a, b) => b.z3d - a.z3d);
+      ctx.save()
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const p1 = particles[i]
+          const p2 = particles[j]
+          
+          const dx = p1.x3d - p2.x3d
+          const dy = p1.y3d - p2.y3d
+          const dz = p1.z3d - p2.z3d
+          const dist3d = Math.sqrt(dx*dx + dy*dy + dz*dz)
 
-      for (let i = 0; i < sortedParticles.length; i++) {
-        for (let j = i + 1; j < sortedParticles.length; j++) {
-          const dx = sortedParticles[i].x - sortedParticles[j].x
-          const dy = sortedParticles[i].y - sortedParticles[j].y
-          const distance = Math.sqrt(dx * dx + dy * dy)
-
-          if (distance < CONNECTION_DISTANCE) {
-            const scale1 = FOCAL_LENGTH / (FOCAL_LENGTH + sortedParticles[i].z3d)
-            const scale2 = FOCAL_LENGTH / (FOCAL_LENGTH + sortedParticles[j].z3d)
+          if (dist3d < CONNECTION_DISTANCE) {
+            const scale1 = FOCAL_LENGTH / (FOCAL_LENGTH + p1.z3d)
+            const scale2 = FOCAL_LENGTH / (FOCAL_LENGTH + p2.z3d)
             
-            // Chỉ kết nối các hạt có độ sâu tương đối gần nhau
-            if (Math.abs(scale1 - scale2) > 0.3) continue;
-
-            const opacity = (1 - distance / CONNECTION_DISTANCE) * 0.25 * (scale1 * scale2)
+            // Độ mờ nét vẽ cố định, chỉ phụ thuộc khoảng cách
+            const opacity = (1 - dist3d / CONNECTION_DISTANCE) * 0.4
+            
             ctx.beginPath()
             ctx.strokeStyle = `rgba(${COLOR_SECONDARY}, ${opacity})`
-            ctx.lineWidth = 1 * scale1
-            ctx.moveTo(sortedParticles[i].x, sortedParticles[i].y)
-            ctx.lineTo(sortedParticles[j].x, sortedParticles[j].y)
+            ctx.lineWidth = 1.2 * ((scale1 + scale2) / 2)
+            ctx.moveTo(p1.x3d * scale1 + canvas.width/2, p1.y3d * scale1 + canvas.height/2)
+            ctx.lineTo(p2.x3d * scale2 + canvas.width/2, p2.y3d * scale2 + canvas.height/2)
             ctx.stroke()
-
-            // Data Pulse: Gói dữ liệu chạy dọc
-            if (Math.random() > 0.99) {
-               drawDataPacket(sortedParticles[i], sortedParticles[j], scale1)
-            }
           }
         }
       }
-    }
-
-    const drawDataPacket = (p1, p2, scale) => {
-        // Một vệt sáng mạnh chạy từ p1 đến p2
-        ctx.beginPath()
-        ctx.strokeStyle = `rgba(255, 255, 255, ${0.4 * scale})`
-        ctx.lineWidth = 3 * scale
-        ctx.moveTo(p1.x, p1.y)
-        ctx.lineTo(p2.x, p2.y)
-        ctx.stroke()
+      ctx.restore()
     }
 
     const animate = () => {
-      // Tạo hiệu ứng Trail mạnh hơn
-      ctx.fillStyle = 'rgba(5, 12, 24, 0.3)' 
+      // Xóa sạch canvas mỗi frame để mất dấu chân hoàn toàn
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.fillStyle = '#030712' 
       ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-      // Vẽ Ma trận nền
-      drawBinaryMatrix()
-
-      particles.forEach((particle) => {
-        particle.update()
-        particle.draw()
-      })
+      
+      particles.sort((a, b) => b.z3d - a.z3d)
       
       drawConnections()
-
+      particles.forEach(p => { 
+        p.update()
+        p.draw()
+      })
+      
       animationId = requestAnimationFrame(animate)
     }
 
     animate()
-
     return () => {
       window.removeEventListener('resize', resize)
       window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('mousedown', handleMouseDown)
       cancelAnimationFrame(animationId)
     }
   }, [])
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 -z-10"
-      style={{ 
-        background: 'linear-gradient(135deg, #050c18 0%, #0a192f 50%, #050c18 100%)',
-      }}
+    <canvas 
+      ref={canvasRef} 
+      className="fixed inset-0 -z-10" 
+      style={{ background: '#030712' }} 
     />
   )
 }

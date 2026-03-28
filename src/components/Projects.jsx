@@ -8,7 +8,7 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null)
 
   return (
-    <Section id="projects" backgroundColor="#F8FAFC" patternColor="#64748B" patternOpacity={0.04}>
+    <Section id="projects" backgroundColor="#F8FAFC" patternColor="#64748B" patternOpacity={0.02}>
       <div className="text-center mb-12">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

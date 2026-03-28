@@ -46,7 +46,7 @@ export default function Contact() {
   ]
 
   return (
-    <Section id="contact" backgroundColor="#F8FAFC" patternColor="#10B981" patternOpacity={0.04}>
+    <Section id="contact" backgroundColor="#F8FAFC" patternColor="#3B82F6" patternOpacity={0.3}>
       <div className="text-center mb-12">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

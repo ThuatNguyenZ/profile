@@ -88,7 +88,7 @@ const categoryColors = {
 
 export default function Skills() {
   return (
-    <Section id="skills" backgroundColor="#F8FAFC" patternColor="#64748B" patternOpacity={0.04}>
+    <Section id="skills" backgroundColor="#F8FAFC" patternColor="#64748B" patternOpacity={0.02}>
       <div className="text-center mb-12">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

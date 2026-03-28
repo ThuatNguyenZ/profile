@@ -29,7 +29,7 @@ const education = [
 
 export default function About() {
   return (
-    <Section id="about" backgroundColor="white" patternColor="#3B82F6" patternOpacity={0.03}>
+    <Section id="about" backgroundColor="white" patternColor="#3B82F6" patternOpacity={0.2}>
       <div className="text-center mb-12">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}

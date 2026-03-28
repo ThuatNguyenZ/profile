@@ -51,7 +51,7 @@ function getMetricIcon(iconName) {
 
 export default function Experience() {
   return (
-    <Section id="experience" backgroundColor="white" patternColor="#10B981" patternOpacity={0.03}>
+    <Section id="experience" backgroundColor="white" patternColor="#3B82F6" patternOpacity={0.3}>
       <div className="text-center mb-12">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
