@@ -37,10 +37,16 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            whileHover={{ y: -5, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
+            whileHover={{ y: -5 }}
             onClick={() => setSelectedProject(project)}
-            className="bg-white rounded-2xl p-6 cursor-pointer shadow-md hover:shadow-xl transition-all"
+            className="bg-white rounded-2xl p-6 cursor-pointer shadow-md hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
           >
+            {/* Gradient border effect on hover */}
+            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+              style={{
+                background: `linear-gradient(to bottom right, #3B82F620, transparent 70%)`,
+              }}
+            />
             <div className="flex items-start justify-between mb-4">
               <div>
                 <h3 className="text-xl font-bold text-primary">{project.title}</h3>
