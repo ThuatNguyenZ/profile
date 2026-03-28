@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, Server, HardDrive, GitBranch, Zap, Database } from 'lucide-react'
+import { ArrowRight, Server, HardDrive, Zap, Database } from 'lucide-react'
 
 const serviceColors = {
   EC2: '#FF9900',
@@ -9,21 +9,48 @@ const serviceColors = {
   PostgreSQL: '#336791',
 }
 
+// AWS Glue Icon - Custom SVG
+function GlueIcon({ size = 24, color }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="6" cy="6" r="3" />
+      <circle cx="18" cy="6" r="3" />
+      <circle cx="6" cy="18" r="3" />
+      <circle cx="18" cy="18" r="3" />
+      <path d="M9 6h6" />
+      <path d="M9 18h6" />
+      <path d="M6 9v6" />
+      <path d="M18 9v6" />
+    </svg>
+  )
+}
+
+// AWS Lambda Icon - Custom SVG (λ symbol)
+function LambdaIcon({ size = 24, color }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M8 4h2l6 12" />
+      <path d="M12 8l6 12" />
+      <path d="M8 20h10" />
+    </svg>
+  )
+}
+
 // Custom SVG icons for each service
 const serviceIcons = {
-  compute: ({ size = 32, color }) => (
+  compute: ({ size = 24, color }) => (
     <Server size={size} strokeWidth={2} color={color} />
   ),
-  storage: ({ size = 32, color }) => (
+  storage: ({ size = 24, color }) => (
     <HardDrive size={size} strokeWidth={2} color={color} />
   ),
-  etl: ({ size = 32, color }) => (
-    <GitBranch size={size} strokeWidth={2} color={color} />
+  etl: ({ size = 24, color }) => (
+    <GlueIcon size={size} color={color} />
   ),
-  function: ({ size = 32, color }) => (
-    <Zap size={size} strokeWidth={2} color={color} />
+  function: ({ size = 24, color }) => (
+    <LambdaIcon size={size} color={color} />
   ),
-  database: ({ size = 32, color }) => (
+  database: ({ size = 24, color }) => (
     <Database size={size} strokeWidth={2} color={color} />
   ),
 }
