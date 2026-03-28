@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ExternalLink } from 'lucide-react'
+import { ExternalLink, Database, ShoppingCart, Clock, Rocket } from 'lucide-react'
 import Section from './common/Section'
 import SkillsSidebar from './experience/SkillsSidebar'
 import ArchitectureDiagram from './experience/ArchitectureDiagram'
@@ -36,16 +36,17 @@ function TechChip({ name }) {
   )
 }
 
-// Icon mapping for metrics
+// Icon mapping for metrics - using Lucide React components
 const metricIconMap = {
-  Database: '📊',
-  ShoppingCart: '🛒',
-  Clock: '⏱️',
-  Rocket: '🚀',
+  Database: Database,
+  ShoppingCart: ShoppingCart,
+  Clock: Clock,
+  Rocket: Rocket,
 }
 
 function getMetricIcon(iconName) {
-  return metricIconMap[iconName] || '📊'
+  const IconComponent = metricIconMap[iconName] || Database
+  return <IconComponent size={32} className="mx-auto text-secondary" />
 }
 
 export default function Experience() {
@@ -114,22 +115,25 @@ export default function Experience() {
 
               {/* Metrics Cards */}
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-                {exp.metrics.map((metric, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.05 }}
-                    className="bg-surface rounded-xl p-4 text-center"
-                  >
-                    <div className="text-3xl mb-2">{getMetricIcon(metric.icon)}</div>
-                    <div className="text-2xl md:text-3xl font-bold text-secondary mb-1">
-                      {metric.value}
-                    </div>
-                    <p className="text-gray-600 text-sm">{metric.label}</p>
-                  </motion.div>
-                ))}
+                {exp.metrics.map((metric, i) => {
+                  const IconComponent = metricIconMap[metric.icon] || Database
+                  return (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.05 }}
+                      className="bg-surface rounded-xl p-4 text-center"
+                    >
+                      <IconComponent size={32} className="mx-auto text-secondary mb-2" strokeWidth={1.5} />
+                      <div className="text-2xl md:text-3xl font-bold text-secondary mb-1">
+                        {metric.value}
+                      </div>
+                      <p className="text-gray-600 text-sm">{metric.label}</p>
+                    </motion.div>
+                  )
+                })}
               </div>
 
               {/* Architecture Diagram */}
