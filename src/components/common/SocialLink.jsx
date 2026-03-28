@@ -13,7 +13,7 @@ export default function SocialLink({
       rel="noopener noreferrer"
       whileHover={{ scale: 1.1, y: -2 }}
       whileTap={{ scale: 0.95 }}
-      className={`flex items-center gap-2 ${color} hover:opacity-80 transition-opacity`}
+      className={`flex items-center gap-2 ${color} hover:opacity-80 transition-colors duration-300`}
     >
       <Icon size={20} />
       <span className="hidden md:inline">{label}</span>

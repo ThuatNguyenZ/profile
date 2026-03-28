@@ -49,7 +49,7 @@ export default function Header() {
         <div className="flex items-center justify-between">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className={`text-xl font-bold ${textColor} cursor-pointer`}
+            className={`text-xl font-bold ${textColor} cursor-pointer transition-colors duration-300`}
             onClick={() => scrollToSection('home')}
           >
             NTT<span className="text-secondary">.</span>
@@ -75,7 +75,7 @@ export default function Header() {
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`md:hidden p-2 ${textColor}`}
+            className={`md:hidden p-2 ${textColor} transition-colors duration-300`}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -93,7 +93,7 @@ export default function Header() {
                     <button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className={`text-left ${textColor} hover:text-secondary font-medium py-2`}
+                      className={`text-left ${textColor} hover:text-secondary transition-colors duration-300 font-medium py-2`}
                     >
                       {item.label}
                     </button>
