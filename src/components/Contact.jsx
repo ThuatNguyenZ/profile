@@ -6,11 +6,16 @@ import { useState } from 'react'
 
 export default function Contact() {
   const [copied, setCopied] = useState(false)
+  const [showToast, setShowToast] = useState(false)
 
   const copyEmail = () => {
     navigator.clipboard.writeText(profile.contact.email)
     setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
+    setShowToast(true)
+    setTimeout(() => {
+      setCopied(false)
+      setShowToast(false)
+    }, 2000)
   }
 
   const contactItems = [
@@ -18,8 +23,8 @@ export default function Contact() {
       icon: Mail,
       label: 'Email',
       value: profile.contact.email,
-      href: `mailto:${profile.contact.email}`,
       onClick: copyEmail,
+      isCopyButton: true,
     },
     {
       icon: Phone,
@@ -71,34 +76,41 @@ export default function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-lg transition-shadow"
+              whileHover={{ y: -5 }}
+              className="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
             >
-              <item.icon className="mx-auto mb-4 text-secondary" size={32} />
+              {/* Gradient border effect on hover */}
+              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                style={{
+                  background: `linear-gradient(to bottom right, ${item.icon === Mail ? '#3B82F6' : item.icon === Phone ? '#10B981' : '#F97316'}20, transparent 70%)`,
+                }}
+              />
+              <item.icon className="mx-auto mb-4 text-primary" size={32} strokeWidth={2} />
               <h3 className="font-bold text-gray-500 text-sm mb-2">{item.label}</h3>
-              {item.href ? (
+              {item.isCopyButton ? (
+                <button
+                  onClick={item.onClick}
+                  className="w-full mt-2 px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-secondary transition-colors flex items-center justify-center gap-2"
+                >
+                  {copied ? (
+                    <>
+                      <Check size={16} /> Copied!
+                    </>
+                  ) : (
+                    <>
+                      <Mail size={16} /> Copy Email
+                    </>
+                  )}
+                </button>
+              ) : item.href ? (
                 <a
                   href={item.href}
-                  onClick={item.onClick}
                   className="text-primary font-medium hover:text-secondary transition-colors break-all"
                 >
                   {item.value}
                 </a>
               ) : (
                 <p className="text-primary font-medium">{item.value}</p>
-              )}
-              {item.onClick && (
-                <button
-                  onClick={item.onClick}
-                  className="mt-2 text-xs text-secondary flex items-center justify-center gap-1 mx-auto"
-                >
-                  {copied ? (
-                    <>
-                      <Check size={12} /> Copied!
-                    </>
-                  ) : (
-                    'Click to copy'
-                  )}
-                </button>
               )}
             </motion.div>
           ))}
@@ -136,12 +148,25 @@ export default function Contact() {
           <a
             href="/cv.pdf"
             download
-            className="inline-flex items-center gap-3 px-8 py-4 bg-accent text-white rounded-full font-medium hover:bg-green-600 transition-colors shadow-lg hover:shadow-xl"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-transparent text-primary border-2 border-primary rounded-full font-medium hover:bg-primary hover:text-white transition-all duration-300 shadow-md hover:shadow-lg"
           >
             <Download size={20} />
             Download Full CV (PDF)
           </a>
         </motion.div>
+
+        {/* Toast notification */}
+        {showToast && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-primary text-white px-6 py-3 rounded-full shadow-lg z-50 flex items-center gap-2"
+          >
+            <Check size={18} />
+            Đã sao chép email!
+          </motion.div>
+        )}
       </div>
     </Section>
   )
