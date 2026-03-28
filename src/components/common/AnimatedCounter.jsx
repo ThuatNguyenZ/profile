@@ -1,26 +1,27 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, useSpring } from 'framer-motion'
 
 export default function AnimatedCounter({ value, duration = 2 }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
-  const [displayValue, setDisplayValue] = useSpring(0, {
+  const springValue = useSpring(0, {
     duration: duration * 1000,
     ease: 'easeOut',
   })
+  const [displayValue, setDisplayValue] = useState(0)
 
   useEffect(() => {
     if (isInView) {
-      displayValue.set(value)
+      springValue.set(value)
     }
-  }, [isInView, value, displayValue])
+  }, [isInView, value, springValue])
 
   useEffect(() => {
-    const unsubscribe = displayValue.on('change', (latest) => {
+    const unsubscribe = springValue.on('change', (latest) => {
       setDisplayValue(Math.round(latest))
     })
     return () => unsubscribe()
-  }, [displayValue, setDisplayValue])
+  }, [springValue, setDisplayValue])
 
   return (
     <motion.span ref={ref}>

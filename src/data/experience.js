@@ -1,7 +1,7 @@
 export const experiences = [
   {
     company: 'BA3 Studio',
-    website: 'https://demo.ba3.studio',
+    website: 'https://analytic.ba3.studio/',
     role: 'Data Engineer',
     period: 'Nov. 2024 – Present',
     location: 'Ho Chi Minh City, Vietnam',

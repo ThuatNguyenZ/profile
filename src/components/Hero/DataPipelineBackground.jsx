@@ -94,7 +94,7 @@ export default function DataPipelineBackground() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 -z-10"
-      style={{ top: 0 }}
+      style={{ backgroundColor: '#1E3A5F' }}
     />
   )
 }

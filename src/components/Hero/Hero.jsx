@@ -29,7 +29,7 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-secondary font-medium mb-4"
+              className="text-gray-300 font-medium mb-4"
             >
               Hello, I'm
             </motion.p>
@@ -47,7 +47,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
-              className="text-2xl md:text-4xl text-secondary mb-6"
+              className="text-2xl md:text-4xl text-white font-semibold mb-6"
             >
               {profile.title}
             </motion.h2>
@@ -105,7 +105,7 @@ export default function Hero() {
               </button>
               <button
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-3 bg-white/10 border border-white/30 rounded-full font-medium hover:bg-white/20 transition-colors"
+                className="px-8 py-3 bg-white/20 border border-white/50 rounded-full font-medium hover:bg-white/30 transition-colors"
               >
                 Contact Me
               </button>
