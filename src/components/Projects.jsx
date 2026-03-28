@@ -48,15 +48,10 @@ export default function Projects() {
               }}
             />
             <div className="flex items-start justify-between mb-4">
-              <div>
+              <div className="flex-1">
                 <h3 className="text-xl font-bold text-primary">{project.title}</h3>
                 <p className="text-secondary text-sm mt-1">{project.subtitle}</p>
               </div>
-              {project.publication?.rank && (
-                <span className="px-3 py-1 bg-accent text-white text-xs font-medium rounded-full">
-                  Q2 Journal
-                </span>
-              )}
             </div>
 
             <p className="text-gray-600 text-sm mb-4 line-clamp-3">
@@ -82,7 +77,12 @@ export default function Projects() {
             {project.publication && (
               <div className="flex items-center gap-2 text-sm text-gray-500">
                 <BookOpen size={16} />
-                <span>{project.publication.journal || project.publication.conference}</span>
+                <span className="truncate">{project.publication.journal || project.publication.conference}</span>
+                {project.publication.rank && (
+                  <span className="ml-2 px-2 py-0.5 bg-accent/10 text-accent text-xs font-medium rounded-full whitespace-nowrap">
+                    {project.publication.rank}
+                  </span>
+                )}
               </div>
             )}
 
