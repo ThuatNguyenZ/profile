@@ -68,9 +68,9 @@ export default function Header() {
           </nav>
 
           <div className="hidden md:flex items-center gap-4">
-            <SocialLink href="https://github.com/ThuatNguyenZ" icon={Github} label="" />
-            <SocialLink href="https://linkedin.com/in/thuat-nguyen1306/" icon={Linkedin} label="" />
-            <SocialLink href="mailto:thuatnguyen2k2info@gmail.com" icon={Mail} label="" />
+            <SocialLink href="https://github.com/ThuatNguyenZ" icon={Github} label="" color={textColor} />
+            <SocialLink href="https://linkedin.com/in/thuat-nguyen1306/" icon={Linkedin} label="" color={textColor} />
+            <SocialLink href="mailto:thuatnguyen2k2info@gmail.com" icon={Mail} label="" color={textColor} />
           </div>
 
           <button
@@ -99,9 +99,9 @@ export default function Header() {
                     </button>
                   ))}
                   <div className="flex gap-4 pt-4 border-t">
-                    <SocialLink href="https://github.com/ThuatNguyenZ" icon={Github} label="GitHub" />
-                    <SocialLink href="https://linkedin.com/in/thuat-nguyen1306/" icon={Linkedin} label="LinkedIn" />
-                    <SocialLink href="mailto:thuatnguyen2k2info@gmail.com" icon={Mail} label="Email" />
+                    <SocialLink href="https://github.com/ThuatNguyenZ" icon={Github} label="GitHub" color={textColor} />
+                    <SocialLink href="https://linkedin.com/in/thuat-nguyen1306/" icon={Linkedin} label="LinkedIn" color={textColor} />
+                    <SocialLink href="mailto:thuatnguyen2k2info@gmail.com" icon={Mail} label="Email" color={textColor} />
                   </div>
                 </nav>
               </motion.div>
