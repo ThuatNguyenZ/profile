@@ -1,61 +1,27 @@
-# Nguyen Thien Thuat - Data Engineer Portfolio
+# Nguyen Thien Thuat — Data Engineer portfolio
 
-Personal portfolio website showcasing my work in Data Engineering, ETL pipelines, and AI/ML projects.
+Dark, "telemetry"-style portfolio: a home page and two case studies (BA3 Data Platform, Lunch-Order).
 
-## Tech Stack
+## Stack
 
-- **Framework:** React 18+
-- **Build Tool:** Vite
-- **Styling:** Tailwind CSS
-- **Animations:** Framer Motion
-- **Charts:** Recharts
-- **Icons:** Lucide React
+React 19 · Vite 6 · Tailwind CSS 3 · react-router 7 · framer-motion · hand-written SVG diagrams.
 
-## Getting Started
+## Run
 
 ```bash
-# Install dependencies
 npm install
-
-# Start development server
-npm run dev
-
-# Build for production
+npm run dev       # http://localhost:5173
+npm run check     # confidentiality lint: forbidden internal terms in src/
 npm run build
-
-# Preview production build
 npm run preview
 ```
 
-## Project Structure
+## Editing content
 
-```
-src/
-├── components/     # React components organized by section
-├── data/          # Static content (profile, skills, experience, etc.)
-├── hooks/         # Custom React hooks
-├── styles/        # Global styles
-└── utils/         # Utility functions
-```
+All copy and numbers live in `src/content/`. Components only render them.
+Rules for what may be said about the employer's system: `docs/superpowers/specs/2026-11-19-data-engineer-portfolio-redesign-design.md` §3.
+Run `npm run check` before every deploy.
 
-## Deployment
+## Social preview
 
-This site is optimized for deployment on Vercel or Netlify.
-
-### Vercel
-
-```bash
-npm install -g vercel
-vercel
-```
-
-### Netlify
-
-```bash
-npm run build
-# Drag and drop dist/ folder to Netlify
-```
-
-## License
-
-© Nguyen Thien Thuat. All rights reserved.
+`public/og.png` is rendered from `scripts/og.html` with headless Chrome (see the implementation plan, Task 11).
