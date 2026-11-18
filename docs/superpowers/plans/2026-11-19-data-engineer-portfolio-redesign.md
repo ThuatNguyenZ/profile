@@ -2521,7 +2521,7 @@ for (const [width, label] of [[1440, 'desktop'], [390, 'mobile']]) {
     await page.evaluate(() => document.fonts.ready)
     const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth)
     const fontsOk = await page.evaluate(
-      () => document.fonts.check('16px "Space Grotesk"') && document.fonts.check('12px "JetBrains Mono"') && document.fonts.check('15px Inter'),
+      () => document.fonts.check('600 16px "Space Grotesk"') && document.fonts.check('12px "JetBrains Mono"') && document.fonts.check('15px Inter'),
     )
     const title = await page.title()
     await page.screenshot({ path: `.superpowers/shots/${name}-${label}.png`, fullPage: true })
