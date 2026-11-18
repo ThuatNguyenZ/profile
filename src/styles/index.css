@@ -1,22 +1,111 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: light only;
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 104px;
+  }
+
+  body {
+    @apply bg-canvas font-sans text-tx antialiased;
+    font-size: 15px;
+    line-height: 1.6;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  ::selection {
+    background: rgba(0, 240, 255, 0.25);
+    color: #f8fafc;
+  }
+
+  :focus-visible {
+    outline: 1px solid #00f0ff;
+    outline-offset: 2px;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-4 md:px-8 xl:px-10;
+  }
+
+  .label-code {
+    @apply font-mono text-[10.5px] font-medium uppercase tracking-[0.08em] text-mu;
+  }
+
+  .panel {
+    @apply border border-line bg-s1/75 backdrop-blur-md;
+  }
+
+  .heading-display {
+    @apply font-display font-bold uppercase leading-[1.02] tracking-[-0.035em];
+  }
+
+  .heading-section {
+    @apply font-display font-semibold uppercase leading-[1.1] tracking-[-0.03em];
+  }
 }
 
-body {
-  font-family: 'Inter', system-ui, sans-serif;
-  @apply text-primary bg-white;
+@keyframes flow {
+  to {
+    stroke-dashoffset: -30;
+  }
 }
 
-.font-mono {
-  font-family: 'JetBrains Mono', monospace;
+.flow {
+  stroke-dasharray: 3 7;
+  animation: flow 1s linear infinite;
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(400%);
+  }
+}
+
+.scan {
+  animation: scan 2.4s ease-in-out infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.caret {
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes pulse-dot {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .flow,
+  .scan,
+  .caret,
+  .pulse-dot {
+    animation: none !important;
+  }
 }

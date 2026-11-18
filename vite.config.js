@@ -9,4 +9,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  define: {
+    __BUILD_MONTH__: JSON.stringify(new Date().toISOString().slice(0, 7)),
+  },
 })

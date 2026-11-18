@@ -1,29 +1,8 @@
-import Header from './components/Header'
-import Hero from './components/Hero'
-import About from './components/About'
-import Skills from './components/Skills'
-import Experience from './components/Experience'
-import Projects from './components/Projects'
-import Life from './components/Life'
-import Contact from './components/Contact'
-import Footer from './components/Footer'
-
-function App() {
+export default function App() {
   return (
-    <div className="min-h-screen bg-transparent">
-      <Header />
-      <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Life />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <main className="container-site py-24">
+      <p className="label-code">// foundation</p>
+      <h1 className="heading-display mt-2 text-[48px]">Foundation ready</h1>
+    </main>
   )
 }
-
-export default App
