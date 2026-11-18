@@ -17,7 +17,7 @@ export const lunchOrder = {
   using (user_id = auth.uid());`,
 
   problem:
-    'Orders were collected in a group chat, tallied by hand, and payments tracked in someone's head. Small mistakes cost money and goodwill every day.',
+    'Orders were collected in a group chat, tallied by hand, and payments tracked in someone’s head. Small mistakes cost money and goodwill every day.',
 
   entities: [
     { id: 'members', name: 'Members', fields: ['role', 'approval status', 'default note'] },
@@ -37,7 +37,7 @@ export const lunchOrder = {
   ],
 
   logic: [
-    'Row-level security decides who sees what — members see their own orders and today's board, never other people's payments.',
+    'Row-level security decides who sees what — members see their own orders and today’s board, never other people’s payments.',
     'Triggers enforce the cutoff time and keep totals consistent.',
     'RPC functions wrap multi-step actions, like settling a week or granting a reward, in one transaction.',
   ],

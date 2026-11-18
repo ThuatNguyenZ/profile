@@ -42,7 +42,7 @@ export const platform = {
   problem: [
     'Six sources, six access patterns: official marketplace APIs, ad platforms with their own quotas and token lifecycles, and public web data.',
     'Logic lived in scattered scripts on several machines, each with its own configuration and failure modes.',
-    'Nobody could say at a glance whether yesterday's data had arrived — customers noticed first.',
+    'Nobody could say at a glance whether yesterday’s data had arrived — customers noticed first.',
   ],
 
   architecture: [
