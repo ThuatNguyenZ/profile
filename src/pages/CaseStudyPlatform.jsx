@@ -36,7 +36,7 @@ export default function CaseStudyPlatform() {
       </CaseHeader>
 
       <CaseBody sections={SECTIONS}>
-        <CaseSection id="problem" index="01" label="PROBLEM" title="Many sources, no single view">
+        <CaseSection id="problem" index="01" label="PROBLEM" stage="INPUT" tone="cy" title="Many sources, no single view">
           <ul className="grid gap-px border border-line bg-line md:grid-cols-3">
             {platform.problem.map((p, i) => (
               <li key={i} className="lift relative bg-s1 p-5 hover:z-10">
@@ -47,11 +47,11 @@ export default function CaseStudyPlatform() {
           </ul>
         </CaseSection>
 
-        <CaseSection id="architecture" index="02" label="ARCHITECTURE" title="From source to product" intro="A high-level view. Internals are intentionally left out.">
+        <CaseSection id="architecture" index="02" label="ARCHITECTURE" stage="DESIGN" tone="cy" title="From source to product" intro="A high-level view. Internals are intentionally left out.">
           <ArchitectureDiagram />
         </CaseSection>
 
-        <CaseSection id="principles" index="03" label="PRINCIPLES" title="How it's built">
+        <CaseSection id="principles" index="03" label="PRINCIPLES" stage="RULES" tone="vi" title="How it's built">
           <div className="grid gap-4 md:grid-cols-2">
             {platform.principles.map((d, i) => (
               <Panel key={d.title} title={`principle · ${String(i + 1).padStart(2, '0')}`} className="lift transition-colors hover:border-t-cy">
@@ -71,11 +71,11 @@ export default function CaseStudyPlatform() {
           </div>
         </CaseSection>
 
-        <CaseSection id="monitoring" index="04" label="MONITORING" title="Alerts before customers notice">
+        <CaseSection id="monitoring" index="04" label="MONITORING" stage="OBSERVE" tone="em" title="Alerts before customers notice">
           <StatusBoard categories={platform.checkCategories} stats={platform.observabilityStats} />
         </CaseSection>
 
-        <CaseSection id="enrichment" index="05" label="TEXT ENRICHMENT" title="From messy text to signals" intro={platform.enrichment.note}>
+        <CaseSection id="enrichment" index="05" label="TEXT ENRICHMENT" stage="ENRICH" tone="vi" title="From messy text to signals" intro={platform.enrichment.note}>
           <BlackBoxFlow inputs={platform.enrichment.inputs} layer={platform.enrichment.layer} outputs={platform.enrichment.outputs} />
           <p className="mt-6 font-mono text-[12px] text-mu">
             Related:{' '}
@@ -85,7 +85,7 @@ export default function CaseStudyPlatform() {
           </p>
         </CaseSection>
 
-        <CaseSection id="lessons" index="06" label="LESSONS" title="What I'd keep, what's next">
+        <CaseSection id="lessons" index="06" label="LESSONS" stage="OUTPUT" tone="em" title="What I'd keep, what's next">
           <ul className="space-y-3">
             {platform.lessons.map((l) => (
               <li key={l} className="flex gap-3 text-[15px]">

@@ -252,6 +252,55 @@
   }
 }
 
+.stage-ring {
+  animation: stage-ring 2.4s ease-out infinite;
+}
+
+@keyframes stage-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+.stage-packet {
+  animation: stage-packet 3.2s cubic-bezier(0.45, 0, 0.55, 1) 1.1s infinite;
+}
+
+@keyframes stage-packet {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+.row-scan {
+  animation: row-scan 5s cubic-bezier(0.45, 0, 0.55, 1) 1.4s infinite;
+}
+
+@keyframes row-scan {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(800%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -277,6 +326,16 @@
   .pulse-dot {
     animation-duration: 4s;
   }
+
+  .stage-ring {
+    animation-duration: 4.8s;
+  }
+
+  .stage-packet {
+    animation-duration: 6.4s;
+  }
+
+  .row-scan { animation-duration: 10s; }
 
   .ambient-grid {
     animation-duration: 120s;
