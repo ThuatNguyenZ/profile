@@ -257,7 +257,7 @@ function Research() {
               label="RESEARCH"
               title="Published"
               stage="ENRICH"
-              sub="peer-reviewed work on recommendation & NLP"
+             
               tone="vi"
               onSpine
             />

@@ -18,7 +18,15 @@ export default function SectionAura({ tone = 'cy', side = 'left', mark, layer = 
 
   return (
     <div ref={ref} aria-hidden="true" className={`pointer-events-none absolute inset-0 ${layer}`}>
-      <motion.div style={{ y }} className="absolute inset-0">
+      <motion.div
+        style={{ y }}
+        className={`absolute inset-0 ${
+          // Isolated (column-width) sections clip the glow at their edges: fade it out instead of a hard cut.
+          layer === '-z-10'
+            ? '[mask-composite:intersect] [mask-image:linear-gradient(to_right,transparent,black_18%,black_82%,transparent),linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)]'
+            : ''
+        }`}
+      >
         <div className={`aura absolute ${main} h-[42rem] w-[42rem] rounded-full blur-[110px]`} style={{ background: `rgb(var(--c-${c}))` }} />
         <div className={`aura aura-b absolute ${second} h-[30rem] w-[30rem] rounded-full blur-[120px]`} style={{ background: `rgb(var(--c-${c === 'em' ? 'cy' : c === 'cy' ? 'vi' : 'em'}))`, opacity: 'calc(var(--aura-a) * 0.6)' }} />
       </motion.div>
