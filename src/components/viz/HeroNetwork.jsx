@@ -4,7 +4,9 @@ import * as THREE from 'three'
 // Motion rates are half of the Stitch reference (a quarter when the OS asks for reduced motion).
 const SPEED = 0.5
 
-export default function HeroNetwork() {
+const DEFAULT_MASK = "[mask-image:linear-gradient(to_right,transparent_0%,black_45%,black_100%)]"
+
+export default function HeroNetwork({ mask = DEFAULT_MASK }) {
   const mountRef = useRef(null)
 
   useEffect(() => {
@@ -181,7 +183,7 @@ export default function HeroNetwork() {
     <div
       ref={mountRef}
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 opacity-60 [mask-image:linear-gradient(to_right,transparent_0%,black_45%,black_100%)] md:opacity-75"
+      className={`pointer-events-none absolute inset-0 opacity-60 md:opacity-75 ${mask}`}
     />
   )
 }

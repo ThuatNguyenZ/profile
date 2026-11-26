@@ -29,7 +29,7 @@ export default function About() {
         chips={[]}
         slug={about.slug}
         crumbs={[]}
-        backdrop={<Suspense fallback={null}><HeroNetwork /></Suspense>}
+        backdrop={<Suspense fallback={null}><HeroNetwork mask="[mask-image:linear-gradient(to_right,transparent_0%,transparent_50%,rgba(0,0,0,0.35)_62%,black_80%)]" /></Suspense>}
       >
         <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_280px] md:items-start">
           <div>
