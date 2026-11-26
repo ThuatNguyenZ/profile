@@ -14,6 +14,7 @@ export const profile = {
 }
 
 export const navLinks = [
+  { id: 'about', label: '00 ABOUT', to: '/about' },
   { id: 'platform', label: '01 PLATFORM' },
   { id: 'builds', label: '02 BUILDS' },
   { id: 'stack', label: '03 STACK' },

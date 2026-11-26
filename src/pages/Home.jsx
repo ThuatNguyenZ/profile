@@ -60,6 +60,7 @@ function Hero() {
         <div className="mt-6 flex flex-wrap gap-3">
           <Button to={`/work/${platform.slug}`}>Explore the platform →</Button>
           <Button href="#platform" variant="ghost">&gt; See the pipeline</Button>
+          <Button to="/about" variant="ghost">About me →</Button>
         </div>
         <div className="mt-12">
           <KpiStrip items={kpis} />

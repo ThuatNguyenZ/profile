@@ -6,13 +6,13 @@ import { navLinks, profile } from '../../content/profile'
 
 import useScrollSpy from '../../lib/useScrollSpy'
 
-const ROUTE_SECTION = { '/work/ba3-data-platform': 'platform', '/work/lunch-order': 'builds' }
+const ROUTE_SECTION = { '/about': 'about', '/work/ba3-data-platform': 'platform', '/work/lunch-order': 'builds' }
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
   const close = () => setOpen(false)
   const { pathname } = useLocation()
-  const spied = useScrollSpy(pathname === '/' ? navLinks.map((l) => l.id) : [])
+  const spied = useScrollSpy(pathname === '/' ? navLinks.filter((l) => !l.to).map((l) => l.id) : [])
   const activeId = pathname === '/' ? spied : ROUTE_SECTION[pathname] ?? null
   const { scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.3 })
@@ -32,13 +32,13 @@ export default function Nav() {
           </span>
         </Link>
 
-        <div className="ml-auto hidden items-center gap-6 lg:flex">
+        <div className="ml-auto hidden items-center gap-5 xl:flex">
           {navLinks.map((link) => {
             const active = link.id === activeId
             return (
               <Link
                 key={link.id}
-                to={`/#${link.id}`}
+                to={link.to ?? `/#${link.id}`}
                 className={'relative py-1 font-mono text-[11px] font-medium transition-colors duration-300 ' + (active ? 'text-cy' : 'text-mu hover:text-cy')}
                 aria-current={active ? 'location' : undefined}
               >
@@ -53,7 +53,7 @@ export default function Nav() {
           href={profile.cv}
           target="_blank"
           rel="noreferrer"
-          className="ml-auto hidden border border-cy bg-cy px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-canvas sweep [--sweep-bg:#08090C] hover:text-cy hover:shadow-glow sm:inline-flex lg:ml-0"
+          className="ml-auto hidden border border-cy bg-cy px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-canvas sweep [--sweep-bg:#08090C] hover:text-cy hover:shadow-glow sm:inline-flex xl:ml-0"
         >
           CV.PDF ↓
         </a>
@@ -64,19 +64,19 @@ export default function Nav() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? 'Close menu' : 'Open menu'}
-          className="ml-auto grid h-9 w-9 place-items-center border border-line text-mu icon-btn sm:ml-0 lg:hidden"
+          className="ml-auto grid h-9 w-9 place-items-center border border-line text-mu icon-btn sm:ml-0 xl:hidden"
         >
           {open ? <X size={16} /> : <Menu size={16} />}
         </button>
       </div>
 
       {open && (
-        <div id="mobile-menu" className="border-t border-line lg:hidden">
+        <div id="mobile-menu" className="border-t border-line xl:hidden">
           <div className="container-site flex flex-col py-2">
             {navLinks.map((link) => (
               <Link
                 key={link.id}
-                to={`/#${link.id}`}
+                to={link.to ?? `/#${link.id}`}
                 onClick={close}
                 className={`border-b border-line py-3 font-mono text-[12px] ${link.id === activeId ? 'text-cy' : 'text-mu hover:text-cy'}`}
               >

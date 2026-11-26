@@ -1,0 +1,34 @@
+export const about = {
+  slug: 'about',
+  kicker: 'ABOUT',
+  title: 'Hi, I’m Thuat.',
+  lead: 'Data engineer in Ho Chi Minh City. I like systems that are boring in production — because someone designed them with care.',
+  photo: { src: '/images/profile.jpg', alt: 'Portrait of Nguyen Thien Thuat' },
+  facts: [
+    { label: 'role', value: 'Data Engineer · BA3 Studio' },
+    { label: 'studying', value: 'M.Sc. AI · University of Science' },
+    { label: 'based in', value: 'Ho Chi Minh City' },
+    { label: 'research', value: 'Recommender systems · NLP' },
+  ],
+  story: [
+    'I studied Data Science at the University of Information Technology (VNU-HCM) and finished the four-year program in three and a half. Research came early: a review-based recommender for Vietnamese e-commerce, later published in SN Computer Science.',
+    'At BA3 Studio I found the work I enjoy most — owning the data platform behind an analytics product, from the first collection job to the alert at 3 a.m. I would rather build something small that runs every day than something clever that runs once.',
+    'Today I split my time between that platform and a Master’s in Artificial Intelligence at the University of Science (VNU-HCM). On the side I build small tools people actually use — like the lunch-ordering app my office opens every morning.',
+  ],
+  timeline: [
+    { when: '2020', title: 'B.Sc. Data Science begins', text: 'University of Information Technology, VNU-HCM.' },
+    { when: '2023', title: 'First research project', text: 'Review-based recommendation for Vietnamese e-commerce.' },
+    { when: '05/2024', title: 'Graduated early', text: 'GPA 8.22/10, in 3.5 years. The paper is published in SN Computer Science (Q2).' },
+    { when: '11/2024', title: 'Joined BA3 Studio', text: 'Data Engineer on an e-commerce analytics product.' },
+    { when: '03/2025', title: 'Building the data platform', text: 'Design, build and operate — end to end.', highlight: true },
+    { when: '09/2025', title: 'M.Sc. Artificial Intelligence', text: 'University of Science, VNU-HCM.' },
+    { when: '2025', title: 'Second paper', text: 'Co-NAML-LSTUR, news recommendation — MIWAI 2025, Springer Nature.' },
+    { when: '11/2026', title: 'Lunch-Order', text: 'A side build the whole office now uses every day.' },
+  ],
+  principles: [
+    { title: 'Own it end to end', text: 'From the first API call to the dashboard, I would rather understand the whole path than hand off halfway.' },
+    { title: 'Make failure cheap', text: 'Resumable jobs, replayable data, small steps. Things will break; recovery should be boring.' },
+    { title: 'Watch before you are asked', text: 'If a customer notices a problem first, the monitoring was not finished.' },
+    { title: 'Write it down while building', text: 'Runbooks written alongside the code keep designs honest and onboarding short.' },
+  ],
+}

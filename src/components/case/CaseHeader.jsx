@@ -1,7 +1,8 @@
+import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import Chip from '../ui/Chip'
 
-export default function CaseHeader({ slug, kicker, title, role, period, chips, children }) {
+export default function CaseHeader({ slug, kicker, title, role, period, chips, children, crumbs = [{ label: 'work', to: '/#builds' }] }) {
   return (
     <section className="relative overflow-hidden border-b border-line">
       <div
@@ -11,8 +12,12 @@ export default function CaseHeader({ slug, kicker, title, role, period, chips, c
       <div className="container-site relative py-14 md:py-20">
         <nav aria-label="Breadcrumb" className="mb-5 font-mono text-[12px] text-mu">
           <Link to="/" className="link-grow hover:text-cy">~</Link>
-          <span className="mx-2 text-dim">/</span>
-          <Link to="/#builds" className="link-grow hover:text-cy">work</Link>
+          {crumbs.map(({ label, to }) => (
+            <Fragment key={label}>
+              <span className="mx-2 text-dim">/</span>
+              {to ? <Link to={to} className="link-grow hover:text-cy">{label}</Link> : <span>{label}</span>}
+            </Fragment>
+          ))}
           <span className="mx-2 text-dim">/</span>
           <span className="text-cy" aria-current="page">{slug}</span>
         </nav>
