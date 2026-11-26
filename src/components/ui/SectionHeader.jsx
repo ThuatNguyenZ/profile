@@ -57,7 +57,7 @@ export default function SectionHeader({ index, label, title, stage, sub, tone = 
         <span className={`stage-packet absolute top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full ${t.bg} shadow-glow`} />
       </div>
 
-      {children && <div className="mt-4 max-w-2xl text-mu">{children}</div>}
+      {children && <div className={`mt-4 max-w-2xl text-mu ${className.includes("-ml-[56px]") ? "lg:ml-[56px]" : ""}`}>{children}</div>}
     </header>
   )
 }
