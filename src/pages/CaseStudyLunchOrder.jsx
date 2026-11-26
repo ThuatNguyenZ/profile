@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import CaseBody from '../components/case/CaseBody'
 import CaseHeader from '../components/case/CaseHeader'
 import CaseNav from '../components/case/CaseNav'
@@ -7,6 +8,9 @@ import Erd from '../components/viz/Erd'
 import { lunchOrder } from '../content/lunchOrder'
 import { platform } from '../content/platform'
 import useDocumentTitle from '../lib/useDocumentTitle'
+
+const HeroNetwork = lazy(() => import('../components/viz/HeroNetwork'))
+const BACKDROP_MASK = '[mask-image:linear-gradient(to_right,transparent_0%,transparent_50%,rgba(0,0,0,0.35)_62%,black_80%)]'
 
 const SECTIONS = [
   { id: 'problem', label: 'Problem' },
@@ -21,7 +25,7 @@ export default function CaseStudyLunchOrder() {
   useDocumentTitle(lunchOrder.name)
   return (
     <>
-      <CaseHeader slug={lunchOrder.slug} kicker="CASE STUDY · 02 · SIDE BUILD" title={lunchOrder.name} role={lunchOrder.role} period={lunchOrder.period} chips={lunchOrder.chips}>
+      <CaseHeader slug={lunchOrder.slug} kicker="CASE STUDY · 02 · SIDE BUILD" title={lunchOrder.name} role={lunchOrder.role} period={lunchOrder.period} chips={lunchOrder.chips} backdrop={<Suspense fallback={null}><HeroNetwork mask={BACKDROP_MASK} /></Suspense>}>
         <p className="mb-8 max-w-2xl text-[16px] text-mu md:text-[17px]">{lunchOrder.pitch}</p>
         <dl className="grid max-w-xl grid-cols-3 gap-px border border-line bg-line">
           {lunchOrder.facts.map((f) => (

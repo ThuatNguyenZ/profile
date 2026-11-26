@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { Link } from 'react-router-dom'
 import CaseBody from '../components/case/CaseBody'
 import CaseHeader from '../components/case/CaseHeader'
@@ -13,6 +14,9 @@ import { platform } from '../content/platform'
 import { lunchOrder } from '../content/lunchOrder'
 import useDocumentTitle from '../lib/useDocumentTitle'
 
+const HeroNetwork = lazy(() => import('../components/viz/HeroNetwork'))
+const BACKDROP_MASK = '[mask-image:linear-gradient(to_right,transparent_0%,transparent_50%,rgba(0,0,0,0.35)_62%,black_80%)]'
+
 const SECTIONS = [
   { id: 'problem', label: 'Problem' },
   { id: 'architecture', label: 'Architecture' },
@@ -26,7 +30,7 @@ export default function CaseStudyPlatform() {
   useDocumentTitle(platform.name)
   return (
     <>
-      <CaseHeader slug={platform.slug} kicker="CASE STUDY · 01" title={platform.name} role={platform.role} period={platform.period} chips={platform.chips}>
+      <CaseHeader slug={platform.slug} kicker="CASE STUDY · 01" title={platform.name} role={platform.role} period={platform.period} chips={platform.chips} backdrop={<Suspense fallback={null}><HeroNetwork mask={BACKDROP_MASK} /></Suspense>}>
         <p className="mb-8 max-w-2xl text-[16px] text-mu md:text-[17px]">{platform.pitch}</p>
         <KpiStrip items={kpis} />
       </CaseHeader>
