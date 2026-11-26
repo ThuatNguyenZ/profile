@@ -5,16 +5,13 @@
     <script>
       ;(function () {
         try {
-          var p = localStorage.getItem('theme') || 'system'
-          var dark = p === 'dark' || (p === 'system' && !window.matchMedia('(prefers-color-scheme: light)').matches)
-          document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+          document.documentElement.dataset.theme = localStorage.getItem('theme') === 'light' ? 'light' : 'dark'
         } catch (e) {}
       })()
     </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#08090C" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#F7F8FA" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#08090C" />
     <meta name="color-scheme" content="dark light" />
     <title>Nguyen Thien Thuat · Data Engineer</title>
     <meta name="description" content="Data Engineer in Ho Chi Minh City. I design, ship and operate the data platform behind an e-commerce analytics product." />

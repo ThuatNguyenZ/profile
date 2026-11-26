@@ -72,7 +72,7 @@ function Hero() {
 function AboutIntro() {
   return (
     <section id="about" className="relative overflow-hidden border-b border-line py-16 md:py-24">
-      <SectionAura layer="z-0" tone="cy" side="left" mark="SEC 00 · SOURCE · 10.82°N 106.63°E" />
+      <SectionAura layer="z-0" spine="container" tone="cy" side="left" mark="SEC 00 · SOURCE · 10.82°N 106.63°E" />
       <div className="container-site relative z-[1]">
         <div className="lg:pl-[56px]">
           <SectionHeader
@@ -107,7 +107,7 @@ function AboutIntro() {
 function Platform() {
   return (
     <section id="platform" className="relative overflow-hidden border-b border-line py-16 md:py-24 bg-[rgb(var(--band)/var(--band-a))]">
-      <SectionAura layer="z-0" tone="cy" side="right" mark="SEC 01 · BUILD" />
+      <SectionAura layer="z-0" spine="container" tone="cy" side="right" mark="SEC 01 · BUILD" />
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cy/40 to-transparent" />
       <div className="container-site relative z-[1]">
         <div className="lg:pl-[56px]">
@@ -160,7 +160,7 @@ function Platform() {
 function Builds() {
   return (
     <section id="builds" className="relative overflow-hidden border-b border-line py-16 md:py-24">
-      <SectionAura layer="z-0" tone="cy" side="left" mark="SEC 02 · SHIP" />
+      <SectionAura layer="z-0" spine="container" tone="cy" side="left" mark="SEC 02 · SHIP" />
       <div className="container-site relative z-[1]">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:pl-[56px]">
           <Reveal>
@@ -216,7 +216,7 @@ function Builds() {
 function Stack() {
   return (
     <section id="stack" className="relative overflow-hidden border-b border-line py-16 md:py-24 bg-[rgb(var(--band)/var(--band-a))]">
-      <SectionAura layer="z-0" tone="vi" side="right" mark="SEC 03 · LAYERS" />
+      <SectionAura layer="z-0" spine="container" tone="vi" side="right" mark="SEC 03 · LAYERS" />
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cy/40 to-transparent" />
       <div className="container-site relative z-[1]">
         <div className="lg:pl-[56px]">
@@ -248,7 +248,7 @@ function Stack() {
 function Research() {
   return (
     <section id="research" className="relative overflow-hidden border-b border-line py-16 md:py-24">
-      <SectionAura layer="z-0" tone="vi" side="left" mark="SEC 04 · ENRICH" />
+      <SectionAura layer="z-0" spine="container" tone="vi" side="left" mark="SEC 04 · ENRICH" />
       <div className="container-site relative z-[1]">
         <div className="grid gap-12 md:grid-cols-2 lg:pl-[56px]">
           <div>
@@ -295,7 +295,7 @@ function Research() {
 function Contact() {
   return (
     <section id="contact" className="relative overflow-hidden py-16 md:py-24 bg-[rgb(var(--band)/var(--band-a))]">
-      <SectionAura layer="z-0" tone="em" side="right" mark="SEC 05 · SERVE" />
+      <SectionAura layer="z-0" spine="container" tone="em" side="right" mark="SEC 05 · SERVE" />
       <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cy/40 to-transparent" />
       <div className="container-site relative z-[1]">
         <div className="lg:pl-[56px]">

@@ -1,25 +1,19 @@
-import { useCallback, useEffect, useSyncExternalStore } from 'react'
+import { useCallback, useSyncExternalStore } from 'react'
 
 const KEY = 'theme'
-const query = () => window.matchMedia('(prefers-color-scheme: light)')
 
 function readPreference() {
+  const applied = document.documentElement.dataset.theme
+  if (applied) return resolve(applied)
   try {
-    return localStorage.getItem(KEY) || 'system'
+    return resolve(localStorage.getItem(KEY))
   } catch {
-    return 'system'
+    return 'dark'
   }
 }
 
 function resolve(pref) {
-  if (pref === 'light' || pref === 'dark') return pref
-  return query().matches ? 'light' : 'dark'
-}
-
-function apply(pref) {
-  const theme = resolve(pref)
-  document.documentElement.dataset.theme = theme
-  window.dispatchEvent(new CustomEvent('themechange', { detail: theme }))
+  return pref === 'light' ? 'light' : 'dark'
 }
 
 const listeners = new Set()
@@ -31,35 +25,20 @@ function notify() {
   listeners.forEach((cb) => cb())
 }
 
-// Preference: 'system' | 'light' | 'dark'. Resolved theme: 'light' | 'dark' (also on <html data-theme>).
 export default function useTheme() {
-  const preference = useSyncExternalStore(subscribe, readPreference, () => 'system')
-  const theme = useSyncExternalStore(
-    subscribe,
-    () => document.documentElement.dataset.theme || resolve(readPreference()),
-    () => 'dark',
-  )
-
-  useEffect(() => {
-    if (preference !== 'system') return undefined
-    const mq = query()
-    const onChange = () => {
-      apply('system')
-      notify()
-    }
-    mq.addEventListener('change', onChange)
-    return () => mq.removeEventListener('change', onChange)
-  }, [preference])
+  const preference = useSyncExternalStore(subscribe, readPreference, () => 'dark')
 
   const setPreference = useCallback((pref) => {
+    const theme = resolve(pref)
     try {
-      localStorage.setItem(KEY, pref)
+      localStorage.setItem(KEY, theme)
     } catch {
       /* private mode: keep it for this page view only */
     }
-    apply(pref)
+    document.documentElement.dataset.theme = theme
+    window.dispatchEvent(new CustomEvent('themechange', { detail: theme }))
     notify()
   }, [])
 
-  return { preference, theme, setPreference }
+  return { preference, theme: preference, setPreference }
 }

@@ -6,7 +6,7 @@ export const SpineContext = createContext(null)
 // Pipeline line from the first to the last stage node; a packet and a fill follow the scroll and
 // reach the last node exactly when the page bottom is reached. The node the packet has passed most
 // recently is "active" (shared with SectionHeader through SpineContext).
-export default function PipelineSpine({ children }) {
+export default function PipelineSpine({ children, align = 'container' }) {
   const ref = useRef(null)
   const [geo, setGeo] = useState({ top: 0, height: 0, nodes: [] })
   const [activeKey, setActiveKey] = useState(null)
@@ -67,23 +67,25 @@ export default function PipelineSpine({ children }) {
   useMotionValueEvent(progress, 'change', pickActive)
   useEffect(() => pickActive(progress.get()), [pickActive, progress])
 
+  const line = (
+    <div
+      className={`absolute w-px ${align === 'self' ? 'left-[10.5px]' : 'left-[calc(2rem+10.5px)] xl:left-[calc(2.5rem+10.5px)]'}`}
+      style={{ top: geo.top, height: geo.height }}
+    >
+      <div className="absolute inset-0 bg-line" />
+      <motion.div className="absolute inset-0 origin-top bg-gradient-to-b from-cy via-vi to-em" style={{ scaleY: progress }} />
+      <motion.span
+        className="absolute left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cy shadow-glow"
+        style={{ top: packetTop }}
+      />
+    </div>
+  )
+
   return (
     <SpineContext.Provider value={{ activeKey }}>
       <div ref={ref} className="relative">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden lg:block z-[1]">
-          <div className="container-site relative h-full">
-            <div
-              className="absolute left-[calc(2rem+10.5px)] w-px xl:left-[calc(2.5rem+10.5px)]"
-              style={{ top: geo.top, height: geo.height }}
-            >
-              <div className="absolute inset-0 bg-line" />
-              <motion.div className="absolute inset-0 origin-top bg-gradient-to-b from-cy via-vi to-em" style={{ scaleY: progress }} />
-              <motion.span
-                className="absolute left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cy shadow-glow"
-                style={{ top: packetTop }}
-              />
-            </div>
-          </div>
+          {align === 'self' ? line : <div className="container-site relative h-full">{line}</div>}
         </div>
         {children}
       </div>

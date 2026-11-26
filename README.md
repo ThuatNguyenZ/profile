@@ -24,7 +24,7 @@ Run `npm run check` before every deploy.
 
 ## Theme
 
-Colours are CSS variables (`src/styles/index.css`, dark on `:root`, light on `:root[data-theme="light"]`), exposed to Tailwind through `src/theme/tokens.js`. The site follows the OS by default; the nav toggle cycles System → Light → Dark and is stored in `localStorage.theme`.
+Colours are CSS variables (`src/styles/index.css`, dark on `:root`, light on `:root[data-theme="light"]`), exposed to Tailwind through `src/theme/tokens.js`. Dark by default; the nav toggle switches Light/Dark and is stored in `localStorage.theme`.
 
 **After editing `src/theme/tokens.js` or `tailwind.config.js`, restart `npm run dev`** — the dev server does not reload the Tailwind config's imports, so it keeps serving the old colours.
 
