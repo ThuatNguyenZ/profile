@@ -97,6 +97,25 @@
   animation: pulse-dot 2s ease-in-out infinite;
 }
 
+.packet {
+  opacity: 0.9;
+}
+
+@keyframes pulse-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  60%,
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.pulse-bar {
+  transform: translateX(-100%);
+  animation: pulse-bar 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -107,5 +126,14 @@
   .caret,
   .pulse-dot {
     animation: none !important;
+  }
+
+  .packet {
+    display: none !important;
+  }
+
+  .pulse-bar {
+    animation: none !important;
+    transform: none !important;
   }
 }

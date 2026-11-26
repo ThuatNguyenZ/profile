@@ -4,9 +4,9 @@ import Chip from '../components/ui/Chip'
 import CopyEmail from '../components/ui/CopyEmail'
 import KpiStrip from '../components/ui/KpiStrip'
 import Panel from '../components/ui/Panel'
+import PipelinePulse from '../components/ui/PipelinePulse'
 import Reveal from '../components/ui/Reveal'
 import SectionHeader from '../components/ui/SectionHeader'
-import Terminal from '../components/ui/Terminal'
 import HeroDag from '../components/viz/HeroDag'
 import { kpis, profile } from '../content/profile'
 import { platform } from '../content/platform'
@@ -32,9 +32,7 @@ function Hero() {
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
           <Button to={`/work/${platform.slug}`}>Explore the platform →</Button>
-          <Button href="#platform-terminal" variant="ghost">
-            &gt; Run dry-run
-          </Button>
+          <Button href="#platform" variant="ghost">&gt; See the pipeline</Button>
         </div>
         <div className="mt-12">
           <KpiStrip items={kpis} />
@@ -66,9 +64,7 @@ function Platform() {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div id="platform-terminal">
-              <Terminal title="pipeline · dry run" lines={platform.terminal} />
-            </div>
+            <PipelinePulse stages={platform.pulse} />
           </Reveal>
         </div>
         <ol className="mt-12 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">

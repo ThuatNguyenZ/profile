@@ -21,7 +21,7 @@ export default function CaseStudyPlatform() {
         <KpiStrip items={kpis} />
       </CaseHeader>
 
-      <CaseSection index="01" label="PROBLEM" title="Six sources, no single view">
+      <CaseSection index="01" label="PROBLEM" title="Many sources, no single view">
         <ul className="grid gap-px border border-line bg-line md:grid-cols-3">
           {platform.problem.map((p, i) => (
             <li key={i} className="bg-s1 p-5">
@@ -36,10 +36,10 @@ export default function CaseStudyPlatform() {
         <ArchitectureDiagram />
       </CaseSection>
 
-      <CaseSection index="03" label="KEY DECISIONS" title="Choices that shaped it">
+      <CaseSection index="03" label="PRINCIPLES" title="How it's built">
         <div className="grid gap-4 md:grid-cols-2">
-          {platform.decisions.map((d, i) => (
-            <Panel key={d.title} title={`decision · ${String(i + 1).padStart(2, '0')}`} className="transition-colors hover:border-t-cy">
+          {platform.principles.map((d, i) => (
+            <Panel key={d.title} title={`principle · ${String(i + 1).padStart(2, '0')}`} className="transition-colors hover:border-t-cy">
               <h3 className="font-display text-[19px] font-semibold">{d.title}</h3>
               <dl className="mt-3 space-y-3 text-[14px]">
                 <div>
@@ -60,7 +60,7 @@ export default function CaseStudyPlatform() {
         <StatusBoard categories={platform.checkCategories} stats={platform.observabilityStats} />
       </CaseSection>
 
-      <CaseSection index="05" label="REVIEW ENRICHMENT" title="Making Vietnamese reviews countable" intro={platform.enrichment.note}>
+      <CaseSection index="05" label="TEXT ENRICHMENT" title="From messy text to signals" intro={platform.enrichment.note}>
         <BlackBoxFlow inputs={platform.enrichment.inputs} layer={platform.enrichment.layer} outputs={platform.enrichment.outputs} />
         <p className="mt-6 font-mono text-[12px] text-mu">
           Related:{' '}

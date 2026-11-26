@@ -4,7 +4,7 @@ export const profile = {
   role: 'Data Engineer',
   location: 'Ho Chi Minh City, Vietnam',
   locationShort: 'hcmc',
-  headline: 'Turning six marketplaces into one warehouse.',
+  headline: 'Turning scattered commerce data into one warehouse.',
   subhead:
     'I design, ship and operate the data platform behind an e-commerce analytics product, from collection to the 3 a.m. alert.',
   email: 'thuatnguyen2k2info@gmail.com',
@@ -22,15 +22,16 @@ export const navLinks = [
 ]
 
 export const statusStrip = [
-  { label: 'schedules', value: 'daily · every 4h · every 15m' },
-  { label: 'sources', value: '6' },
-  { label: 'tables', value: '~140' },
-  { label: 'tests', value: '~3.4k' },
+  { label: 'role', value: 'data engineer' },
+  { label: 'based in', value: 'ho chi minh city' },
+  { label: 'focus', value: 'pipelines · warehousing · monitoring' },
+  { label: 'stack', value: 'python · aws · postgres' },
+  { label: 'research', value: 'recommender systems · nlp' },
 ]
 
 export const kpis = [
-  { value: '6', label: 'sources — 4 marketplaces, 2 ad platforms' },
-  { value: '~140', label: 'warehouse tables, raw and clean' },
-  { value: '20+', label: 'monitoring checks with email alerts' },
-  { value: '~3.4k', label: 'tests guarding the pipeline' },
+  { value: '2', label: 'data domains — commerce and advertising' },
+  { value: '4', label: 'layers — sources, lake, warehouse, product' },
+  { value: '24/7', label: 'automated monitoring with alerts' },
+  { value: '1', label: 'owner — design, build and operate' },
 ]
