@@ -1,5 +1,7 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { Github, Linkedin } from 'lucide-react'
+import AboutPhoto from '../components/about/AboutPhoto'
+import EngineerTable from '../components/about/EngineerTable'
 import PipelineSpine from '../components/layout/PipelineSpine'
 import Button from '../components/ui/Button'
 import Chip from '../components/ui/Chip'
@@ -11,6 +13,7 @@ import Reveal from '../components/ui/Reveal'
 import SectionHeader from '../components/ui/SectionHeader'
 import HeroAmbient from '../components/viz/HeroAmbient'
 import HeroDag from '../components/viz/HeroDag'
+import { about } from '../content/about'
 import { kpis, profile } from '../content/profile'
 import { platform } from '../content/platform'
 import { lunchOrder } from '../content/lunchOrder'
@@ -54,11 +57,45 @@ function Hero() {
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
           <Button to={`/work/${platform.slug}`}>Explore the platform →</Button>
-          <Button to="/about">About me →</Button>
+          <Button href="#about">About me →</Button>
           <Button href="#platform" variant="ghost">&gt; See the pipeline</Button>
         </div>
         <div className="mt-12">
           <KpiStrip items={kpis} />
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function AboutIntro() {
+  return (
+    <section id="about" className="border-b border-line py-16 md:py-24">
+      <div className="container-site">
+        <div className="lg:pl-[56px]">
+          <SectionHeader
+            index="00"
+            label="ABOUT ME"
+            title={about.title}
+            stage="SOURCE"
+            sub="where the pipeline starts"
+            tone="cy"
+            onSpine
+          >
+            {about.lead}
+          </SectionHeader>
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_240px] lg:items-start">
+            <Reveal>
+              <EngineerTable data={about.engineer} />
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Button to="/about">Read my story →</Button>
+                <Button to="/#contact" variant="ghost">Say hello →</Button>
+              </div>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <AboutPhoto className="max-w-[240px]" />
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>
@@ -286,6 +323,7 @@ export default function Home() {
     <>
       <Hero />
       <PipelineSpine>
+        <AboutIntro />
         <Platform />
         <Builds />
         <Stack />

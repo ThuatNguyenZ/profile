@@ -3,6 +3,7 @@ import Button from '../components/ui/Button'
 import CaseBody from '../components/case/CaseBody'
 import CaseHeader from '../components/case/CaseHeader'
 import CaseSection from '../components/case/CaseSection'
+import AboutPhoto from '../components/about/AboutPhoto'
 import EngineerTable from '../components/about/EngineerTable'
 import Timeline from '../components/about/Timeline'
 import { about } from '../content/about'
@@ -37,13 +38,7 @@ export default function About() {
             <p className="max-w-2xl text-[17px] text-mu md:text-[19px]">{about.lead}</p>
             <div className="mt-8"><EngineerTable data={about.engineer} /></div>
           </div>
-          <figure className="lift relative mx-auto w-full max-w-[280px] border border-line bg-s1 p-2 backdrop-blur-sm">
-            <img src={about.photo.src} alt={about.photo.alt} className="aspect-[4/5] w-full object-cover grayscale-[35%] transition-[filter] duration-500 hover:grayscale-0" />
-            <figcaption className="mt-2 flex items-center justify-between font-mono text-[10px] text-dim">
-              <span>{profile.name.toLowerCase()}</span>
-              <span className="text-em">● online</span>
-            </figcaption>
-          </figure>
+          <AboutPhoto className="max-w-[280px]" />
         </div>
       </CaseHeader>
 
