@@ -1,19 +1,33 @@
+import { Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import Chip from '../ui/Chip'
 
-export default function CaseHeader({ kicker, title, role, period, chips, children }) {
+export default function CaseHeader({ slug, kicker, title, role, period, chips, children, backdrop, crumbs = [{ label: 'work', to: '/#builds' }] }) {
   return (
     <section className="relative overflow-hidden border-b border-line">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_20%,rgba(0,240,255,0.10),transparent_50%)]"
       />
+      {backdrop}
       <div className="container-site relative py-14 md:py-20">
+        <nav aria-label="Breadcrumb" className="mb-5 font-mono text-[12px] text-mu">
+          <Link to="/" className="link-grow hover:text-cy">~</Link>
+          {crumbs.map(({ label, to }) => (
+            <Fragment key={label}>
+              <span className="mx-2 text-dim">/</span>
+              {to ? <Link to={to} className="link-grow hover:text-cy">{label}</Link> : <span>{label}</span>}
+            </Fragment>
+          ))}
+          <span className="mx-2 text-dim">/</span>
+          <span className="text-cy" aria-current="page">{slug}</span>
+        </nav>
         <p className="font-mono text-[11px] font-medium tracking-[0.08em] text-cy">// {kicker}</p>
         <h1 className="heading-display mt-3 text-[38px] sm:text-[48px] lg:text-[56px]">{title}</h1>
         <p className="mt-4 font-mono text-[12px] text-mu">
           {role} · {period}
         </p>
-        <div className="mt-5 flex flex-wrap gap-2">
+        <div className={chips.length ? "mt-5 flex flex-wrap gap-2" : "hidden"}>
           {chips.map((c) => (
             <Chip key={c}>{c}</Chip>
           ))}

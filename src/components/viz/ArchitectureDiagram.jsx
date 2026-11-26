@@ -3,13 +3,13 @@ import { platform } from '../../content/platform'
 
 const MONO = 'JetBrains Mono, monospace'
 const DISPLAY = 'Space Grotesk, sans-serif'
-const W = 160
-const GAP = 50
 const Y = 40
 const H = 70
 
 export default function ArchitectureDiagram() {
   const nodes = platform.architecture
+  const GAP = 60
+  const W = (1000 - GAP * (nodes.length - 1)) / nodes.length
   const [active, setActive] = useState(null)
   const caption =
     active === 'observability'
@@ -19,7 +19,7 @@ export default function ArchitectureDiagram() {
   return (
     <div>
       <div className="hidden md:block" onMouseLeave={() => setActive(null)}>
-        <svg viewBox="0 0 1000 260" className="w-full" role="img" aria-label="Sources, collection, data lake, warehouse and analytics product in sequence, with observability across every stage.">
+        <svg viewBox="0 0 1000 260" className="w-full" role="img" aria-label="Sources, data lake, warehouse and analytics product in sequence, with monitoring across every stage.">
           <defs>
             <marker id="arch-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto">
               <path d="M0 0 L8 4 L0 8 z" fill="#00F0FF" />

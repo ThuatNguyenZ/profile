@@ -6,143 +6,90 @@ const VI = '#6366F1'
 const EM = '#10B981'
 const LINE = '#1E2230'
 const MONO = 'JetBrains Mono, monospace'
+const ARIA = 'Marketplace and advertising data flow into a data lake, then a warehouse and analytics, with monitoring across every stage.'
 
-function Edge({ d, color }) {
+function Edge({ d, color, packets = 1, delay = 0 }) {
   return (
     <>
       <path d={d} fill="none" stroke={color} strokeOpacity="0.22" strokeWidth="1.2" />
       <path d={d} fill="none" stroke={color} strokeWidth="1.4" className="flow" />
+      {Array.from({ length: packets }, (_, i) => (
+        <circle key={i} r="2.6" fill={color} className="packet" style={{ filter: `drop-shadow(0 0 4px ${color})` }}>
+          <animateMotion dur="4.8s" repeatCount="indefinite" begin={`${delay + i * 1.6}s`} path={d} />
+        </circle>
+      ))}
     </>
   )
 }
 
-function NodeBox({ id, x, y, w, h = 36, active, highlight, onActivate }) {
-  const { label, role } = platform.heroNodes[id]
-  const lit = active === id || highlight
+function Box({ id, x, y, w, h = 36, label, active, highlight, onActivate, roleKey = id }) {
+  const node = platform.heroNodes[roleKey]
+  const lit = active === roleKey || highlight
   return (
-    <g
-      tabIndex={0}
-      aria-label={`${label}: ${role}`}
-      onMouseEnter={() => onActivate(id)}
-      onFocus={() => onActivate(id)}
-      className="cursor-default outline-none"
-    >
-      <rect
-        x={x}
-        y={y}
-        width={w}
-        height={h}
-        fill="#0E1015"
-        stroke={lit ? CY : LINE}
-        style={active === id ? { filter: 'drop-shadow(0 0 8px rgba(0,240,255,0.45))' } : undefined}
-      />
-      <text x={x + w / 2} y={y + h / 2 + 3.5} textAnchor="middle" fontFamily={MONO} fontSize="10" fill={highlight ? CY : '#F8FAFC'}>
+    <g tabIndex={0} aria-label={`${label}: ${node.role}`} onMouseEnter={() => onActivate(roleKey)} onFocus={() => onActivate(roleKey)} className="cursor-default outline-none">
+      <rect x={x} y={y} width={w} height={h} fill="#0E1015" stroke={lit ? CY : LINE} style={active === roleKey ? { filter: 'drop-shadow(0 0 8px rgba(0,240,255,0.45))' } : undefined} />
+      <text x={x + w / 2} y={y + h / 2 + 3.5} textAnchor="middle" fontFamily={MONO} fontSize="10" letterSpacing="0.06em" fill={highlight ? CY : '#F8FAFC'}>
         {label}
       </text>
     </g>
   )
 }
 
-function SourceLabel({ name, x, y, anchor = 'start', active, onActivate }) {
+function Monitor({ d, ticks, text, tx, ty, anchor = 'start', active, onActivate }) {
+  const node = platform.heroNodes.observe
   return (
-    <text
-      x={x}
-      y={y}
-      textAnchor={anchor}
-      fontFamily={MONO}
-      fontSize="10"
-      letterSpacing="0.06em"
-      fill={active === 'sources' ? '#F8FAFC' : '#94A3B8'}
-      tabIndex={0}
-      aria-label={`${name}: ${platform.heroNodes.sources.role}`}
-      onMouseEnter={() => onActivate('sources')}
-      onFocus={() => onActivate('sources')}
-      className="cursor-default outline-none"
-    >
-      {name.toUpperCase()}
-    </text>
+    <g tabIndex={0} aria-label={`${node.label}: ${node.role}`} onMouseEnter={() => onActivate('observe')} onFocus={() => onActivate('observe')} className="cursor-default outline-none">
+      <path d={d} stroke={EM} strokeOpacity={active === 'observe' ? 0.9 : 0.5} strokeDasharray="2 4" />
+      {ticks.map((t) => (
+        <path key={t} d={t} stroke={EM} strokeOpacity="0.4" strokeDasharray="2 4" />
+      ))}
+      <text x={tx} y={ty} textAnchor={anchor} fontFamily={MONO} fontSize="10" fill={EM}>
+        {text}
+      </text>
+    </g>
   )
 }
 
 function Horizontal({ active, onActivate }) {
-  const ys = platform.sources.map((_, i) => 26 + i * 40)
-  const mid = 126
+  const [market, ads] = platform.sourceGroups
   return (
-    <svg viewBox="0 0 760 236" className="w-full" role="img" aria-label="Six sources flow into a data lake, then a raw warehouse, a clean warehouse and analytics, all monitored every 15 minutes.">
-      {platform.sources.map((name, i) => (
-        <g key={name}>
-          <SourceLabel name={name} x={0} y={ys[i] + 3.5} active={active} onActivate={onActivate} />
-          <Edge d={`M118 ${ys[i]} C165 ${ys[i]} 165 ${mid} 210 ${mid}`} color={i >= 4 ? VI : CY} />
-        </g>
+    <svg viewBox="0 0 760 214" className="w-full" role="img" aria-label={ARIA}>
+      {[56, 67, 78].map((y, i) => (
+        <Edge key={`m${y}`} d={`M140 ${y} C180 ${y} 180 110 220 110`} color={CY} delay={i * 0.5} />
       ))}
-      <Edge d={`M314 ${mid} H344`} color={CY} />
-      <Edge d={`M474 ${mid} H504`} color={CY} />
-      <Edge d={`M640 ${mid} H664`} color={EM} />
+      {[142, 153, 164].map((y, i) => (
+        <Edge key={`a${y}`} d={`M140 ${y} C180 ${y} 180 110 220 110`} color={VI} delay={0.25 + i * 0.5} />
+      ))}
+      <Edge d="M350 110 H390" color={CY} packets={2} />
+      <Edge d="M550 110 H590" color={EM} packets={2} delay={0.8} />
 
-      <NodeBox id="lake" x={210} y={108} w={104} active={active} onActivate={onActivate} />
-      <NodeBox id="raw" x={344} y={108} w={130} active={active} onActivate={onActivate} />
-      <NodeBox id="clean" x={504} y={108} w={136} active={active} highlight onActivate={onActivate} />
-      <NodeBox id="analytics" x={664} y={108} w={96} active={active} onActivate={onActivate} />
+      <Box id="marketplaces" roleKey="sources" x={0} y={44} w={140} h={46} label={market.label} active={active} onActivate={onActivate} />
+      <Box id="ads" roleKey="sources" x={0} y={130} w={140} h={46} label={ads.label} active={active} onActivate={onActivate} />
+      <Box id="lake" x={220} y={92} w={130} label={platform.heroNodes.lake.label} active={active} onActivate={onActivate} />
+      <Box id="warehouse" x={390} y={92} w={160} label={platform.heroNodes.warehouse.label} active={active} highlight onActivate={onActivate} />
+      <Box id="analytics" x={590} y={92} w={170} label={platform.heroNodes.analytics.label} active={active} onActivate={onActivate} />
 
-      <g
-        tabIndex={0}
-        aria-label={`${platform.heroNodes.observe.label}: ${platform.heroNodes.observe.role}`}
-        onMouseEnter={() => onActivate('observe')}
-        onFocus={() => onActivate('observe')}
-        className="cursor-default outline-none"
-      >
-        <path d="M210 186 H760" stroke={EM} strokeOpacity={active === 'observe' ? 0.9 : 0.5} strokeDasharray="2 4" />
-        {[262, 409, 572, 712].map((x) => (
-          <path key={x} d={`M${x} 144 V186`} stroke={EM} strokeOpacity="0.4" strokeDasharray="2 4" />
-        ))}
-        <text x={210} y={208} fontFamily={MONO} fontSize="10" fill={EM}>
-          ● OBSERVE · 20+ checks · every 15 min
-        </text>
-      </g>
+      <Monitor d="M220 176 H760" ticks={['M285 128 V176', 'M470 128 V176', 'M675 128 V176']} text="● MONITORING · automated checks · alerts" tx={220} ty={198} active={active} onActivate={onActivate} />
     </svg>
   )
 }
 
 function Vertical({ active, onActivate }) {
-  const rows = [20, 48, 76]
-  const cols = [{ x: 20, start: 114 }, { x: 320, start: 226, anchor: 'end' }]
-  const centerX = 170
+  const [market, ads] = platform.sourceGroups
   return (
-    <svg viewBox="0 0 340 420" className="w-full" role="img" aria-label="Six sources flow into a data lake, then a raw warehouse, a clean warehouse and analytics, all monitored every 15 minutes.">
-      {platform.sources.map((name, i) => {
-        const col = cols[i < 3 ? 0 : 1]
-        const y = rows[i % 3]
-        return (
-          <g key={name}>
-            <SourceLabel name={name} x={col.x} y={y} anchor={col.anchor} active={active} onActivate={onActivate} />
-            <Edge d={`M${col.start} ${y - 3} C${col.start} 112 ${centerX} 100 ${centerX} 130`} color={i >= 4 ? VI : CY} />
-          </g>
-        )
-      })}
-      <Edge d="M170 164 V190" color={CY} />
-      <Edge d="M170 224 V250" color={CY} />
-      <Edge d="M170 284 V310" color={EM} />
+    <svg viewBox="0 0 340 330" className="w-full" role="img" aria-label={ARIA}>
+      <Edge d="M85 48 C85 80 170 70 170 104" color={CY} />
+      <Edge d="M255 48 C255 80 170 70 170 104" color={VI} delay={0.4} />
+      <Edge d="M170 138 V164" color={CY} />
+      <Edge d="M170 198 V224" color={EM} delay={0.6} />
 
-      <NodeBox id="lake" x={110} y={130} w={120} h={34} active={active} onActivate={onActivate} />
-      <NodeBox id="raw" x={110} y={190} w={120} h={34} active={active} onActivate={onActivate} />
-      <NodeBox id="clean" x={110} y={250} w={120} h={34} active={active} highlight onActivate={onActivate} />
-      <NodeBox id="analytics" x={110} y={310} w={120} h={34} active={active} onActivate={onActivate} />
+      <Box id="marketplaces" roleKey="sources" x={10} y={12} w={150} label={market.label} active={active} onActivate={onActivate} />
+      <Box id="ads" roleKey="sources" x={180} y={12} w={150} label={ads.label} active={active} onActivate={onActivate} />
+      <Box id="lake" x={100} y={104} w={140} h={34} label={platform.heroNodes.lake.label} active={active} onActivate={onActivate} />
+      <Box id="warehouse" x={100} y={164} w={140} h={34} label={platform.heroNodes.warehouse.label} active={active} highlight onActivate={onActivate} />
+      <Box id="analytics" x={100} y={224} w={140} h={34} label={platform.heroNodes.analytics.label} active={active} onActivate={onActivate} />
 
-      <g
-        tabIndex={0}
-        aria-label={`${platform.heroNodes.observe.label}: ${platform.heroNodes.observe.role}`}
-        onMouseEnter={() => onActivate('observe')}
-        onFocus={() => onActivate('observe')}
-        className="cursor-default outline-none"
-      >
-        <path d="M300 147 V327" stroke={EM} strokeOpacity={active === 'observe' ? 0.9 : 0.5} strokeDasharray="2 4" />
-        {[147, 207, 267, 327].map((y) => (
-          <path key={y} d={`M230 ${y} H300`} stroke={EM} strokeOpacity="0.4" strokeDasharray="2 4" />
-        ))}
-        <text x={170} y={384} textAnchor="middle" fontFamily={MONO} fontSize="10" fill={EM}>
-          ● OBSERVE · 20+ checks · every 15 min
-        </text>
-      </g>
+      <Monitor d="M300 121 V241" ticks={['M240 121 H300', 'M240 181 H300', 'M240 241 H300']} text="● MONITORING · automated checks" tx={170} ty={300} anchor="middle" active={active} onActivate={onActivate} />
     </svg>
   )
 }
@@ -150,7 +97,6 @@ function Vertical({ active, onActivate }) {
 export default function HeroDag() {
   const [active, setActive] = useState(null)
   const node = active ? platform.heroNodes[active] : null
-
   return (
     <div onMouseLeave={() => setActive(null)}>
       <div className="hidden md:block">

@@ -32,7 +32,7 @@ export default function StatusBoard({ categories, stats }) {
     <div className="space-y-6">
       <div className="grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
         {categories.map((c) => (
-          <div key={c.name} className="bg-s1 p-4">
+          <div key={c.name} className="lift relative bg-s1 p-4 hover:z-10">
             <div className="flex items-center justify-between gap-3">
               <p className="font-mono text-[11px] font-medium uppercase tracking-[0.08em]">{c.name}</p>
               <Chip tone="em" dot>

@@ -5,6 +5,7 @@
 @layer base {
   :root {
     color-scheme: dark;
+    --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
 
   html {
@@ -97,15 +98,192 @@
   animation: pulse-dot 2s ease-in-out infinite;
 }
 
+.packet {
+  opacity: 0.9;
+}
+
+@keyframes pulse-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  60%,
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.pulse-bar {
+  transform: translateX(-100%);
+  animation: pulse-bar 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  animation: marquee 48s linear infinite;
+}
+
+.lift {
+  transition:
+    transform 0.35s var(--ease),
+    border-color 0.35s var(--ease),
+    box-shadow 0.45s var(--ease),
+    background-color 0.35s var(--ease);
+}
+
+.lift:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 240, 255, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(0, 240, 255, 0.12),
+    0 10px 30px -12px rgba(0, 240, 255, 0.28);
+}
+
+/* Button colour sweep: set --sweep-bg per variant. */
+.sweep {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transition:
+    color 0.3s var(--ease),
+    border-color 0.3s var(--ease),
+    box-shadow 0.4s var(--ease),
+    transform 0.2s var(--ease);
+}
+
+.sweep::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--sweep-bg, rgba(0, 240, 255, 0.08));
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s var(--ease);
+}
+
+.sweep:hover::before,
+.sweep:focus-visible::before {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.sweep:active {
+  transform: scale(0.98);
+}
+
+.nudge {
+  display: inline-block;
+  transition: transform 0.3s var(--ease);
+}
+
+.group:hover .nudge,
+.group:focus-visible .nudge {
+  transform: translateX(4px);
+}
+
+/* Text link underline that grows from the left. */
+.link-grow {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 1px;
+  transition:
+    background-size 0.35s var(--ease),
+    color 0.3s var(--ease);
+}
+
+.link-grow:hover,
+.link-grow:focus-visible {
+  background-size: 100% 1px;
+}
+
+.icon-btn {
+  transition:
+    transform 0.3s var(--ease),
+    border-color 0.3s var(--ease),
+    color 0.3s var(--ease),
+    box-shadow 0.4s var(--ease);
+}
+
+.icon-btn:hover,
+.icon-btn:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px -8px rgba(0, 240, 255, 0.5);
+}
+
+.ambient-grid {
+  background-image: radial-gradient(rgba(0, 240, 255, 0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+  animation: ambient-grid 60s linear infinite;
+}
+
+@keyframes ambient-grid {
+  to {
+    background-position: 32px 0;
+  }
+}
+
+.ambient-blob {
+  will-change: transform;
+}
+
+.ambient-blob-a {
+  animation: ambient-drift-a 26s ease-in-out infinite alternate;
+}
+
+.ambient-blob-b {
+  animation: ambient-drift-b 32s ease-in-out infinite alternate;
+}
+
+@keyframes ambient-drift-a {
+  to {
+    transform: translate3d(14vw, 6vh, 0) scale(1.08);
+  }
+}
+
+@keyframes ambient-drift-b {
+  to {
+    transform: translate3d(-12vw, -8vh, 0) scale(0.94);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
-  .flow,
-  .scan,
-  .caret,
+  /* Ambient loops keep running, just slower. */
+  .flow {
+    animation-duration: 2s;
+  }
+
+  .scan {
+    animation-duration: 4.8s;
+  }
+
+  .pulse-bar {
+    animation-duration: 5.6s;
+  }
+
+  .marquee {
+    animation-duration: 96s;
+  }
+
   .pulse-dot {
-    animation: none !important;
+    animation-duration: 4s;
+  }
+
+  .ambient-grid {
+    animation-duration: 120s;
+  }
+
+  .ambient-blob-a,
+  .ambient-blob-b {
+    animation-duration: 64s;
   }
 }

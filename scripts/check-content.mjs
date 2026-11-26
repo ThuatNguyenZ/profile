@@ -3,7 +3,7 @@ import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { join, relative } from 'node:path'
 
 const ROOT = process.cwd()
-const TARGETS = ['src', 'index.html']
+const TARGETS = ['src', 'index.html', 'scripts/og.html']
 const EXTENSIONS = ['.js', '.jsx', '.css', '.html']
 
 const RULES = [
@@ -15,6 +15,10 @@ const RULES = [
   [/xlm-?r\b|xlm-roberta|visobert|masked lm/i, 'internal model detail'],
   [/ap-southeast|BA3-tech-team|shopee_ads/i, 'infrastructure identifier'],
   [/\b(R[1-5]|E[12]|L[12]|F[12]|A[1-3]|S1|T1|H[1-6])\b/, 'monitor check code'],
+  [/shopee|lazada|tiktok|amazon|meta ads|google ads/i, 'do not name BA3 source platforms'],
+  [/\bSSM\b|\bSES\b/, 'do not name BA3 AWS services'],
+  [/~140|3\.4k|20\+ checks|8 dashboards|every 4h|every 15 ?m|six marketplaces|6 sources/i, 'do not state BA3 system counts or cadences'],
+  [/one host|five cutover|cutover phases|vietnamese reviews|star ratings|names redacted|dry-run|dry run/i, 'BA3 implementation detail'],
 ]
 
 function walk(path) {

@@ -1,12 +1,14 @@
+import { motion, useReducedMotion } from 'framer-motion'
 import { Github, Linkedin } from 'lucide-react'
 import Button from '../components/ui/Button'
 import Chip from '../components/ui/Chip'
 import CopyEmail from '../components/ui/CopyEmail'
 import KpiStrip from '../components/ui/KpiStrip'
 import Panel from '../components/ui/Panel'
+import PipelinePulse from '../components/ui/PipelinePulse'
 import Reveal from '../components/ui/Reveal'
 import SectionHeader from '../components/ui/SectionHeader'
-import Terminal from '../components/ui/Terminal'
+import HeroAmbient from '../components/viz/HeroAmbient'
 import HeroDag from '../components/viz/HeroDag'
 import { kpis, profile } from '../content/profile'
 import { platform } from '../content/platform'
@@ -15,16 +17,35 @@ import { stackLayers } from '../content/stack'
 import { education, papers } from '../content/research'
 import useDocumentTitle from '../lib/useDocumentTitle'
 
+function HeadlineWords({ text, className }) {
+  const reduce = useReducedMotion()
+  const words = text.split(' ')
+  if (reduce) return <h1 className={className}>{text}</h1>
+  return (
+    <h1 className={className} aria-label={text}>
+      {words.map((w, i) => (
+        <motion.span
+          key={`${w}-${i}`}
+          aria-hidden="true"
+          className="mr-[0.25em] inline-block"
+          initial={{ opacity: 0, y: 24, filter: 'blur(6px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 0.6, delay: 0.08 * i, ease: [0.2, 0.7, 0.2, 1] }}
+        >
+          {w}
+        </motion.span>
+      ))}
+    </h1>
+  )
+}
+
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-line">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_85%,rgba(99,102,241,0.14),transparent_55%),radial-gradient(circle_at_12%_8%,rgba(0,240,255,0.08),transparent_45%)]"
-      />
+      <HeroAmbient />
       <div className="container-site relative py-14 md:py-20">
+        <HeadlineWords text={profile.headline} className="heading-display max-w-4xl text-[38px] sm:text-[48px] lg:text-[60px]" />
         <Reveal>
-          <h1 className="heading-display max-w-4xl text-[38px] sm:text-[48px] lg:text-[60px]">{profile.headline}</h1>
           <p className="mt-5 max-w-2xl text-[16px] text-mu md:text-[17px]">{profile.subhead}</p>
         </Reveal>
         <div className="mt-10">
@@ -32,9 +53,8 @@ function Hero() {
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
           <Button to={`/work/${platform.slug}`}>Explore the platform →</Button>
-          <Button href="#platform-terminal" variant="ghost">
-            &gt; Run dry-run
-          </Button>
+          <Button to="/about">About me →</Button>
+          <Button href="#platform" variant="ghost">&gt; See the pipeline</Button>
         </div>
         <div className="mt-12">
           <KpiStrip items={kpis} />
@@ -66,14 +86,12 @@ function Platform() {
             </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <div id="platform-terminal">
-              <Terminal title="pipeline · dry run" lines={platform.terminal} />
-            </div>
+            <PipelinePulse stages={platform.pulse} />
           </Reveal>
         </div>
         <ol className="mt-12 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
           {platform.steps.map((step, i) => (
-            <li key={step.label} className={`bg-s1 p-4 ${step.highlight ? 'shadow-[inset_0_2px_0_#00F0FF]' : ''}`}>
+            <li key={step.label} className={`lift relative bg-s1 hover:z-10 p-4 ${step.highlight ? 'shadow-[inset_0_2px_0_#00F0FF]' : ''}`}>
               <p className="label-code text-[9.5px]">
                 {String(i + 1).padStart(2, '0')} · {step.label}
               </p>
@@ -97,7 +115,7 @@ function Builds() {
           </SectionHeader>
           <dl className="grid grid-cols-3 gap-px border border-line bg-line">
             {lunchOrder.facts.map((f) => (
-              <div key={f.label} className="bg-s1 p-3">
+              <div key={f.label} className="lift relative bg-s1 p-3 hover:z-10">
                 <dt className="font-display text-[22px] font-semibold">{f.value}</dt>
                 <dd className="text-[12px] leading-snug text-mu">{f.label}</dd>
               </div>
@@ -159,8 +177,8 @@ function Research() {
         <div>
           <SectionHeader index="04" label="RESEARCH" title="Published" />
           {papers.map((p) => (
-            <article key={p.doi} className="mb-6 border-l-2 border-vi pl-4">
-              <a href={p.doi} target="_blank" rel="noreferrer" className="font-display text-[17px] font-semibold transition-colors hover:text-cy">
+            <article key={p.doi} className="lift mb-6 border-l-2 border-vi pl-4">
+              <a href={p.doi} target="_blank" rel="noreferrer" className="font-display text-[17px] font-semibold transition-colors link-grow hover:text-cy">
                 {p.title} ↗
               </a>
               <p className="text-[14px] text-mu">{p.subtitle}</p>
@@ -173,7 +191,7 @@ function Research() {
         <div>
           <SectionHeader label="EDUCATION" title="Studied" />
           {education.map((e) => (
-            <article key={e.degree} className="mb-6 border-l-2 border-cy pl-4">
+            <article key={e.degree} className="lift mb-6 border-l-2 border-cy pl-4">
               <p className="font-display text-[17px] font-semibold">{e.degree}</p>
               <p className="text-[14px] text-mu">{e.school}</p>
               <p className="mt-1 font-mono text-[11px] text-dim">

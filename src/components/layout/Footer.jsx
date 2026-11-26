@@ -23,7 +23,7 @@ export default function Footer() {
               target={href.startsWith('http') ? '_blank' : undefined}
               rel="noreferrer"
               aria-label={label}
-              className="grid h-9 w-9 place-items-center border border-line text-mu transition-colors hover:border-cy hover:text-cy"
+              className="grid h-9 w-9 place-items-center border border-line text-mu icon-btn hover:border-cy hover:text-cy"
             >
               <Icon size={15} />
             </a>
