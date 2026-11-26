@@ -183,7 +183,7 @@ function Research() {
           <SectionHeader index="04" label="RESEARCH" title="Published" />
           {papers.map((p) => (
             <article key={p.doi} className="lift mb-6 border-l-2 border-vi pl-4">
-              <a href={p.doi} target="_blank" rel="noreferrer" className="font-display text-[17px] font-semibold transition-colors hover:text-cy">
+              <a href={p.doi} target="_blank" rel="noreferrer" className="font-display text-[17px] font-semibold transition-colors link-grow hover:text-cy">
                 {p.title} ↗
               </a>
               <p className="text-[14px] text-mu">{p.subtitle}</p>

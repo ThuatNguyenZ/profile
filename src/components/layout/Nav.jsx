@@ -39,10 +39,10 @@ export default function Nav() {
               <Link
                 key={link.id}
                 to={`/#${link.id}`}
-                className={'relative py-1 font-mono text-[11px] font-medium transition-colors ' + (active ? 'text-cy' : 'text-mu hover:text-cy')}
+                className={'relative py-1 font-mono text-[11px] font-medium transition-colors duration-300 ' + (active ? 'text-cy' : 'text-mu hover:text-cy')}
                 aria-current={active ? 'location' : undefined}
               >
-                // {link.label}
+                <span className={active ? undefined : 'link-grow'}>// {link.label}</span>
                 {active && <motion.span layoutId="nav-active" className="absolute inset-x-0 -bottom-[17px] h-[2px] bg-cy shadow-glow" transition={{ type: 'spring', stiffness: 400, damping: 34 }} />}
               </Link>
             )
@@ -53,7 +53,7 @@ export default function Nav() {
           href={profile.cv}
           target="_blank"
           rel="noreferrer"
-          className="ml-auto hidden border border-cy bg-cy px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-canvas transition-colors hover:bg-transparent hover:text-cy sm:inline-flex lg:ml-0"
+          className="ml-auto hidden border border-cy bg-cy px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-canvas sweep [--sweep-bg:#08090C] hover:text-cy hover:shadow-glow sm:inline-flex lg:ml-0"
         >
           CV.PDF ↓
         </a>
@@ -64,7 +64,7 @@ export default function Nav() {
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? 'Close menu' : 'Open menu'}
-          className="ml-auto grid h-9 w-9 place-items-center border border-line text-mu sm:ml-0 lg:hidden"
+          className="ml-auto grid h-9 w-9 place-items-center border border-line text-mu icon-btn sm:ml-0 lg:hidden"
         >
           {open ? <X size={16} /> : <Menu size={16} />}
         </button>

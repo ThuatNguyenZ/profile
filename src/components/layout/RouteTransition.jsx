@@ -3,8 +3,6 @@ import { useLocation } from 'react-router-dom'
 
 export function RouteSweep() {
   const { pathname } = useLocation()
-  const reduce = useReducedMotion()
-  if (reduce) return null
   return (
     <motion.div
       key={pathname}
@@ -20,14 +18,13 @@ export function RouteSweep() {
 export default function RouteTransition({ children }) {
   const location = useLocation()
   const reduce = useReducedMotion()
-  if (reduce) return children(location)
   return (
     <AnimatePresence mode="wait" initial={false}>
       <motion.div
         key={location.pathname}
-        initial={{ opacity: 0, y: 14 }}
+        initial={{ opacity: 0, y: reduce ? 0 : 14 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -8 }}
+        exit={{ opacity: 0, y: reduce ? 0 : -8 }}
         transition={{ duration: 0.28, ease: [0.2, 0.7, 0.2, 1] }}
       >
         {children(location)}

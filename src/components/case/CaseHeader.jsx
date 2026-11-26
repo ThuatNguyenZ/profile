@@ -10,9 +10,9 @@ export default function CaseHeader({ slug, kicker, title, role, period, chips, c
       />
       <div className="container-site relative py-14 md:py-20">
         <nav aria-label="Breadcrumb" className="mb-5 font-mono text-[12px] text-mu">
-          <Link to="/" className="hover:text-cy">~</Link>
+          <Link to="/" className="link-grow hover:text-cy">~</Link>
           <span className="mx-2 text-dim">/</span>
-          <Link to="/#builds" className="hover:text-cy">work</Link>
+          <Link to="/#builds" className="link-grow hover:text-cy">work</Link>
           <span className="mx-2 text-dim">/</span>
           <span className="text-cy" aria-current="page">{slug}</span>
         </nav>

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 
-// Every motion rate is half of the Stitch reference animation.
+// Motion rates are half of the Stitch reference (a quarter when the OS asks for reduced motion).
 const SPEED = 0.5
 
 export default function HeroNetwork() {
@@ -12,6 +12,7 @@ export default function HeroNetwork() {
     if (!mount) return undefined
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const speed = reduce ? SPEED * 0.5 : SPEED
     const small = window.innerWidth < 768
     let width = mount.clientWidth || window.innerWidth
     let height = mount.clientHeight || 600
@@ -105,19 +106,19 @@ export default function HeroNetwork() {
 
     let clock = 0
     function step() {
-      clock += 0.015 * SPEED
+      clock += 0.015 * speed
       targetX += (mouseX - targetX) * 0.05
       targetY += (mouseY - targetY) * 0.05
       group.rotation.y = clock * 0.08 + targetX * 0.02
       group.rotation.x = Math.sin(clock * 0.05) * 0.15 + targetY * 0.02
       for (const n of nodes) {
-        n.mesh.rotation.x += n.speed * SPEED
-        n.mesh.rotation.y += n.speed * 1.5 * SPEED
+        n.mesh.rotation.x += n.speed * speed
+        n.mesh.rotation.y += n.speed * 1.5 * speed
         n.mesh.position.y = n.origin.y + Math.sin(clock * 2 + n.phase) * 1.2
       }
       const arr = packetGeo.attributes.position.array
       for (let i = 0; i < packetCount; i++) {
-        arr[i * 3] += packetSpeeds[i] * SPEED
+        arr[i * 3] += packetSpeeds[i] * speed
         if (arr[i * 3] > 60) arr[i * 3] = -60
       }
       packetGeo.attributes.position.needsUpdate = true
@@ -132,7 +133,7 @@ export default function HeroNetwork() {
       frame = requestAnimationFrame(loop)
     }
     const start = () => {
-      if (reduce || running) return
+      if (running) return
       running = true
       frame = requestAnimationFrame(loop)
     }

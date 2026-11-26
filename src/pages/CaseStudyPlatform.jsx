@@ -75,7 +75,7 @@ export default function CaseStudyPlatform() {
           <BlackBoxFlow inputs={platform.enrichment.inputs} layer={platform.enrichment.layer} outputs={platform.enrichment.outputs} />
           <p className="mt-6 font-mono text-[12px] text-mu">
             Related:{' '}
-            <Link to="/#research" className="text-cy hover:underline">
+            <Link to="/#research" className="text-cy link-grow">
               my published research on Vietnamese review mining →
             </Link>
           </p>

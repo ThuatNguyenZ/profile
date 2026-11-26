@@ -40,7 +40,7 @@ export default function CaseToc({ sections }) {
                     href={`#${s.id}`}
                     onClick={(e) => go(e, s.id)}
                     aria-current={on ? 'location' : undefined}
-                    className={`block py-2 pl-4 font-mono text-[11px] uppercase tracking-[0.06em] transition-colors ${on ? 'text-cy' : 'text-mu hover:text-tx'}`}
+                    className={`block py-2 pl-4 font-mono text-[11px] uppercase tracking-[0.06em] transition-[color,transform] duration-300 hover:translate-x-1 ${on ? 'text-cy' : 'text-mu hover:text-tx'}`}
                   >
                     <span className={on ? 'text-cy' : 'text-dim'}>{String(i + 1).padStart(2, '0')}</span> {s.label}
                   </a>
@@ -64,7 +64,7 @@ export default function CaseToc({ sections }) {
                   href={`#${s.id}`}
                   data-active={on}
                   onClick={(e) => go(e, s.id)}
-                  className={`block whitespace-nowrap border px-2.5 py-1 font-mono text-[10.5px] uppercase ${on ? 'border-cy bg-cy/10 text-cy' : 'border-line text-mu'}`}
+                  className={`block whitespace-nowrap border px-2.5 py-1 font-mono text-[10.5px] uppercase ${on ? 'border-cy bg-cy/10 text-cy' : 'border-line text-mu transition-colors duration-300 hover:border-cy/60 hover:text-tx'}`}
                 >
                   {String(i + 1).padStart(2, '0')} {s.label}
                 </a>
