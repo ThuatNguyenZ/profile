@@ -67,7 +67,7 @@ export default function CaseStudyPlatform() {
           </div>
         </CaseSection>
 
-        <CaseSection id="monitoring" index="04" label="OBSERVABILITY" title="Alerts before customers notice">
+        <CaseSection id="monitoring" index="04" label="MONITORING" title="Alerts before customers notice">
           <StatusBoard categories={platform.checkCategories} stats={platform.observabilityStats} />
         </CaseSection>
 
