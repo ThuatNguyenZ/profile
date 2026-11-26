@@ -3,9 +3,9 @@ import { useContext, useRef } from 'react'
 import { SpineContext } from '../layout/PipelineSpine'
 
 const TONES = {
-  cy: { text: 'text-cy', border: 'border-cy', bg: 'bg-cy', stroke: '#00F0FF', rule: 'from-cy' },
-  vi: { text: 'text-vi', border: 'border-vi', bg: 'bg-vi', stroke: '#6366F1', rule: 'from-vi' },
-  em: { text: 'text-em', border: 'border-em', bg: 'bg-em', stroke: '#10B981', rule: 'from-em' },
+  cy: { text: 'text-cy', border: 'border-cy', bg: 'bg-cy', stroke: 'rgb(var(--c-cy))', rule: 'from-cy' },
+  vi: { text: 'text-vi', border: 'border-vi', bg: 'bg-vi', stroke: 'rgb(var(--c-vi))', rule: 'from-vi' },
+  em: { text: 'text-em', border: 'border-em', bg: 'bg-em', stroke: 'rgb(var(--c-em))', rule: 'from-em' },
 }
 
 // Pipeline-stage section header: node · outlined number · title · stage label, with a rule that grows in.

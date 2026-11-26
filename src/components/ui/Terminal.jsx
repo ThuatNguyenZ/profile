@@ -3,7 +3,7 @@ import { useInView, useReducedMotion } from 'framer-motion'
 
 const styles = {
   cmd: 'text-tx',
-  out: 'text-[#c9d1d9]',
+  out: 'text-codetx',
   dim: 'text-dim',
 }
 
@@ -24,9 +24,9 @@ export default function Terminal({ title = 'terminal', lines, className = '' }) 
   }, [inView, shown, reduce, lines.length])
 
   return (
-    <div ref={ref} className={`border border-line bg-[#05060a] ${className}`}>
+    <div ref={ref} className={`border border-line bg-code ${className}`}>
       <div className="flex items-center gap-2 border-b border-line px-3 py-2">
-        <span className="h-2 w-2 rounded-full bg-[#ef4444]/70" />
+        <span className="h-2 w-2 rounded-full bg-red-500/70" />
         <span className="h-2 w-2 rounded-full bg-am/70" />
         <span className="h-2 w-2 rounded-full bg-em/70" />
         <span className="label-code ml-2">{title}</span>

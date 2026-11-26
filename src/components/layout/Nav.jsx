@@ -5,6 +5,7 @@ import { Menu, X } from 'lucide-react'
 import { navLinks, profile } from '../../content/profile'
 
 import useScrollSpy from '../../lib/useScrollSpy'
+import ThemeToggle from './ThemeToggle'
 
 const ROUTE_SECTION = { '/about': 'about', '/work/ba3-data-platform': 'platform', '/work/lunch-order': 'builds' }
 
@@ -49,11 +50,12 @@ export default function Nav() {
           })}
         </div>
 
+        <ThemeToggle />
         <a
           href={profile.cv}
           target="_blank"
           rel="noreferrer"
-          className="ml-auto hidden border border-cy bg-cy px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-canvas sweep [--sweep-bg:#08090C] hover:text-cy hover:shadow-glow sm:inline-flex xl:ml-0"
+          className="ml-auto hidden border border-cy bg-cy px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-canvas sweep [--sweep-bg:rgb(var(--c-canvas))] hover:text-cy hover:shadow-glow sm:inline-flex xl:ml-0"
         >
           CV.PDF ↓
         </a>

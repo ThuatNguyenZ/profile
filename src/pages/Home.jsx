@@ -138,7 +138,7 @@ function Platform() {
           </div>
           <ol className="mt-12 grid gap-px border border-line bg-line sm:grid-cols-2 lg:grid-cols-5">
             {platform.steps.map((step, i) => (
-              <li key={step.label} className={`lift relative bg-s1 hover:z-10 p-4 ${step.highlight ? 'shadow-[inset_0_2px_0_#00F0FF]' : ''}`}>
+              <li key={step.label} className={`lift relative bg-s1 hover:z-10 p-4 ${step.highlight ? 'shadow-[inset_0_2px_0_rgb(var(--c-cy))]' : ''}`}>
                 <p className="label-code text-[9.5px]">
                   {String(i + 1).padStart(2, '0')} · {step.label}
                 </p>
@@ -197,7 +197,7 @@ function Builds() {
               }
               bodyClassName="p-0"
             >
-              <pre className="overflow-x-auto bg-[#05060a] px-4 py-5 font-mono text-[12.5px] leading-[1.75] text-[#c9d1d9]">
+              <pre className="overflow-x-auto bg-code px-4 py-5 font-mono text-[12.5px] leading-[1.75] text-codetx">
                 {lunchOrder.homeSnippet}
               </pre>
             </Panel>

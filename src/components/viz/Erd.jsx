@@ -1,3 +1,5 @@
+import { C } from '../../theme/svg'
+
 const MONO = 'JetBrains Mono, monospace'
 const DISPLAY = 'Space Grotesk, sans-serif'
 const BOX_W = 200
@@ -20,19 +22,19 @@ export default function Erd({ entities, relations }) {
         {relations.map(([a, b]) => {
           const p = center(a)
           const q = center(b)
-          return <line key={`${a}-${b}`} x1={p.x} y1={p.y} x2={q.x} y2={q.y} stroke="#6366F1" strokeOpacity="0.6" strokeWidth="1.2" />
+          return <line key={`${a}-${b}`} x1={p.x} y1={p.y} x2={q.x} y2={q.y} style={{ stroke: C.vi }} strokeOpacity="0.6" strokeWidth="1.2" />
         })}
         {entities.map((e) => {
           const { x, y } = pos[e.id]
           return (
             <g key={e.id}>
-              <rect x={x} y={y} width={BOX_W} height={BOX_H} fill="#0E1015" stroke="#1E2230" />
-              <rect x={x} y={y} width={BOX_W} height="28" fill="#151821" stroke="#1E2230" />
-              <text x={x + 12} y={y + 19} fontFamily={DISPLAY} fontSize="14" fontWeight="600" fill="#F8FAFC">
+              <rect x={x} y={y} width={BOX_W} height={BOX_H} style={{ fill: C.s1, stroke: C.line }} />
+              <rect x={x} y={y} width={BOX_W} height="28" style={{ fill: C.s2, stroke: C.line }} />
+              <text x={x + 12} y={y + 19} fontFamily={DISPLAY} fontSize="14" fontWeight="600" style={{ fill: C.tx }}>
                 {e.name}
               </text>
               {e.fields.map((f, i) => (
-                <text key={f} x={x + 12} y={y + 48 + i * 20} fontFamily={MONO} fontSize="11" fill="#94A3B8">
+                <text key={f} x={x + 12} y={y + 48 + i * 20} fontFamily={MONO} fontSize="11" style={{ fill: C.mu }}>
                   · {f}
                 </text>
               ))}
@@ -47,8 +49,8 @@ export default function Erd({ entities, relations }) {
           const w = label.length * 6.6 + 12
           return (
             <g key={`l-${a}-${b}`}>
-              <rect x={mx - w / 2} y={my - 9} width={w} height="18" fill="#08090C" stroke="#6366F1" strokeOpacity="0.6" />
-              <text x={mx} y={my + 3.5} textAnchor="middle" fontFamily={MONO} fontSize="10" fill="#b4b6ff">
+              <rect x={mx - w / 2} y={my - 9} width={w} height="18" style={{ fill: C.canvas, stroke: C.vi }} strokeOpacity="0.6" />
+              <text x={mx} y={my + 3.5} textAnchor="middle" fontFamily={MONO} fontSize="10" style={{ fill: C.viSoft }}>
                 {label}
               </text>
             </g>
@@ -72,7 +74,7 @@ export default function Erd({ entities, relations }) {
         <ul className="space-y-1 font-mono text-[12px] text-mu">
           {relations.map(([a, b, label]) => (
             <li key={`${a}-${b}`}>
-              {names[a]} <span className="text-[#b4b6ff]">— {label} →</span> {names[b]}
+              {names[a]} <span className="text-vi-soft">— {label} →</span> {names[b]}
             </li>
           ))}
         </ul>

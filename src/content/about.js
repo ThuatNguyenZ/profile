@@ -15,7 +15,7 @@ export const about = {
       { column: 'studying', type: 'text', value: 'M.Sc. Artificial Intelligence · University of Science, VNU-HCM' },
       { column: 'research', type: 'text[]', list: ['recommender systems', 'NLP'] },
       { column: 'based_in', type: 'geography', value: 'Ho Chi Minh City, Vietnam', comment: '10.82° N, 106.63° E' },
-      { column: 'motto', type: 'text', value: '‘Boring in production — because it was designed with care.’', muted: true },
+      { column: 'motto', type: 'text', value: '“Fearless in exploration — meticulous in creation.”', muted: true },
       { column: 'status', type: 'enum', status: 'shipping' },
     ],
   },

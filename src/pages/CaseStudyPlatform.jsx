@@ -15,7 +15,7 @@ import { lunchOrder } from '../content/lunchOrder'
 import useDocumentTitle from '../lib/useDocumentTitle'
 
 const HeroNetwork = lazy(() => import('../components/viz/HeroNetwork'))
-const BACKDROP_MASK = '[mask-image:linear-gradient(to_right,transparent_0%,transparent_50%,rgba(0,0,0,0.35)_62%,black_80%)]'
+const BACKDROP_MASK = '[mask-image:linear-gradient(to_right,transparent_0%,transparent_50%,rgb(var(--c-canvas)/0.35)_62%,rgb(var(--c-canvas))_80%)]'
 
 const SECTIONS = [
   { id: 'problem', label: 'Problem' },
