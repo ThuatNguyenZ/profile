@@ -297,7 +297,7 @@
     transform: translateY(-100%);
   }
   to {
-    transform: translateY(800%);
+    transform: translateY(var(--scan-end, 800%));
   }
 }
 

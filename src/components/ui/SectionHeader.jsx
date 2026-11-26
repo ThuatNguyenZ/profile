@@ -1,5 +1,6 @@
 import { motion, useInView, useReducedMotion } from 'framer-motion'
-import { useRef } from 'react'
+import { useContext, useRef } from 'react'
+import { SpineContext } from '../layout/PipelineSpine'
 
 const TONES = {
   cy: { text: 'text-cy', border: 'border-cy', bg: 'bg-cy', stroke: '#00F0FF', rule: 'from-cy' },
@@ -12,6 +13,8 @@ export default function SectionHeader({ index, label, title, stage, sub, tone = 
   const t = TONES[tone] ?? TONES.cy
   const ref = useRef(null)
   const inView = useInView(ref, { margin: '-35% 0px -55% 0px' })
+  const spine = useContext(SpineContext)
+  const lit = spine && index ? spine.activeKey === index : inView
   const seen = useInView(ref, { once: true, amount: 0.6 })
   const reduce = useReducedMotion()
 
@@ -19,10 +22,10 @@ export default function SectionHeader({ index, label, title, stage, sub, tone = 
     <header ref={ref} className={`relative mb-8 ${onSpine ? 'lg:-ml-[56px]' : ''} ${className}`}>
       <div className="flex items-center gap-3 sm:gap-4">
         {node && (
-          <span data-stage-node className="relative grid h-[22px] w-[22px] shrink-0 place-items-center" aria-hidden="true">
+          <span data-stage-node data-stage-index={index} className="relative grid h-[22px] w-[22px] shrink-0 place-items-center" aria-hidden="true">
             <span className={`stage-ring absolute inset-0 rounded-full border ${t.border}`} />
-            <span className={`relative grid h-[22px] w-[22px] place-items-center rounded-full border-2 bg-canvas transition-shadow duration-500 ${t.border} ${inView ? 'shadow-glow' : ''}`}>
-              <span className={`h-2 w-2 rounded-full transition-transform duration-500 ${t.bg} ${inView ? 'scale-125' : 'scale-100'}`} />
+            <span className={`relative grid h-[22px] w-[22px] place-items-center rounded-full border-2 bg-canvas transition-shadow duration-500 ${t.border} ${lit ? 'shadow-glow' : ''}`}>
+              <span className={`h-2 w-2 rounded-full transition-transform duration-500 ${t.bg} ${lit ? 'scale-125' : 'scale-100'}`} />
             </span>
           </span>
         )}

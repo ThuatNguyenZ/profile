@@ -86,7 +86,7 @@ function AboutIntro() {
           </SectionHeader>
           <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_240px] lg:items-start">
             <Reveal>
-              <EngineerTable data={about.engineer} />
+              <EngineerTable data={about.engineer} hide={['research', 'motto', 'status']} />
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button to="/about">Read my story →</Button>
                 <Button to="/#contact" variant="ghost">Say hello →</Button>
