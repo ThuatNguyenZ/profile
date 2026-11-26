@@ -160,7 +160,7 @@ export default function PipelineSpine({ children }) {
 
 - [ ] **Step 4: `src/pages/Home.jsx`**
   - Import `PipelineSpine` and wrap `<Platform /> <Builds /> <Stack /> <Research /> <Contact />` (everything after `<Hero />`) in `<PipelineSpine>…</PipelineSpine>`.
-  - In every section's top-level content (the element right inside `container-site`, or the `container-site` element itself when it is a grid), add `lg:pl-[56px]` so content clears the spine, and give each `SectionHeader` (except Education) `className="lg:-ml-[56px]"` (merge with any existing className, e.g. Builds keeps `mb-6`) so its node sits on the spine. For the two-column Research grid, apply `lg:pl-[56px]` to the grid; the Education header gets `node={false}` and no negative margin.
+  - Never put the left padding on a `container-site` element itself (that would override its gutter). Where a section's `container-site` element is also the grid (Builds, Research), move the grid classes onto a new inner `<div>` and keep `container-site` as a plain wrapper. Then, in every section, add `lg:pl-[56px]` to the element directly inside `container-site` so content clears the spine, and give each `SectionHeader` (except Education) `className="lg:-ml-[56px]"` (merge with any existing className, e.g. Builds keeps `mb-6`) so its node sits on the spine. For the two-column Research grid, apply `lg:pl-[56px]` to the (new inner) grid div; the Education header gets `node={false}` and no negative margin.
   - Stage props per section:
 
 | Section | label | stage | sub | tone |

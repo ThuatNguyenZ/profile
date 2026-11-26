@@ -38,15 +38,15 @@ export default function CaseStudyLunchOrder() {
       </CaseHeader>
 
       <CaseBody sections={SECTIONS}>
-        <CaseSection id="problem" index="01" label="PROBLEM" title="Lunch by group chat">
+        <CaseSection id="problem" index="01" label="PROBLEM" stage="INPUT" tone="cy" title="Lunch by group chat">
           <p className="max-w-2xl text-mu">{lunchOrder.problem}</p>
         </CaseSection>
 
-        <CaseSection id="data-model" index="02" label="DATA MODEL" title="Six entities, simplified" intro="The real schema has more tables; this is the shape that matters.">
+        <CaseSection id="data-model" index="02" label="DATA MODEL" stage="MODEL" tone="cy" title="Six entities, simplified" intro="The real schema has more tables; this is the shape that matters.">
           <Erd entities={lunchOrder.entities} relations={lunchOrder.relations} />
         </CaseSection>
 
-        <CaseSection id="logic" index="03" label="LOGIC IN THE DATABASE" title="Thin client, strict Postgres">
+        <CaseSection id="logic" index="03" label="LOGIC IN THE DATABASE" stage="RULES" tone="vi" title="Thin client, strict Postgres">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-start">
             <ul className="space-y-3">
               {lunchOrder.logic.map((l) => (
@@ -62,11 +62,11 @@ export default function CaseStudyLunchOrder() {
           </div>
         </CaseSection>
 
-        <CaseSection id="testing" index="04" label="TESTING" title="A real Postgres inside the test runner">
+        <CaseSection id="testing" index="04" label="TESTING" stage="VERIFY" tone="vi" title="A real Postgres inside the test runner">
           <p className="max-w-2xl text-mu">{lunchOrder.testing}</p>
         </CaseSection>
 
-        <CaseSection id="releases" index="05" label="RELEASES" title="Seven versions, three jumps">
+        <CaseSection id="releases" index="05" label="RELEASES" stage="SHIP" tone="em" title="Seven versions, three jumps">
           <ol className="grid gap-px border border-line bg-line md:grid-cols-3">
             {lunchOrder.milestones.map((m) => (
               <li key={m.version} className="lift relative bg-s1 p-5 hover:z-10">
@@ -78,7 +78,7 @@ export default function CaseStudyLunchOrder() {
           </ol>
         </CaseSection>
 
-        <CaseSection id="stack" index="06" label="STACK & COST" title="Free tier, all the way">
+        <CaseSection id="stack" index="06" label="STACK & COST" stage="COST" tone="em" title="Free tier, all the way">
           <div className="border-b border-line">
             {lunchOrder.stack.map((row) => (
               <div key={row.key} className="grid gap-1 border-t border-line py-3 md:grid-cols-[180px_1fr]">

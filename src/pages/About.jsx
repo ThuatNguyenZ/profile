@@ -3,6 +3,7 @@ import Button from '../components/ui/Button'
 import CaseBody from '../components/case/CaseBody'
 import CaseHeader from '../components/case/CaseHeader'
 import CaseSection from '../components/case/CaseSection'
+import EngineerTable from '../components/about/EngineerTable'
 import Timeline from '../components/about/Timeline'
 import { about } from '../content/about'
 import { profile } from '../content/profile'
@@ -31,17 +32,10 @@ export default function About() {
         crumbs={[]}
         backdrop={<Suspense fallback={null}><HeroNetwork mask="[mask-image:linear-gradient(to_right,transparent_0%,transparent_50%,rgba(0,0,0,0.35)_62%,black_80%)]" /></Suspense>}
       >
-        <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_280px] md:items-start">
+        <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_260px] md:items-start">
           <div>
             <p className="max-w-2xl text-[17px] text-mu md:text-[19px]">{about.lead}</p>
-            <dl className="mt-8 grid gap-px border border-line bg-line sm:grid-cols-2">
-              {about.facts.map((f) => (
-                <div key={f.label} className="lift relative bg-s1/90 p-4 hover:z-10">
-                  <dt className="label-code">{f.label}</dt>
-                  <dd className="mt-1 text-[14px]">{f.value}</dd>
-                </div>
-              ))}
-            </dl>
+            <div className="mt-8"><EngineerTable data={about.engineer} /></div>
           </div>
           <figure className="lift relative mx-auto w-full max-w-[280px] border border-line bg-s1 p-2 backdrop-blur-sm">
             <img src={about.photo.src} alt={about.photo.alt} className="aspect-[4/5] w-full object-cover grayscale-[35%] transition-[filter] duration-500 hover:grayscale-0" />
@@ -54,7 +48,7 @@ export default function About() {
       </CaseHeader>
 
       <CaseBody sections={SECTIONS}>
-        <CaseSection id="story" index="01" label="STORY" title="How I got here">
+        <CaseSection id="story" index="01" label="STORY" stage="SOURCE" tone="cy" title="How I got here">
           <div className="max-w-2xl space-y-5 text-[16px] leading-relaxed text-mu">
             {about.story.map((p) => (
               <p key={p.slice(0, 24)}>{p}</p>
@@ -62,11 +56,11 @@ export default function About() {
           </div>
         </CaseSection>
 
-        <CaseSection id="timeline" index="02" label="TIMELINE" title="Milestones">
+        <CaseSection id="timeline" index="02" label="TIMELINE" stage="HISTORY" tone="vi" title="Milestones">
           <Timeline items={about.timeline} />
         </CaseSection>
 
-        <CaseSection id="how-i-work" index="03" label="HOW I WORK" title="Four habits">
+        <CaseSection id="how-i-work" index="03" label="HOW I WORK" stage="RULES" tone="em" title="Four habits">
           <div className="grid gap-4 md:grid-cols-2">
             {about.principles.map((p, i) => (
               <div key={p.title} className="lift panel p-5">

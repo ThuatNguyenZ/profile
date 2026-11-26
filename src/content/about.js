@@ -4,12 +4,21 @@ export const about = {
   title: 'Hi, I’m Thuat.',
   lead: 'Data engineer in Ho Chi Minh City. I like systems that are boring in production — because someone designed them with care.',
   photo: { src: '/images/profile.jpg', alt: 'Portrait of Nguyen Thien Thuat' },
-  facts: [
-    { label: 'role', value: 'Data Engineer · BA3 Studio' },
-    { label: 'studying', value: 'M.Sc. AI · University of Science' },
-    { label: 'based in', value: 'Ho Chi Minh City' },
-    { label: 'research', value: 'Recommender systems · NLP' },
-  ],
+  engineer: {
+    table: 'engineer',
+    meta: '1 row · fetched in 0.42 ms',
+    query: 'SELECT * FROM engineer WHERE curious = true;',
+    rows: [
+      { column: 'name', type: 'text', value: 'Nguyen Thien Thuat', pk: true, strong: true },
+      { column: 'role', type: 'text', value: 'Data Engineer', accent: true, comment: 'owner of the data platform: design → build → operate' },
+      { column: 'focus', type: 'text[]', list: ['pipelines', 'warehousing', 'monitoring'] },
+      { column: 'studying', type: 'text', value: 'M.Sc. Artificial Intelligence · University of Science, VNU-HCM' },
+      { column: 'research', type: 'text[]', list: ['recommender systems', 'NLP'] },
+      { column: 'based_in', type: 'geography', value: 'Ho Chi Minh City, Vietnam', comment: '10.82° N, 106.63° E' },
+      { column: 'motto', type: 'text', value: '‘Boring in production — because it was designed with care.’', muted: true },
+      { column: 'status', type: 'enum', status: 'shipping' },
+    ],
+  },
   story: [
     'I studied Data Science at the University of Information Technology (VNU-HCM) and finished the four-year program in three and a half. Research came early: a review-based recommender for Vietnamese e-commerce, later published in SN Computer Science.',
     'At BA3 Studio I found the work I enjoy most — owning the data platform behind an analytics product, from the first collection job to the alert at 3 a.m. I would rather build something small that runs every day than something clever that runs once.',
