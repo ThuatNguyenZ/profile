@@ -24,7 +24,7 @@ export default function CaseStudyPlatform() {
       <CaseSection index="01" label="PROBLEM" title="Many sources, no single view">
         <ul className="grid gap-px border border-line bg-line md:grid-cols-3">
           {platform.problem.map((p, i) => (
-            <li key={i} className="bg-s1 p-5">
+            <li key={i} className="lift relative bg-s1 p-5 hover:z-10">
               <p className="label-code text-am">pain · {String(i + 1).padStart(2, '0')}</p>
               <p className="mt-2 text-[14px] text-mu">{p}</p>
             </li>
@@ -39,7 +39,7 @@ export default function CaseStudyPlatform() {
       <CaseSection index="03" label="PRINCIPLES" title="How it's built">
         <div className="grid gap-4 md:grid-cols-2">
           {platform.principles.map((d, i) => (
-            <Panel key={d.title} title={`principle · ${String(i + 1).padStart(2, '0')}`} className="transition-colors hover:border-t-cy">
+            <Panel key={d.title} title={`principle · ${String(i + 1).padStart(2, '0')}`} className="lift transition-colors hover:border-t-cy">
               <h3 className="font-display text-[19px] font-semibold">{d.title}</h3>
               <dl className="mt-3 space-y-3 text-[14px]">
                 <div>

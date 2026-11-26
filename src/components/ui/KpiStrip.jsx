@@ -4,7 +4,7 @@ export default function KpiStrip({ items }) {
       {items.map((item, i) => (
         <div
           key={item.label}
-          className={`border-line p-4 md:p-5 ${i % 2 === 0 ? 'border-r' : ''} ${i < 2 ? 'border-b md:border-b-0' : ''} md:border-r md:last:border-r-0`}
+          className={`lift border-line p-4 md:p-5 ${i % 2 === 0 ? 'border-r' : ''} ${i < 2 ? 'border-b md:border-b-0' : ''} md:border-r md:last:border-r-0`}
         >
           <p className="font-display text-[26px] font-semibold tracking-[-0.02em] md:text-[30px]">{item.value}</p>
           <p className="mt-1 text-[12px] leading-snug text-mu">{item.label}</p>

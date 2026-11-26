@@ -54,7 +54,7 @@ export default function CaseStudyLunchOrder() {
       <CaseSection index="05" label="RELEASES" title="Seven versions, three jumps">
         <ol className="grid gap-px border border-line bg-line md:grid-cols-3">
           {lunchOrder.milestones.map((m) => (
-            <li key={m.version} className="bg-s1 p-5">
+            <li key={m.version} className="lift relative bg-s1 p-5 hover:z-10">
               <p className="font-mono text-[12px] text-cy">{m.version}</p>
               <p className="mt-1 font-display text-[18px] font-semibold">{m.title}</p>
               <p className="mt-2 text-[14px] text-mu">{m.text}</p>

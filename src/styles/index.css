@@ -116,6 +116,26 @@
   animation: pulse-bar 2.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  animation: marquee 48s linear infinite;
+}
+
+.lift {
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lift:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 240, 255, 0.45);
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.12);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -135,5 +155,13 @@
   .pulse-bar {
     animation: none !important;
     transform: none !important;
+  }
+
+  .marquee {
+    animation: none !important;
+  }
+
+  .lift:hover {
+    transform: none;
   }
 }
