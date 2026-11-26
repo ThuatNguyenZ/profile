@@ -70,7 +70,7 @@ export default function PipelineSpine({ children }) {
   return (
     <SpineContext.Provider value={{ activeKey }}>
       <div ref={ref} className="relative">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden lg:block">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden lg:block z-[1]">
           <div className="container-site relative h-full">
             <div
               className="absolute left-[calc(2rem+10.5px)] w-px xl:left-[calc(2.5rem+10.5px)]"

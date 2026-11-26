@@ -22,7 +22,7 @@ export default function SectionHeader({ index, label, title, stage, sub, tone = 
     <header ref={ref} className={`relative mb-8 ${onSpine ? 'lg:-ml-[56px]' : ''} ${className}`}>
       <div className="flex items-center gap-3 sm:gap-4">
         {node && (
-          <span data-stage-node data-stage-index={index} className="relative grid h-[22px] w-[22px] shrink-0 place-items-center" aria-hidden="true">
+          <span data-stage-node data-stage-index={index} className="relative z-[2] grid h-[22px] w-[22px] shrink-0 place-items-center" aria-hidden="true">
             <span className={`stage-ring absolute inset-0 rounded-full border ${t.border}`} />
             <span className={`relative grid h-[22px] w-[22px] place-items-center rounded-full border-2 bg-canvas transition-shadow duration-500 ${t.border} ${lit ? 'shadow-glow' : ''}`}>
               <span className={`h-2 w-2 rounded-full transition-transform duration-500 ${t.bg} ${lit ? 'scale-125' : 'scale-100'}`} />

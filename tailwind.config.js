@@ -3,6 +3,7 @@ import { colors, fonts } from './src/theme/tokens.js'
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
+  safelist: ['border-cy/40', 'border-vi/40', 'border-em/40'],
   theme: {
     extend: {
       colors,

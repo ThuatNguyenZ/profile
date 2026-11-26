@@ -25,6 +25,12 @@
     --dot: 255 255 255;
     --dot-a: 0.035;
     --glow-a: 0.18;
+    --grid: 255 255 255;
+    --grid-a: 0.035;
+    --grain-a: 0.05;
+    --aura-a: 0.16;
+    --band: var(--c-s2);
+    --band-a: 0.35;
   }
 
   :root[data-theme='light'] {
@@ -48,6 +54,12 @@
     --dot: 15 23 42;
     --dot-a: 0.06;
     --glow-a: 0.25;
+    --grid: 15 23 42;
+    --grid-a: 0.05;
+    --grain-a: 0.06;
+    --aura-a: 0.14;
+    --band: var(--c-s2);
+    --band-a: 0.9;
   }
 
   html {
@@ -59,8 +71,6 @@
     @apply bg-canvas font-sans text-tx antialiased;
     font-size: 15px;
     line-height: 1.6;
-    background-image: radial-gradient(rgb(var(--dot) / var(--dot-a)) 1px, transparent 1px);
-    background-size: 24px 24px;
     transition: background-color .3s var(--ease), color .3s var(--ease);
   }
 
@@ -97,6 +107,12 @@
     --dot: 15 23 42;
     --dot-a: 0.06;
     --glow-a: 0.25;
+    --grid: 15 23 42;
+    --grid-a: 0.05;
+    --grain-a: 0.06;
+    --aura-a: 0.14;
+    --band: var(--c-s2);
+    --band-a: 0.9;
   }
 }
 
@@ -369,12 +385,44 @@
   }
 }
 
+.backdrop-grid {
+  background-image:
+    radial-gradient(rgb(var(--dot) / var(--dot-a)) 1px, transparent 1px),
+    linear-gradient(to right, rgb(var(--grid) / var(--grid-a)) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--grid) / var(--grid-a)) 1px, transparent 1px);
+  background-size: 24px 24px, 120px 120px, 120px 120px;
+}
+
+.backdrop-grain {
+  opacity: var(--grain-a);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+.aura {
+  opacity: var(--aura-a);
+  animation: aura-drift 28s ease-in-out infinite alternate;
+}
+
+.aura-b {
+  animation-duration: 34s;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes aura-drift {
+  to {
+    transform: translate3d(6%, 4%, 0) scale(1.08);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
   /* Ambient loops keep running, just slower. */
+  .aura { animation-duration: 60s; }
+
   .flow {
     animation-duration: 2s;
   }

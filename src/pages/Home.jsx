@@ -3,6 +3,7 @@ import { Github, Linkedin } from 'lucide-react'
 import AboutPhoto from '../components/about/AboutPhoto'
 import EngineerTable from '../components/about/EngineerTable'
 import PipelineSpine from '../components/layout/PipelineSpine'
+import SectionAura from '../components/layout/SectionAura'
 import Button from '../components/ui/Button'
 import Chip from '../components/ui/Chip'
 import CopyEmail from '../components/ui/CopyEmail'
@@ -70,8 +71,9 @@ function Hero() {
 
 function AboutIntro() {
   return (
-    <section id="about" className="border-b border-line py-16 md:py-24">
-      <div className="container-site">
+    <section id="about" className="relative overflow-hidden border-b border-line py-16 md:py-24">
+      <SectionAura layer="z-0" tone="cy" side="left" mark="SEC 00 · SOURCE · 10.82°N 106.63°E" />
+      <div className="container-site relative z-[1]">
         <div className="lg:pl-[56px]">
           <SectionHeader
             index="00"
@@ -104,8 +106,10 @@ function AboutIntro() {
 
 function Platform() {
   return (
-    <section id="platform" className="border-b border-line py-16 md:py-24">
-      <div className="container-site">
+    <section id="platform" className="relative overflow-hidden border-b border-line py-16 md:py-24 bg-[rgb(var(--band)/var(--band-a))]">
+      <SectionAura layer="z-0" tone="cy" side="right" mark="SEC 01 · BUILD" />
+      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cy/40 to-transparent" />
+      <div className="container-site relative z-[1]">
         <div className="lg:pl-[56px]">
           <SectionHeader
             index="01"
@@ -155,8 +159,9 @@ function Platform() {
 
 function Builds() {
   return (
-    <section id="builds" className="border-b border-line py-16 md:py-24">
-      <div className="container-site">
+    <section id="builds" className="relative overflow-hidden border-b border-line py-16 md:py-24">
+      <SectionAura layer="z-0" tone="cy" side="left" mark="SEC 02 · SHIP" />
+      <div className="container-site relative z-[1]">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:pl-[56px]">
           <Reveal>
             <SectionHeader
@@ -210,8 +215,10 @@ function Builds() {
 
 function Stack() {
   return (
-    <section id="stack" className="border-b border-line py-16 md:py-24">
-      <div className="container-site">
+    <section id="stack" className="relative overflow-hidden border-b border-line py-16 md:py-24 bg-[rgb(var(--band)/var(--band-a))]">
+      <SectionAura layer="z-0" tone="vi" side="right" mark="SEC 03 · LAYERS" />
+      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cy/40 to-transparent" />
+      <div className="container-site relative z-[1]">
         <div className="lg:pl-[56px]">
           <SectionHeader
             index="03"
@@ -240,8 +247,9 @@ function Stack() {
 
 function Research() {
   return (
-    <section id="research" className="border-b border-line py-16 md:py-24">
-      <div className="container-site">
+    <section id="research" className="relative overflow-hidden border-b border-line py-16 md:py-24">
+      <SectionAura layer="z-0" tone="vi" side="left" mark="SEC 04 · ENRICH" />
+      <div className="container-site relative z-[1]">
         <div className="grid gap-12 md:grid-cols-2 lg:pl-[56px]">
           <div>
             <SectionHeader
@@ -286,8 +294,10 @@ function Research() {
 
 function Contact() {
   return (
-    <section id="contact" className="py-16 md:py-24">
-      <div className="container-site">
+    <section id="contact" className="relative overflow-hidden py-16 md:py-24 bg-[rgb(var(--band)/var(--band-a))]">
+      <SectionAura layer="z-0" tone="em" side="right" mark="SEC 05 · SERVE" />
+      <div aria-hidden="true" className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cy/40 to-transparent" />
+      <div className="container-site relative z-[1]">
         <div className="lg:pl-[56px]">
           <SectionHeader
             index="05"
