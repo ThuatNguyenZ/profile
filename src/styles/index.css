@@ -216,6 +216,42 @@
   box-shadow: 0 6px 18px -8px rgba(0, 240, 255, 0.5);
 }
 
+.ambient-grid {
+  background-image: radial-gradient(rgba(0, 240, 255, 0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+  animation: ambient-grid 60s linear infinite;
+}
+
+@keyframes ambient-grid {
+  to {
+    background-position: 32px 0;
+  }
+}
+
+.ambient-blob {
+  will-change: transform;
+}
+
+.ambient-blob-a {
+  animation: ambient-drift-a 26s ease-in-out infinite alternate;
+}
+
+.ambient-blob-b {
+  animation: ambient-drift-b 32s ease-in-out infinite alternate;
+}
+
+@keyframes ambient-drift-a {
+  to {
+    transform: translate3d(14vw, 6vh, 0) scale(1.08);
+  }
+}
+
+@keyframes ambient-drift-b {
+  to {
+    transform: translate3d(-12vw, -8vh, 0) scale(0.94);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -240,5 +276,14 @@
 
   .pulse-dot {
     animation-duration: 4s;
+  }
+
+  .ambient-grid {
+    animation-duration: 120s;
+  }
+
+  .ambient-blob-a,
+  .ambient-blob-b {
+    animation-duration: 64s;
   }
 }

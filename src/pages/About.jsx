@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import Button from '../components/ui/Button'
 import CaseBody from '../components/case/CaseBody'
 import CaseHeader from '../components/case/CaseHeader'
@@ -7,6 +8,8 @@ import { about } from '../content/about'
 import { profile } from '../content/profile'
 import { platform } from '../content/platform'
 import useDocumentTitle from '../lib/useDocumentTitle'
+
+const HeroNetwork = lazy(() => import('../components/viz/HeroNetwork'))
 
 const SECTIONS = [
   { id: 'story', label: 'Story' },
@@ -18,20 +21,29 @@ export default function About() {
   useDocumentTitle('About')
   return (
     <>
-      <CaseHeader kicker={about.kicker} title={about.title} role={profile.role} period={profile.location} chips={[]} slug={about.slug} crumbs={[]}>
+      <CaseHeader
+        kicker={about.kicker}
+        title={about.title}
+        role={profile.role}
+        period={profile.location}
+        chips={[]}
+        slug={about.slug}
+        crumbs={[]}
+        backdrop={<Suspense fallback={null}><HeroNetwork /></Suspense>}
+      >
         <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_280px] md:items-start">
           <div>
             <p className="max-w-2xl text-[17px] text-mu md:text-[19px]">{about.lead}</p>
             <dl className="mt-8 grid gap-px border border-line bg-line sm:grid-cols-2">
               {about.facts.map((f) => (
-                <div key={f.label} className="lift relative bg-s1 p-4 hover:z-10">
+                <div key={f.label} className="lift relative bg-s1/90 p-4 hover:z-10">
                   <dt className="label-code">{f.label}</dt>
                   <dd className="mt-1 text-[14px]">{f.value}</dd>
                 </div>
               ))}
             </dl>
           </div>
-          <figure className="lift relative mx-auto w-full max-w-[280px] border border-line bg-s1 p-2">
+          <figure className="lift relative mx-auto w-full max-w-[280px] border border-line bg-s1 p-2 backdrop-blur-sm">
             <img src={about.photo.src} alt={about.photo.alt} className="aspect-[4/5] w-full object-cover grayscale-[35%] transition-[filter] duration-500 hover:grayscale-0" />
             <figcaption className="mt-2 flex items-center justify-between font-mono text-[10px] text-dim">
               <span>{profile.name.toLowerCase()}</span>

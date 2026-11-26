@@ -1,4 +1,3 @@
-import { lazy, Suspense } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { Github, Linkedin } from 'lucide-react'
 import Button from '../components/ui/Button'
@@ -9,6 +8,7 @@ import Panel from '../components/ui/Panel'
 import PipelinePulse from '../components/ui/PipelinePulse'
 import Reveal from '../components/ui/Reveal'
 import SectionHeader from '../components/ui/SectionHeader'
+import HeroAmbient from '../components/viz/HeroAmbient'
 import HeroDag from '../components/viz/HeroDag'
 import { kpis, profile } from '../content/profile'
 import { platform } from '../content/platform'
@@ -16,8 +16,6 @@ import { lunchOrder } from '../content/lunchOrder'
 import { stackLayers } from '../content/stack'
 import { education, papers } from '../content/research'
 import useDocumentTitle from '../lib/useDocumentTitle'
-
-const HeroNetwork = lazy(() => import('../components/viz/HeroNetwork'))
 
 function HeadlineWords({ text, className }) {
   const reduce = useReducedMotion()
@@ -44,11 +42,7 @@ function HeadlineWords({ text, className }) {
 function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-line">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_85%,rgba(99,102,241,0.14),transparent_55%),radial-gradient(circle_at_12%_8%,rgba(0,240,255,0.08),transparent_45%)]"
-      />
-      <Suspense fallback={null}><HeroNetwork /></Suspense>
+      <HeroAmbient />
       <div className="container-site relative py-14 md:py-20">
         <HeadlineWords text={profile.headline} className="heading-display max-w-4xl text-[38px] sm:text-[48px] lg:text-[60px]" />
         <Reveal>
@@ -59,8 +53,8 @@ function Hero() {
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
           <Button to={`/work/${platform.slug}`}>Explore the platform →</Button>
+          <Button to="/about">About me →</Button>
           <Button href="#platform" variant="ghost">&gt; See the pipeline</Button>
-          <Button to="/about" variant="ghost">About me →</Button>
         </div>
         <div className="mt-12">
           <KpiStrip items={kpis} />

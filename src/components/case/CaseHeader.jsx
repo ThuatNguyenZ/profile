@@ -2,13 +2,14 @@ import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import Chip from '../ui/Chip'
 
-export default function CaseHeader({ slug, kicker, title, role, period, chips, children, crumbs = [{ label: 'work', to: '/#builds' }] }) {
+export default function CaseHeader({ slug, kicker, title, role, period, chips, children, backdrop, crumbs = [{ label: 'work', to: '/#builds' }] }) {
   return (
     <section className="relative overflow-hidden border-b border-line">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_20%,rgba(0,240,255,0.10),transparent_50%)]"
       />
+      {backdrop}
       <div className="container-site relative py-14 md:py-20">
         <nav aria-label="Breadcrumb" className="mb-5 font-mono text-[12px] text-mu">
           <Link to="/" className="link-grow hover:text-cy">~</Link>
