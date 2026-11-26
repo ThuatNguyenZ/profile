@@ -18,7 +18,7 @@ export default function CopyEmail({ email }) {
     <div className="flex flex-wrap items-center gap-2">
       <a
         href={`mailto:${email}`}
-        className="border border-line px-3 py-2.5 font-mono text-[12.5px] text-tx sweep [--sweep-bg:rgba(0,240,255,0.08)] hover:border-cy"
+        className="border border-line px-3 py-2.5 font-mono text-[12.5px] text-tx sweep [--sweep-bg:rgb(var(--c-cy)/0.08)] hover:border-cy"
       >
         {email}
       </a>
@@ -26,7 +26,7 @@ export default function CopyEmail({ email }) {
         type="button"
         onClick={copy}
         aria-live="polite"
-        className="inline-flex items-center gap-2 border border-cy bg-cy px-3 py-2.5 font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-canvas sweep [--sweep-bg:#08090C] hover:text-cy hover:shadow-glow"
+        className="inline-flex items-center gap-2 border border-cy bg-cy px-3 py-2.5 font-mono text-[11px] font-semibold uppercase tracking-[0.06em] text-canvas sweep [--sweep-bg:rgb(var(--c-canvas))] hover:text-cy hover:shadow-glow"
       >
         {copied ? <Check size={14} /> : <Copy size={14} />}
         {copied ? 'Copied' : 'Copy'}

@@ -10,7 +10,7 @@ import { platform } from '../content/platform'
 import useDocumentTitle from '../lib/useDocumentTitle'
 
 const HeroNetwork = lazy(() => import('../components/viz/HeroNetwork'))
-const BACKDROP_MASK = '[mask-image:linear-gradient(to_right,transparent_0%,transparent_50%,rgba(0,0,0,0.35)_62%,black_80%)]'
+const BACKDROP_MASK = '[mask-image:linear-gradient(to_right,transparent_0%,transparent_50%,rgb(var(--c-canvas)/0.35)_62%,rgb(var(--c-canvas))_80%)]'
 
 const SECTIONS = [
   { id: 'problem', label: 'Problem' },
@@ -57,7 +57,7 @@ export default function CaseStudyLunchOrder() {
               ))}
             </ul>
             <Panel title="policies.sql // illustrative" bodyClassName="p-0" className="min-w-0">
-              <pre className="overflow-x-auto bg-[#05060a] px-4 py-5 font-mono text-[12.5px] leading-[1.75] text-[#c9d1d9]">{lunchOrder.rlsSnippet}</pre>
+              <pre className="overflow-x-auto bg-code px-4 py-5 font-mono text-[12.5px] leading-[1.75] text-codetx">{lunchOrder.rlsSnippet}</pre>
             </Panel>
           </div>
         </CaseSection>

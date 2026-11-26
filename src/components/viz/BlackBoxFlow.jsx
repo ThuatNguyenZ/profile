@@ -31,7 +31,7 @@ export default function BlackBoxFlow({ inputs, layer, outputs }) {
       <Arrow />
       <div className="relative overflow-hidden border border-vi/50 bg-vi/[0.06] px-6 py-10 text-center">
         <div aria-hidden="true" className="scan absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-transparent via-vi/25 to-transparent" />
-        <p className="label-code relative text-[#b4b6ff]">Processing layer</p>
+        <p className="label-code relative text-vi-soft">Processing layer</p>
         <p className="relative mt-2 font-display text-[20px] font-semibold">{layer}</p>
         <p className="relative mt-2 font-mono text-[10.5px] text-dim">internals withheld</p>
       </div>

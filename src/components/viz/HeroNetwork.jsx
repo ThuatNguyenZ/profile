@@ -1,18 +1,21 @@
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
+import useTheme from '../../lib/useTheme'
 
 // Motion rates are half of the Stitch reference (a quarter when the OS asks for reduced motion).
 const SPEED = 0.5
 
-const DEFAULT_MASK = "[mask-image:linear-gradient(to_right,transparent_0%,black_45%,black_100%)]"
+const DEFAULT_MASK = "[mask-image:linear-gradient(to_right,transparent_0%,rgb(var(--c-canvas))_45%,rgb(var(--c-canvas))_100%)]"
 
 export default function HeroNetwork({ mask = DEFAULT_MASK }) {
   const mountRef = useRef(null)
+  const { theme } = useTheme()
 
   useEffect(() => {
     const mount = mountRef.current
     if (!mount) return undefined
 
+    const light = theme === 'light'
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const speed = reduce ? SPEED * 0.5 : SPEED
     const small = window.innerWidth < 768
@@ -39,9 +42,10 @@ export default function HeroNetwork({ mask = DEFAULT_MASK }) {
     const nodeCount = small ? 30 : 55
     const sphereGeo = new THREE.SphereGeometry(0.85, 16, 16)
     const coreGeo = new THREE.IcosahedronGeometry(1.4, 1)
-    const cyanMat = new THREE.MeshPhongMaterial({ color: 0x00f0ff, emissive: 0x004455, wireframe: true })
-    const violetMat = new THREE.MeshPhongMaterial({ color: 0x6366f1, emissive: 0x221144, wireframe: true })
-    const greenMat = new THREE.MeshPhongMaterial({ color: 0x10b981, emissive: 0x053322 })
+    const cyan = light ? 0x0e7490 : 0x00f0ff
+    const cyanMat = new THREE.MeshPhongMaterial({ color: cyan, emissive: light ? 0x000000 : 0x004455, wireframe: true })
+    const violetMat = new THREE.MeshPhongMaterial({ color: light ? 0x4f46e5 : 0x6366f1, emissive: light ? 0x000000 : 0x221144, wireframe: true })
+    const greenMat = new THREE.MeshPhongMaterial({ color: light ? 0x047857 : 0x10b981, emissive: light ? 0x000000 : 0x053322 })
 
     const positions = []
     const nodes = []
@@ -71,7 +75,7 @@ export default function HeroNetwork({ mask = DEFAULT_MASK }) {
     }
     const lineGeo = new THREE.BufferGeometry()
     lineGeo.setAttribute('position', new THREE.Float32BufferAttribute(lineCoords, 3))
-    const lineMat = new THREE.LineBasicMaterial({ color: 0x00f0ff, transparent: true, opacity: 0.25 })
+    const lineMat = new THREE.LineBasicMaterial({ color: cyan, transparent: true, opacity: light ? 0.35 : 0.25 })
     group.add(new THREE.LineSegments(lineGeo, lineMat))
 
     const packetCount = small ? 200 : 400
@@ -85,7 +89,7 @@ export default function HeroNetwork({ mask = DEFAULT_MASK }) {
     }
     const packetGeo = new THREE.BufferGeometry()
     packetGeo.setAttribute('position', new THREE.BufferAttribute(packetPositions, 3))
-    const packetMat = new THREE.PointsMaterial({ color: 0x00f0ff, size: 0.85, transparent: true, opacity: 0.8, blending: THREE.AdditiveBlending })
+    const packetMat = new THREE.PointsMaterial({ color: cyan, size: 0.85, transparent: true, opacity: light ? 0.65 : 0.8, blending: light ? THREE.NormalBlending : THREE.AdditiveBlending })
     scene.add(new THREE.Points(packetGeo, packetMat))
 
     scene.add(new THREE.AmbientLight(0xffffff, 0.8))
@@ -177,13 +181,13 @@ export default function HeroNetwork({ mask = DEFAULT_MASK }) {
       renderer.dispose()
       renderer.domElement.remove()
     }
-  }, [])
+  }, [theme])
 
   return (
     <div
       ref={mountRef}
       aria-hidden="true"
-      className={`pointer-events-none absolute inset-0 opacity-60 md:opacity-75 ${mask}`}
+      className={`pointer-events-none absolute inset-0 ${theme === 'light' ? 'opacity-50 md:opacity-60' : 'opacity-60 md:opacity-75'} ${mask}`}
     />
   )
 }

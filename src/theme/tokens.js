@@ -1,15 +1,22 @@
+const v = (name) => `rgb(var(--c-${name}) / <alpha-value>)`
+
 export const colors = {
-  canvas: '#08090C',
-  s1: '#0E1015',
-  s2: '#151821',
-  line: '#1E2230',
-  cy: '#00F0FF',
-  vi: '#6366F1',
-  em: '#10B981',
-  am: '#F59E0B',
-  tx: '#F8FAFC',
-  mu: '#94A3B8',
-  dim: '#475569',
+  canvas: v('canvas'),
+  s1: v('s1'),
+  s2: v('s2'),
+  line: v('line'),
+  cy: v('cy'),
+  vi: v('vi'),
+  em: v('em'),
+  am: v('am'),
+  tx: v('tx'),
+  mu: v('mu'),
+  dim: v('dim'),
+  code: v('code'),
+  codetx: v('codetx'),
+  'cy-soft': v('cy-soft'),
+  'vi-soft': v('vi-soft'),
+  'em-soft': v('em-soft'),
 }
 
 export const fonts = {

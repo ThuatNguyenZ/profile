@@ -2,7 +2,7 @@ import Chip from './Chip'
 
 export default function PipelinePulse({ stages, title = 'pipeline · live status (illustrative)' }) {
   return (
-    <div className="border border-line bg-[#05060a]">
+    <div className="border border-line bg-code">
       <div className="flex items-center justify-between gap-3 border-b border-line px-3 py-2">
         <span className="label-code">{title}</span>
         <Chip tone="em" dot>

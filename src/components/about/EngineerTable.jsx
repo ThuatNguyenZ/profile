@@ -31,8 +31,9 @@ function Value({ row }) {
   )
 }
 
-export default function EngineerTable({ data }) {
+export default function EngineerTable({ data, hide = [] }) {
   const reduce = useReducedMotion()
+  const rows = data.rows.filter((r) => !hide.includes(r.column))
   return (
     <div className="lift border border-line bg-s1/80 font-mono text-[13px] backdrop-blur-sm">
       <div className="flex items-center justify-between gap-3 border-b border-line border-l-4 border-l-cy px-4 py-3">
@@ -51,9 +52,13 @@ export default function EngineerTable({ data }) {
         <span>VALUE</span>
       </div>
       <div className="relative overflow-hidden">
-        <div aria-hidden="true" className="row-scan pointer-events-none absolute inset-x-0 top-0 h-[12.5%] bg-gradient-to-r from-transparent via-cy/10 to-transparent" />
+        <div
+          aria-hidden="true"
+          className="row-scan pointer-events-none absolute inset-x-0 top-0 bg-gradient-to-r from-transparent via-cy/10 to-transparent"
+          style={{ height: `${100 / rows.length}%`, '--scan-end': `${rows.length * 100}%` }}
+        />
         <dl>
-          {data.rows.map((row, i) => (
+          {rows.map((row, i) => (
             <motion.div
               key={row.column}
               className="grid grid-cols-[110px_minmax(0,1fr)] items-baseline gap-x-4 border-b border-line px-4 py-2.5 last:border-b-0 sm:grid-cols-[130px_110px_minmax(0,1fr)]"

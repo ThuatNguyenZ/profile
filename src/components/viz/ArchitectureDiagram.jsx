@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { platform } from '../../content/platform'
+import { C, alpha } from '../../theme/svg'
 
 const MONO = 'JetBrains Mono, monospace'
 const DISPLAY = 'Space Grotesk, sans-serif'
@@ -22,15 +23,15 @@ export default function ArchitectureDiagram() {
         <svg viewBox="0 0 1000 260" className="w-full" role="img" aria-label="Sources, data lake, warehouse and analytics product in sequence, with monitoring across every stage.">
           <defs>
             <marker id="arch-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto">
-              <path d="M0 0 L8 4 L0 8 z" fill="#00F0FF" />
+              <path d="M0 0 L8 4 L0 8 z" style={{ fill: C.cy }} />
             </marker>
           </defs>
           {nodes.slice(0, -1).map((n, i) => {
             const x1 = i * (W + GAP) + W
             return (
               <g key={`e-${n.id}`}>
-                <path d={`M${x1} ${Y + H / 2} H${x1 + GAP - 4}`} stroke="#00F0FF" strokeOpacity="0.25" />
-                <path d={`M${x1} ${Y + H / 2} H${x1 + GAP - 4}`} stroke="#00F0FF" className="flow" markerEnd="url(#arch-arrow)" />
+                <path d={`M${x1} ${Y + H / 2} H${x1 + GAP - 4}`} style={{ stroke: C.cy }} strokeOpacity="0.25" />
+                <path d={`M${x1} ${Y + H / 2} H${x1 + GAP - 4}`} style={{ stroke: C.cy }} className="flow" markerEnd="url(#arch-arrow)" />
               </g>
             )
           })}
@@ -39,20 +40,20 @@ export default function ArchitectureDiagram() {
             const lit = active === n.id
             return (
               <g key={n.id} tabIndex={0} aria-label={`${n.label}: ${n.role}`} onMouseEnter={() => setActive(n.id)} onFocus={() => setActive(n.id)} className="cursor-default outline-none">
-                <path d={`M${x + W / 2} ${Y + H} V190`} stroke="#10B981" strokeOpacity="0.4" strokeDasharray="2 4" />
-                <rect x={x} y={Y} width={W} height={H} fill="#0E1015" stroke={lit ? '#00F0FF' : '#1E2230'} style={lit ? { filter: 'drop-shadow(0 0 8px rgba(0,240,255,0.45))' } : undefined} />
-                <text x={x + 12} y={Y + 22} fontFamily={MONO} fontSize="10" letterSpacing="0.08em" fill="#94A3B8">
+                <path d={`M${x + W / 2} ${Y + H} V190`} style={{ stroke: C.em }} strokeOpacity="0.4" strokeDasharray="2 4" />
+                <rect x={x} y={Y} width={W} height={H} style={{ fill: C.s1, stroke: lit ? C.cy : C.line, filter: lit ? `drop-shadow(0 0 8px ${alpha('cy', 0.45)})` : undefined }} />
+                <text x={x + 12} y={Y + 22} fontFamily={MONO} fontSize="10" letterSpacing="0.08em" style={{ fill: C.mu }}>
                   {n.step} · {n.label}
                 </text>
-                <text x={x + 12} y={Y + 50} fontFamily={DISPLAY} fontSize="17" fontWeight="600" fill="#F8FAFC">
+                <text x={x + 12} y={Y + 50} fontFamily={DISPLAY} fontSize="17" fontWeight="600" style={{ fill: C.tx }}>
                   {n.title}
                 </text>
               </g>
             )
           })}
           <g tabIndex={0} aria-label={`Observability: ${platform.observability.role}`} onMouseEnter={() => setActive('observability')} onFocus={() => setActive('observability')} className="cursor-default outline-none">
-            <rect x="0.5" y="190" width="999" height="50" fill="rgba(16,185,129,0.06)" stroke="#10B981" strokeOpacity={active === 'observability' ? 0.9 : 0.4} strokeDasharray="4 4" />
-            <text x="16" y="220" fontFamily={MONO} fontSize="11" letterSpacing="0.08em" fill="#10B981">
+            <rect x="0.5" y="190" width="999" height="50" style={{ fill: alpha('em', 0.06), stroke: C.em }} strokeOpacity={active === 'observability' ? 0.9 : 0.4} strokeDasharray="4 4" />
+            <text x="16" y="220" fontFamily={MONO} fontSize="11" letterSpacing="0.08em" style={{ fill: C.em }}>
               ● {platform.observability.title}
             </text>
           </g>

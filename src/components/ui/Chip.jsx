@@ -1,7 +1,7 @@
 const tones = {
-  em: 'border-em/25 bg-em/[0.08] text-[#7ee2bd]',
-  cy: 'border-cy/25 bg-cy/[0.07] text-[#8ff7ff]',
-  vi: 'border-vi/30 bg-vi/10 text-[#b4b6ff]',
+  em: 'border-em/25 bg-em/[0.08] text-em-soft',
+  cy: 'border-cy/25 bg-cy/[0.07] text-cy-soft',
+  vi: 'border-vi/30 bg-vi/10 text-vi-soft',
   plain: 'border-line bg-transparent text-mu',
 }
 

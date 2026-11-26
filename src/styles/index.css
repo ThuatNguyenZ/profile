@@ -6,6 +6,60 @@
   :root {
     color-scheme: dark;
     --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+    --c-canvas: 8 9 12;
+    --c-s1: 14 16 21;
+    --c-s2: 21 24 33;
+    --c-line: 30 34 48;
+    --c-cy: 0 240 255;
+    --c-vi: 99 102 241;
+    --c-em: 16 185 129;
+    --c-am: 245 158 11;
+    --c-tx: 248 250 252;
+    --c-mu: 148 163 184;
+    --c-dim: 113 128 150;
+    --c-code: 5 6 10;
+    --c-codetx: 201 209 217;
+    --c-cy-soft: 143 247 255;
+    --c-vi-soft: 180 182 255;
+    --c-em-soft: 126 226 189;
+    --dot: 255 255 255;
+    --dot-a: 0.035;
+    --glow-a: 0.18;
+    --grid: 255 255 255;
+    --grid-a: 0.035;
+    --grain-a: 0.05;
+    --aura-a: 0.16;
+    --band: var(--c-s2);
+    --band-a: 0.35;
+  }
+
+  :root[data-theme='light'] {
+    color-scheme: light;
+    --c-canvas: 247 248 250;
+    --c-s1: 255 255 255;
+    --c-s2: 241 245 249;
+    --c-line: 226 232 240;
+    --c-cy: 14 116 144;
+    --c-vi: 79 70 229;
+    --c-em: 4 120 87;
+    --c-am: 217 119 6;
+    --c-tx: 15 23 42;
+    --c-mu: 71 85 105;
+    --c-dim: 92 106 128;
+    --c-code: 241 245 249;
+    --c-codetx: 51 65 85;
+    --c-cy-soft: 21 94 117;
+    --c-vi-soft: 67 56 202;
+    --c-em-soft: 6 95 70;
+    --dot: 15 23 42;
+    --dot-a: 0.06;
+    --glow-a: 0.25;
+    --grid: 15 23 42;
+    --grid-a: 0.05;
+    --grain-a: 0.06;
+    --aura-a: 0.14;
+    --band: var(--c-s2);
+    --band-a: 0.9;
   }
 
   html {
@@ -17,17 +71,16 @@
     @apply bg-canvas font-sans text-tx antialiased;
     font-size: 15px;
     line-height: 1.6;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-    background-size: 24px 24px;
+    transition: background-color .3s var(--ease), color .3s var(--ease);
   }
 
   ::selection {
-    background: rgba(0, 240, 255, 0.25);
-    color: #f8fafc;
+    background: rgb(var(--c-cy) / 0.25);
+    color: rgb(var(--c-tx));
   }
 
   :focus-visible {
-    outline: 1px solid #00f0ff;
+    outline: 1px solid rgb(var(--c-cy));
     outline-offset: 2px;
   }
 }
@@ -137,10 +190,10 @@
 
 .lift:hover {
   transform: translateY(-3px);
-  border-color: rgba(0, 240, 255, 0.45);
+  border-color: rgb(var(--c-cy) / 0.45);
   box-shadow:
-    0 0 0 1px rgba(0, 240, 255, 0.12),
-    0 10px 30px -12px rgba(0, 240, 255, 0.28);
+    0 0 0 1px rgb(var(--c-cy) / 0.12),
+    0 10px 30px -12px rgb(var(--c-cy) / 0.28);
 }
 
 /* Button colour sweep: set --sweep-bg per variant. */
@@ -160,7 +213,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: var(--sweep-bg, rgba(0, 240, 255, 0.08));
+  background: var(--sweep-bg, rgb(var(--c-cy) / 0.08));
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.4s var(--ease);
@@ -213,11 +266,11 @@
 .icon-btn:hover,
 .icon-btn:focus-visible {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px -8px rgba(0, 240, 255, 0.5);
+  box-shadow: 0 6px 18px -8px rgb(var(--c-cy) / 0.5);
 }
 
 .ambient-grid {
-  background-image: radial-gradient(rgba(0, 240, 255, 0.07) 1px, transparent 1px);
+  background-image: radial-gradient(rgb(var(--c-cy) / 0.07) 1px, transparent 1px);
   background-size: 32px 32px;
   animation: ambient-grid 60s linear infinite;
 }
@@ -297,7 +350,37 @@
     transform: translateY(-100%);
   }
   to {
-    transform: translateY(800%);
+    transform: translateY(var(--scan-end, 800%));
+  }
+}
+
+.backdrop-grid {
+  background-image:
+    radial-gradient(rgb(var(--dot) / var(--dot-a)) 1px, transparent 1px),
+    linear-gradient(to right, rgb(var(--grid) / var(--grid-a)) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--grid) / var(--grid-a)) 1px, transparent 1px);
+  background-size: 24px 24px, 120px 120px, 120px 120px;
+}
+
+.backdrop-grain {
+  opacity: var(--grain-a);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+.aura {
+  opacity: var(--aura-a);
+  animation: aura-drift 28s ease-in-out infinite alternate;
+}
+
+.aura-b {
+  animation-duration: 34s;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes aura-drift {
+  to {
+    transform: translate3d(6%, 4%, 0) scale(1.08);
   }
 }
 
@@ -307,6 +390,8 @@
   }
 
   /* Ambient loops keep running, just slower. */
+  .aura { animation-duration: 60s; }
+
   .flow {
     animation-duration: 2s;
   }

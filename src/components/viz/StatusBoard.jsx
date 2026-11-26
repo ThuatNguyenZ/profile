@@ -1,4 +1,5 @@
 import Chip from '../ui/Chip'
+import { C } from '../../theme/svg'
 
 function DashboardSketch() {
   const line = [40, 52, 47, 60, 58, 66, 63, 72, 70, 78, 74, 82]
@@ -6,21 +7,21 @@ function DashboardSketch() {
   const bars = [60, 85, 40, 95, 70]
   return (
     <svg viewBox="0 0 400 210" className="w-full" role="img" aria-label="Illustration of a monitoring dashboard">
-      <rect x="0.5" y="0.5" width="399" height="209" fill="#0E1015" stroke="#1E2230" />
-      {['#00F0FF', '#10B981', '#6366F1'].map((c, i) => (
+      <rect x="0.5" y="0.5" width="399" height="209" style={{ fill: C.s1, stroke: C.line }} />
+      {[C.cy, C.em, C.vi].map((c, i) => (
         <g key={c}>
-          <rect x={12 + i * 128} y="12" width="120" height="44" fill="#151821" stroke="#1E2230" />
-          <rect x={22 + i * 128} y="22" width="40" height="5" fill="#475569" />
-          <rect x={22 + i * 128} y="34" width={60 - i * 12} height="12" fill={c} opacity="0.85" />
+          <rect x={12 + i * 128} y="12" width="120" height="44" style={{ fill: C.s2, stroke: C.line }} />
+          <rect x={22 + i * 128} y="22" width="40" height="5" style={{ fill: C.dim }} />
+          <rect x={22 + i * 128} y="34" width={60 - i * 12} height="12" style={{ fill: c }} opacity="0.85" />
         </g>
       ))}
-      <rect x="12" y="66" width="248" height="134" fill="#151821" stroke="#1E2230" />
-      <polyline points={points} fill="none" stroke="#00F0FF" strokeWidth="1.5" />
-      <rect x="268" y="66" width="120" height="134" fill="#151821" stroke="#1E2230" />
+      <rect x="12" y="66" width="248" height="134" style={{ fill: C.s2, stroke: C.line }} />
+      <polyline points={points} fill="none" style={{ stroke: C.cy }} strokeWidth="1.5" />
+      <rect x="268" y="66" width="120" height="134" style={{ fill: C.s2, stroke: C.line }} />
       {bars.map((h, i) => (
-        <rect key={i} x={280 + i * 21} y={190 - h} width="13" height={h} fill="#6366F1" opacity="0.8" />
+        <rect key={i} x={280 + i * 21} y={190 - h} width="13" height={h} style={{ fill: C.vi }} opacity="0.8" />
       ))}
-      <text x="388" y="205" textAnchor="end" fontFamily="JetBrains Mono, monospace" fontSize="8" fill="#475569">
+      <text x="388" y="205" textAnchor="end" fontFamily="JetBrains Mono, monospace" fontSize="8" style={{ fill: C.dim }}>
         ILLUSTRATION
       </text>
     </svg>

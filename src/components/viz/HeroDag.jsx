@@ -1,20 +1,17 @@
 import { useState } from 'react'
 import { platform } from '../../content/platform'
+import { C, alpha } from '../../theme/svg'
 
-const CY = '#00F0FF'
-const VI = '#6366F1'
-const EM = '#10B981'
-const LINE = '#1E2230'
 const MONO = 'JetBrains Mono, monospace'
 const ARIA = 'Marketplace and advertising data flow into a data lake, then a warehouse and analytics, with monitoring across every stage.'
 
 function Edge({ d, color, packets = 1, delay = 0 }) {
   return (
     <>
-      <path d={d} fill="none" stroke={color} strokeOpacity="0.22" strokeWidth="1.2" />
-      <path d={d} fill="none" stroke={color} strokeWidth="1.4" className="flow" />
+      <path d={d} fill="none" style={{ stroke: color }} strokeOpacity="0.22" strokeWidth="1.2" />
+      <path d={d} fill="none" style={{ stroke: color }} strokeWidth="1.4" className="flow" />
       {Array.from({ length: packets }, (_, i) => (
-        <circle key={i} r="2.6" fill={color} className="packet" style={{ filter: `drop-shadow(0 0 4px ${color})` }}>
+        <circle key={i} r="2.6" className="packet" style={{ fill: color, filter: `drop-shadow(0 0 4px ${color})` }}>
           <animateMotion dur="4.8s" repeatCount="indefinite" begin={`${delay + i * 1.6}s`} path={d} />
         </circle>
       ))}
@@ -27,8 +24,8 @@ function Box({ id, x, y, w, h = 36, label, active, highlight, onActivate, roleKe
   const lit = active === roleKey || highlight
   return (
     <g tabIndex={0} aria-label={`${label}: ${node.role}`} onMouseEnter={() => onActivate(roleKey)} onFocus={() => onActivate(roleKey)} className="cursor-default outline-none">
-      <rect x={x} y={y} width={w} height={h} fill="#0E1015" stroke={lit ? CY : LINE} style={active === roleKey ? { filter: 'drop-shadow(0 0 8px rgba(0,240,255,0.45))' } : undefined} />
-      <text x={x + w / 2} y={y + h / 2 + 3.5} textAnchor="middle" fontFamily={MONO} fontSize="10" letterSpacing="0.06em" fill={highlight ? CY : '#F8FAFC'}>
+      <rect x={x} y={y} width={w} height={h} style={{ fill: C.s1, stroke: lit ? C.cy : C.line, filter: active === roleKey ? `drop-shadow(0 0 8px ${alpha('cy', 0.45)})` : undefined }} />
+      <text x={x + w / 2} y={y + h / 2 + 3.5} textAnchor="middle" fontFamily={MONO} fontSize="10" letterSpacing="0.06em" style={{ fill: highlight ? C.cy : C.tx }}>
         {label}
       </text>
     </g>
@@ -39,11 +36,11 @@ function Monitor({ d, ticks, text, tx, ty, anchor = 'start', active, onActivate 
   const node = platform.heroNodes.observe
   return (
     <g tabIndex={0} aria-label={`${node.label}: ${node.role}`} onMouseEnter={() => onActivate('observe')} onFocus={() => onActivate('observe')} className="cursor-default outline-none">
-      <path d={d} stroke={EM} strokeOpacity={active === 'observe' ? 0.9 : 0.5} strokeDasharray="2 4" />
+      <path d={d} style={{ stroke: C.em }} strokeOpacity={active === 'observe' ? 0.9 : 0.5} strokeDasharray="2 4" />
       {ticks.map((t) => (
-        <path key={t} d={t} stroke={EM} strokeOpacity="0.4" strokeDasharray="2 4" />
+        <path key={t} d={t} style={{ stroke: C.em }} strokeOpacity="0.4" strokeDasharray="2 4" />
       ))}
-      <text x={tx} y={ty} textAnchor={anchor} fontFamily={MONO} fontSize="10" fill={EM}>
+      <text x={tx} y={ty} textAnchor={anchor} fontFamily={MONO} fontSize="10" style={{ fill: C.em }}>
         {text}
       </text>
     </g>
@@ -55,13 +52,13 @@ function Horizontal({ active, onActivate }) {
   return (
     <svg viewBox="0 0 760 214" className="w-full" role="img" aria-label={ARIA}>
       {[56, 67, 78].map((y, i) => (
-        <Edge key={`m${y}`} d={`M140 ${y} C180 ${y} 180 110 220 110`} color={CY} delay={i * 0.5} />
+        <Edge key={`m${y}`} d={`M140 ${y} C180 ${y} 180 110 220 110`} color={C.cy} delay={i * 0.5} />
       ))}
       {[142, 153, 164].map((y, i) => (
-        <Edge key={`a${y}`} d={`M140 ${y} C180 ${y} 180 110 220 110`} color={VI} delay={0.25 + i * 0.5} />
+        <Edge key={`a${y}`} d={`M140 ${y} C180 ${y} 180 110 220 110`} color={C.vi} delay={0.25 + i * 0.5} />
       ))}
-      <Edge d="M350 110 H390" color={CY} packets={2} />
-      <Edge d="M550 110 H590" color={EM} packets={2} delay={0.8} />
+      <Edge d="M350 110 H390" color={C.cy} packets={2} />
+      <Edge d="M550 110 H590" color={C.em} packets={2} delay={0.8} />
 
       <Box id="marketplaces" roleKey="sources" x={0} y={44} w={140} h={46} label={market.label} active={active} onActivate={onActivate} />
       <Box id="ads" roleKey="sources" x={0} y={130} w={140} h={46} label={ads.label} active={active} onActivate={onActivate} />
@@ -78,10 +75,10 @@ function Vertical({ active, onActivate }) {
   const [market, ads] = platform.sourceGroups
   return (
     <svg viewBox="0 0 340 330" className="w-full" role="img" aria-label={ARIA}>
-      <Edge d="M85 48 C85 80 170 70 170 104" color={CY} />
-      <Edge d="M255 48 C255 80 170 70 170 104" color={VI} delay={0.4} />
-      <Edge d="M170 138 V164" color={CY} />
-      <Edge d="M170 198 V224" color={EM} delay={0.6} />
+      <Edge d="M85 48 C85 80 170 70 170 104" color={C.cy} />
+      <Edge d="M255 48 C255 80 170 70 170 104" color={C.vi} delay={0.4} />
+      <Edge d="M170 138 V164" color={C.cy} />
+      <Edge d="M170 198 V224" color={C.em} delay={0.6} />
 
       <Box id="marketplaces" roleKey="sources" x={10} y={12} w={150} label={market.label} active={active} onActivate={onActivate} />
       <Box id="ads" roleKey="sources" x={180} y={12} w={150} label={ads.label} active={active} onActivate={onActivate} />

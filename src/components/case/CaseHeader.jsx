@@ -7,7 +7,7 @@ export default function CaseHeader({ slug, kicker, title, role, period, chips, c
     <section className="relative overflow-hidden border-b border-line">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_20%,rgba(0,240,255,0.10),transparent_50%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_20%,rgb(var(--c-cy)/0.10),transparent_50%)]"
       />
       {backdrop}
       <div className="container-site relative py-14 md:py-20">
