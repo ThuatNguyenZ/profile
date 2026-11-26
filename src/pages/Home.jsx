@@ -77,7 +77,7 @@ function Platform() {
             stage="BUILD"
             sub="the platform I design, ship and operate"
             tone="cy"
-            className="lg:-ml-[56px]"
+            onSpine
           >
             {platform.pitch}
           </SectionHeader>
@@ -129,7 +129,7 @@ function Builds() {
               stage="SHIP"
               sub="a side project people use every day"
               tone="cy"
-              className="mb-6 lg:-ml-[56px]"
+              onSpine className="mb-6"
             >
               {lunchOrder.pitch}
             </SectionHeader>
@@ -183,7 +183,7 @@ function Stack() {
             stage="LAYERS"
             sub="tools, grouped by where they sit in a pipeline"
             tone="vi"
-            className="lg:-ml-[56px]"
+            onSpine
           />
           <div className="border-b border-line">
             {stackLayers.map((row) => (
@@ -214,7 +214,7 @@ function Research() {
               stage="ENRICH"
               sub="peer-reviewed work on recommendation & NLP"
               tone="vi"
-              className="lg:-ml-[56px]"
+              onSpine
             />
             {papers.map((p) => (
               <article key={p.doi} className="lift mb-6 border-l-2 border-vi pl-4">
@@ -259,7 +259,7 @@ function Contact() {
             stage="SERVE"
             sub="the last stage: you"
             tone="em"
-            className="lg:-ml-[56px]"
+            onSpine
           >
             Based in {profile.location}. Email is the fastest way to reach me.
           </SectionHeader>

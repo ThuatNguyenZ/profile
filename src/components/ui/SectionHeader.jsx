@@ -8,7 +8,7 @@ const TONES = {
 }
 
 // Pipeline-stage section header: node · outlined number · title · stage label, with a rule that grows in.
-export default function SectionHeader({ index, label, title, stage, sub, tone = 'cy', node = true, children, className = '' }) {
+export default function SectionHeader({ index, label, title, stage, sub, tone = 'cy', node = true, onSpine = false, children, className = '' }) {
   const t = TONES[tone] ?? TONES.cy
   const ref = useRef(null)
   const inView = useInView(ref, { margin: '-35% 0px -55% 0px' })
@@ -16,7 +16,7 @@ export default function SectionHeader({ index, label, title, stage, sub, tone = 
   const reduce = useReducedMotion()
 
   return (
-    <header ref={ref} className={`relative mb-8 ${className}`}>
+    <header ref={ref} className={`relative mb-8 ${onSpine ? 'lg:-ml-[56px]' : ''} ${className}`}>
       <div className="flex items-center gap-3 sm:gap-4">
         {node && (
           <span data-stage-node className="relative grid h-[22px] w-[22px] shrink-0 place-items-center" aria-hidden="true">
@@ -57,7 +57,7 @@ export default function SectionHeader({ index, label, title, stage, sub, tone = 
         <span className={`stage-packet absolute top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full ${t.bg} shadow-glow`} />
       </div>
 
-      {children && <div className={`mt-4 max-w-2xl text-mu ${className.includes("-ml-[56px]") ? "lg:ml-[56px]" : ""}`}>{children}</div>}
+      {children && <div className={`mt-4 max-w-2xl text-mu ${onSpine ? 'lg:ml-[56px]' : ''}`}>{children}</div>}
     </header>
   )
 }
