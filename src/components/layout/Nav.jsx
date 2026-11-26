@@ -1,11 +1,21 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import { motion, useScroll, useSpring } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { navLinks, profile } from '../../content/profile'
+
+import useScrollSpy from '../../lib/useScrollSpy'
+
+const ROUTE_SECTION = { '/work/ba3-data-platform': 'platform', '/work/lunch-order': 'builds' }
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
   const close = () => setOpen(false)
+  const { pathname } = useLocation()
+  const spied = useScrollSpy(pathname === '/' ? navLinks.map((l) => l.id) : [])
+  const activeId = pathname === '/' ? spied : ROUTE_SECTION[pathname] ?? null
+  const { scrollYProgress } = useScroll()
+  const progress = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.3 })
 
   return (
     <nav className="sticky top-0 z-40 border-b border-line bg-canvas/85 backdrop-blur-md" aria-label="Primary">
@@ -23,15 +33,20 @@ export default function Nav() {
         </Link>
 
         <div className="ml-auto hidden items-center gap-6 lg:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.id}
-              to={`/#${link.id}`}
-              className="font-mono text-[11px] font-medium text-mu transition-colors hover:text-cy"
-            >
-              // {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const active = link.id === activeId
+            return (
+              <Link
+                key={link.id}
+                to={`/#${link.id}`}
+                className={'relative py-1 font-mono text-[11px] font-medium transition-colors ' + (active ? 'text-cy' : 'text-mu hover:text-cy')}
+                aria-current={active ? 'location' : undefined}
+              >
+                // {link.label}
+                {active && <motion.span layoutId="nav-active" className="absolute inset-x-0 -bottom-[17px] h-[2px] bg-cy shadow-glow" transition={{ type: 'spring', stiffness: 400, damping: 34 }} />}
+              </Link>
+            )
+          })}
         </div>
 
         <a
@@ -63,9 +78,9 @@ export default function Nav() {
                 key={link.id}
                 to={`/#${link.id}`}
                 onClick={close}
-                className="border-b border-line py-3 font-mono text-[12px] text-mu hover:text-cy"
+                className={`border-b border-line py-3 font-mono text-[12px] ${link.id === activeId ? 'text-cy' : 'text-mu hover:text-cy'}`}
               >
-                // {link.label}
+                {link.id === activeId && '▸ '}// {link.label}
               </Link>
             ))}
             <a href={profile.cv} target="_blank" rel="noreferrer" className="py-3 font-mono text-[12px] text-cy">
@@ -74,6 +89,7 @@ export default function Nav() {
           </div>
         </div>
       )}
+      <motion.div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-px origin-left bg-gradient-to-r from-cy via-vi to-em" style={{ scaleX: progress }} />
     </nav>
   )
 }
