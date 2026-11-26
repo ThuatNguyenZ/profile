@@ -19,7 +19,7 @@ export default function About() {
   return (
     <>
       <CaseHeader kicker={about.kicker} title={about.title} role={profile.role} period={profile.location} chips={[]} slug={about.slug} crumbs={[]}>
-        <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_280px] md:items-center">
+        <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_280px] md:items-start">
           <div>
             <p className="max-w-2xl text-[17px] text-mu md:text-[19px]">{about.lead}</p>
             <dl className="mt-8 grid gap-px border border-line bg-line sm:grid-cols-2">

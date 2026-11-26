@@ -26,7 +26,7 @@ export default function CaseHeader({ slug, kicker, title, role, period, chips, c
         <p className="mt-4 font-mono text-[12px] text-mu">
           {role} · {period}
         </p>
-        <div className="mt-5 flex flex-wrap gap-2">
+        <div className={chips.length ? "mt-5 flex flex-wrap gap-2" : "hidden"}>
           {chips.map((c) => (
             <Chip key={c}>{c}</Chip>
           ))}
